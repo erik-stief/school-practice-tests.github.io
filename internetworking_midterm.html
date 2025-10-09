@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multiple Choice Test</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(125deg, #d1eafc 0%, #f4f7fa 100%);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    .quiz-container {
+      background: #fff;
+      padding: 40px 36px 32px 36px;
+      max-width: 420px;
+      margin: 54px auto;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(33, 139, 234, 0.19), 0 1.5px 3px #ccc;
+    }
+    .question {
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-bottom: 22px;
+      color: #218bea;
+      letter-spacing: 0.5px;
+    }
+    #progress {
+      font-size: 0.98rem;
+      color: #666;
+      margin-bottom: 16px;
+      text-align: right;
+    }
+    .options {
+      margin-bottom: 20px;
+    }
+    .options button {
+      display: block;
+      margin: 10px 0;
+      width: 100%;
+      padding: 13px 0;
+      font-size: 1.07rem;
+      font-weight: 500;
+      background: #f5faff;
+      color: #218bea;
+      border: 2px solid #d1eafc;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(.47,1.64,.41,.8);
+      outline: none;
+      box-shadow: 0 1.5px 6px #eee;
+    }
+    .options button:hover, .options button:focus {
+      background: #218bea;
+      color: #fff;
+      border-color: #218bea;
+      transform: scale(1.03);
+      box-shadow: 0 2.5px 18px #b7d6f8;
+    }
+    #result {
+      margin-top: 10px;
+      font-weight: 700;
+      font-size: 1.08rem;
+      text-align: center;
+      opacity: 0.95;
+    }
+    .score {
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-align: center;
+      color: #218bea;
+      margin-top: 38px;
+      margin-bottom: 10px;
+    }
+    .restart-btn {
+      margin: 16px auto 0;
+      padding: 13px 44px;
+      background: #218bea;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: block;
+      transition: background 0.20s;
+      box-shadow: 0 2px 10px #b7d6f8;
+    }
+    .restart-btn:hover {
+      background: #0074d3;
+      color: #f5faff;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <div id="progress"></div>
+    <div id="question" class="question"></div>
+    <div id="options" class="options"></div>
+    <div id="result"></div>
+  </div>
+  <script>
+    const questions = [
+      {
+        question: "Encryption and compression are functions of the _____ layer.",
+        options: ["Application", "Presentation", "Session", "Transport", "Network", "Data Link", "Physical"],
+        answer: 1
+      },
+      {
+        question: "This OSI model layer is responsible for transmitting and recieving the bits that make up a frame, using electrical, radio or light signals.",
+        options: ["Application", "Presentation", "Session", "Transport", "Network", "Data Link", "Physical"],
+        answer: 6
+      },
+      {
+        question: "This OSI model layer is responsible for delivering information from one application to another on different hosts using segments.",
+        options: ["Application", "Presentation", "Session", "Transport", "Network", "Data Link", "Physical"],
+        answer: 3
+      },
+      {
+        question: "The OSI model is made up of ___ layers.",
+        options: ["3", "4", "5", "7"],
+        answer: 3
+      },
+      {
+        question: "The TCP 3-way handshake consists of ___ segments.",
+        options: ["SYN, ACK, FIN", "SYN, SYN-ACK, ACK", "SYN, ACK, ACK", "SYN, SYN, ACK"],
+        answer: 1
+      },
+      {
+        question: "When you add a header to a piece of data, the result is called a ____.",
+        options: ["frame", "packet", "segment", "chunk", "PDU"],
+        answer: 4
+      },
+      {
+        question: "A packet is usually used to carry a ___ from one IP address to another IP address on the Internet.",
+        options: ["application data", "segment", "packet", "PDU"],
+        answer: 1
+      },
+      {
+        question: "Which device(s) break up a collision domain?",
+        options: ["Hub", "Bridge", "Switch", "Router", "All of the above", "All of the above EXCEPT hubs"],
+        answer: 5
+      },
+      {
+        question: "This OSI model layer is responsible for routing, universal addressing, and delivery of data from one host to another <strong>on the Internet</strong> using packets.",
+        options: ["Application", "Presentation", "Session", "Transport", "Network", "Data Link", "Physical"],
+        answer: 4
+      },
+      {
+        question: "What happens to application data as it makes its way down the protocol stack (at the sender)?",
+        options: ["data encapsulation", "spell checking", "data de-encapsulation", "data mining", "packetization"],
+        answer: 0
+      },
+      {
+        question: "This OSI model layer is responsible for delivery of data from one node to another <strong>on the local network</strong> using frames.",
+        options: ["Application", "Presentation", "Session", "Transport", "Network", "Data Link", "Physical"],
+        answer: 6
+      },
+      {
+        question: "A frame is used to carry a ___ from one MAC address to another MAC address on the local LAN.",
+        options: ["application data", "segment", "packet", "PDU"],
+        answer: 2
+      },
+      {
+        question: "The ___ field in the IP header is used to remove from the network packets that are stuck in a routing loop.",
+        options: ["Checksum", "IHL", "Version", "Protocol", "TTL"],
+        answer: 5
+      },
+      {
+        question: "The ___ field in the IP header is used to determine the type of payload in the IP packet.",
+        options: ["Version", "Checksum", "IHL", "TTL", "Protocol"],
+        answer: 5
+      },
+      {
+        question: "The ___ field in the Ethernet header is used to determine the type of payload in the Ethernet frame.",
+        options: ["Type (or ethertype)", "Destination IP address", "FCS", "Destination port", "Destination MAC", "Protocol"],
+        answer: 0
+      },
+      {
+        question: "Which protocol is used when you ping another host?",
+        options: ["UDP", "HTTP", "TCP", "ICMP"],
+        answer: 3
+      },
+      {
+        question: "Which protocol is used by a router to notify a host that a packet it sent was discarded because its TTL reached zero?",
+        options: ["ICMP", "UDP", "TCP", "HTTP"],
+        answer: 0
+      },
+      {
+        question: "If an IP packet contains a UDP segment, the number in the protocol field of the IP header will be ___.",
+        options: ["1", "255", "17", "6"],
+        answer: 0
+      },
+      {
+        question: "Which protocol resolves an IP address to a MAC address (i.e. finds the MAC address of an IP address on the LAN)?",
+        options: ["DHCP", "ARP", "RARP", "DNS"],
+        answer: 1
+      },
+      {
+        question: "Which protocol resolves a host name to an IP address (i.e. finds the IP address of a host name)?",
+        options: ["RARP", "DNS", "ARP", "DHCP"],
+        answer: 1
+      },
+      {
+        question: "Which of the following frames has a destination MAC address of FF:FF:FF:FF:FF:FF (broadcast)?",
+        options: ["ARP Request", "ARP Reply", "	Both", "None of the above"],
+        answer: 0
+      },
+      {
+        question: "If the first octet in an IPv4 address is between 192 and 223, the address is a class ___ address.",
+        options: ["A", "B", "C", "D", "E"],
+        answer: 2
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function showQuestion() {
+      document.getElementById('progress').textContent =
+        `Question ${currentQuestion + 1} of ${questions.length}`;
+      const questionElement = document.getElementById('question');
+      const optionsElement = document.getElementById('options');
+      const resultElement = document.getElementById('result');
+      const current = questions[currentQuestion];
+
+      questionElement.innerHTML = questions[currentQuestion].question
+      optionsElement.innerHTML = '';
+      resultElement.textContent = '';
+      current.options.forEach((option, i) => {
+        const btn = document.createElement('button');
+        btn.textContent = option;
+        btn.onclick = () => checkAnswer(btn, i);
+        optionsElement.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(button, selectedIndex) {
+      const resultElement = document.getElementById('result');
+      const correctIndex = questions[currentQuestion].answer;
+      if (selectedIndex === correctIndex) {
+        score++;
+        button.style.background = "#b0edac";
+        button.style.color = "#24642f";
+        resultElement.textContent = "🎉 Correct!";
+      } else {
+        button.style.background = "#f8b7b7";
+        button.style.color = "#ae2530";
+        resultElement.textContent = `❌ Wrong. Answer: "${questions[currentQuestion].options[correctIndex]}"`;
+      }
+      Array.from(document.querySelectorAll('.options button')).forEach(btn => btn.disabled = true);
+      currentQuestion++;
+      setTimeout(() => {
+        if (currentQuestion < questions.length) {
+          showQuestion();
+        } else {
+          showResult();
+        }
+      }, 1200);
+    }
+
+    function showResult() {
+      document.querySelector('.quiz-container').innerHTML =
+        `<div class="score">Your score: ${score} of ${questions.length}</div>
+         <button class="restart-btn" onclick="location.reload()">Restart Quiz</button>`;
+    }
+
+    showQuestion();
+  </script>
+</body>
+</html>
