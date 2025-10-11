@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Hub</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(125deg, #d1eafc 0%, #f4f7fa 100%);
+      margin: 0; padding: 0; min-height: 100vh;
+    }
+    .hub-container {
+      background: #fff;
+      padding: 44px 40px 35px 40px;
+      max-width: 440px;
+      margin: 64px auto;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(33,139,234,0.19), 0 1.5px 3px #ccc;
+    }
+    h1 {
+      font-weight: 700;
+      font-size: 1.35rem;
+      color: #218bea;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .quiz-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .quiz-list li {
+      margin-bottom: 19px;
+    }
+    .quiz-link {
+      display: block;
+      padding: 16px;
+      font-size: 1.13rem;
+      background: #f5faff;
+      color: #218bea;
+      text-decoration: none;
+      border: 2px solid #d1eafc;
+      border-radius: 9px;
+      font-weight: 500;
+      transition: all 0.18s cubic-bezier(.47,1.64,.41,.8);
+      box-shadow: 0 1.5px 6px #eee;
+      text-align: center;
+    }
+    .quiz-link:hover, .quiz-link:focus {
+      background: #218bea;
+      color: #fff;
+      border-color: #218bea;
+      transform: scale(1.03);
+      box-shadow: 0 2.5px 18px #b7d6f8;
+    }
+    .credit {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #888;
+      margin-top: 36px;
+    }
+  </style>
+</head>
+<body>
+  <div class="hub-container">
+    <h1>Practice Quiz Hub</h1>
+    <ul class="quiz-list">
+      <li><a href="internetowrking_midterm.html" class="quiz-link">Internetworking Quiz</a></li>
+      <li><a href="quiz2.html" class="quiz-link">Calculus Review Quiz</a></li>
+      <li><a href="quiz3.html" class="quiz-link">Linear Algebra Quiz</a></li>
+      <!-- Add more quizzes here -->
+    </ul>
+    <div class="credit">Hosted with GitHub Pages</div>
+  </div>
+</body>
+</html>
