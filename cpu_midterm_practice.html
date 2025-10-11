@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multiple Choice Test</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+    body {
+        font-family: 'Montserrat', Arial, sans-serif;
+        background: linear-gradient(125deg, #ffe5b3 0%, #fff6e5 100%);
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+    }
+    .quiz-container {
+        background: #fff8ed;
+        padding: 40px 36px 32px 36px;
+        max-width: 420px;
+        margin: 54px auto;
+        border-radius: 18px;
+        box-shadow: 0 8px 32px rgba(255, 143, 41, 0.13), 0 1.5px 3px #ffbe78;
+    }
+    .question {
+        font-weight: 700;
+        font-size: 1.15rem;
+        margin-bottom: 22px;
+        color: #ff7800;
+        letter-spacing: 0.5px;
+    }
+    #progress {
+        font-size: 0.98rem;
+        color: #bc7600;
+        margin-bottom: 16px;
+        text-align: right;
+    }
+    .options {
+        margin-bottom: 20px;
+    }
+    .options button {
+        display: block;
+        margin: 10px 0;
+        width: 100%;
+        padding: 13px 0;
+        font-size: 1.07rem;
+        font-weight: 500;
+        background: #fff3e0;
+        color: #ff7800;
+        border: 2px solid #ffd19c;
+        border-radius: 9px;
+        cursor: pointer;
+        transition: all 0.22s cubic-bezier(.47,1.64,.41,.8);
+        outline: none;
+        box-shadow: 0 1.5px 6px #ffe5b3;
+    }
+    .options button:hover, .options button:focus {
+        background: #ff9200;
+        color: #fff;
+        border-color: #ff7800;
+        transform: scale(1.03);
+        box-shadow: 0 2.5px 18px #ffe5b3;
+    }
+    #result {
+        margin-top: 10px;
+        font-weight: 700;
+        font-size: 1.08rem;
+        text-align: center;
+        color: #b36200;
+        opacity: 0.95;
+    }
+    .score {
+        font-size: 1.3rem;
+        font-weight: 700;
+        text-align: center;
+        color: #ff7800;
+        margin-top: 38px;
+        margin-bottom: 10px;
+    }
+    .restart-btn {
+        margin: 16px auto 0;
+        padding: 13px 44px;
+        background: #ff7800;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: block;
+        transition: background 0.20s;
+        box-shadow: 0 2px 10px #ffd19c;
+    }
+    .restart-btn:hover {
+        background: #e36a00;
+        color: #fffbf2;
+    }
+    .back-btn {
+        margin: 24px auto 0;
+        padding: 12px 38px;
+        background: #ff7800;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: block;
+        transition: background 0.20s;
+        box-shadow: 0 2px 10px #ffd19c;
+    }
+    .back-btn:hover {
+        background: #e36a00;
+        color: #fffbf2;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <div id="progress"></div>
+    <div id="question" class="question"></div>
+    <div id="options" class="options"></div>
+    <div id="result"></div>
+  </div>
+  <button class="back-btn" onclick="window.location.href='main.html'">⬅ Back to Main Page</button>
+  <script>
+    const questions = [
+      {
+        question: "Encryption and compression are functions of the _____ layer.",
+        options: ["Application", "Presentation", "Session", "Transport", "Network", "Data Link", "Physical"],
+        answer: 1
+      },
+      {
+        question: "This OSI model layer is responsible for transmitting and recieving the bits that make up a frame, using electrical, radio or light signals.",
+        options: ["Application", "Presentation", "Session", "Transport", "Network", "Data Link", "Physical"],
+        answer: 6
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function showQuestion() {
+      document.getElementById('progress').textContent =
+        `Question ${currentQuestion + 1} of ${questions.length}`;
+      const questionElement = document.getElementById('question');
+      const optionsElement = document.getElementById('options');
+      const resultElement = document.getElementById('result');
+      const current = questions[currentQuestion];
+
+      questionElement.innerHTML = questions[currentQuestion].question;
+      optionsElement.innerHTML = '';
+      resultElement.textContent = '';
+      current.options.forEach((option, i) => {
+        const btn = document.createElement('button');
+        btn.textContent = option;
+        btn.onclick = () => checkAnswer(btn, i);
+        optionsElement.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(button, selectedIndex) {
+      const resultElement = document.getElementById('result');
+      const correctIndex = questions[currentQuestion].answer;
+      if (selectedIndex === correctIndex) {
+        score++;
+        button.style.background = "#b0edac";
+        button.style.color = "#24642f";
+        resultElement.textContent = "🎉 Correct!";
+      } else {
+        button.style.background = "#f8b7b7";
+        button.style.color = "#ae2530";
+        resultElement.textContent = `❌ Wrong. Answer: "${questions[currentQuestion].options[correctIndex]}"`;
+      }
+      Array.from(document.querySelectorAll('.options button')).forEach(btn => btn.disabled = true);
+      currentQuestion++;
+      setTimeout(() => {
+        if (currentQuestion < questions.length) {
+          showQuestion();
+        } else {
+          showResult();
+        }
+      }, 1200);
+    }
+
+    function showResult() {
+      document.querySelector('.quiz-container').innerHTML =
+        `<div class="score">Your score: ${score} of ${questions.length}</div>
+         <button class="restart-btn" onclick="location.reload()">Restart Quiz</button>`;
+    }
+
+    showQuestion();
+  </script>
+</body>
+</html>
