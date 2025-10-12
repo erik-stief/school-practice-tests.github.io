@@ -124,15 +124,394 @@
   <script>
     const questions = [
       {
-        question: "Encryption and compression are functions of the _____ layer.",
-        options: ["Application", "Presentation", "Session", "Transport", "Network", "Data Link", "Physical"],
-        answer: 1
+          question: "What is the von Neumann Model/architecture?",
+          options: ["outlines how CPU's work by fetching examining and executing programs stored in main memory one instruction after another", 
+            "It describes how neurons in the brain store binary data.", 
+            "The von Neumann model is a type of operating system for old computers.", 
+            "It's the architecture used only in quantum computers."],
+          answer: 0
       },
       {
-        question: "This OSI model layer is responsible for transmitting and recieving the bits that make up a frame, using electrical, radio or light signals.",
-        options: ["Application", "Presentation", "Session", "Transport", "Network", "Data Link", "Physical"],
-        answer: 6
-      }
+          question: "When was the von Neumann architecture invented?",
+          options: [1958, 1999, 1946, 1964],
+          answer: 2
+      },
+      {
+          question: "The von Neumann Architecture has been changed recently.",
+          opttions: ["True", "False"],
+          answer: 0
+      },
+      {
+          question: "What is NOT an evolution of von neumann architecture?",
+          options: ["Bus separation", "Interupts", "Multiple cores", "Optical computing"],
+          answer: 3
+      },
+      {
+          question: "What are some trends of computer architecture?",
+          options: ["Quantum computing", "Overcoming Speed Bottlenecks", "Memory as fast as CPU", 
+          "DNA computing"],
+          answer: 1
+      },
+      {
+          question: "There are no modern computers made from The von Neumann Model.",
+          options: ["True", "False"],
+          answer: 1
+      },
+      {
+          question: "What is the first 3 steps of the instruction execution sequence?",
+          options: ["Control unit executes operation, Store results(if applicable), return to step 1, fetch",
+          "add 1 to program counter, decode, store results", "fetch, add 1 to program counter, decode", 
+          "fetch, decode, add 1 to program counter"],
+          answer: 2
+      },
+      {
+          question: "Modern CPUs store the ______ data and instructions in the closest memory for efficency.",
+          options: ["most frequently used", "smallest", "biggest", "last used"],
+          answer: 3
+      },
+      {
+          question: "What is the name of the principle that cache memory exploites to increase efficency?",
+          options: ["principle of locality", "Fundamental Architectural Principles", 
+          "Performance and Optimization Principle", "Moore's law"],
+          answer: 1
+      },
+      {
+          question: "Name the missing main component of a CPU form the list. ALU, CU, _____, I/O, system bus",
+          options: ["Registers", "CPU", "CISC", "Memory"],
+          answer: 3
+      },
+      {
+          question: "Name the missing main component of a CPU form the list. ALU, ____, memory, I/O, system bus",
+          options: ["Registers", "CU", "system clock", "Memory"],
+          answer: 1
+      },
+      {
+          question: "Provide register names for Program counter in Intel/ARM processors.",
+          options: ["PC/IP", "SP", "DR", "PS"],
+          answer: 0
+      },
+      {
+          question: "Provide register names for storing Processor states in Intel/ARM processors.",
+          options: ["XR", "MBR", "PS", "PC/IP"],
+          answer: 2
+      },
+      {
+          question: "Provide register names for storing the top of the Stack in Intel/ARM processors.",
+          option: ["IR", "SP", "XR", "MAR"],
+          answer: 1
+      },
+      {
+          question: "CISC computers are faster than RISC computers.",
+          options: ["True", "False"],
+          answer: 1
+      },
+      {
+          question: "What does RISC stad for?",
+          options: ["Reduced Instruction Set Computer", "Really Incredable Super Computer", 
+          "Registery Instruction Stack Computer", "Rate Increase Set Chip"],
+          answer: 0
+      },
+      {
+          question: "Which is TRUE about RISC computers?",
+          options: ["most arithmetic operations can address the memory", 
+          "only LOAD and STORE instructions should reference memory", 
+          "They are more expensive and complicated", "backwards compatible"],
+          answer: 1
+      },
+      {
+          question: "Does this statment reference CISC or RISC? 'uses a large number of interpreted instructions, usually 200 to 300",
+          options: ["CISC", "RSIC"],
+          answer: 0
+      },
+      {
+          question: "CISC stands for Complex Instruction Set Computer.",
+          options: ["True", "False"],
+          answer: 0
+      },
+      {
+          question: "Intel and IMB mainframes use RISC architecture.",
+          options: ["True", "False"],
+          answer: 1
+      },
+      {
+          question: "instructions are _____ and are ______ in RISC architecture.",
+          optoins: ["complex, not interpereted", "complex, interpreted", "simple, interpereted", 
+          "simple, not interperated"],
+          answer: 3
+      },
+      {
+          question: "RISC architecture computers include:",
+          options: ["Intel", "IBM mainframes", "SPARC", "X86 Product Line"],
+          answer: 2
+      },
+      {
+          question: "How many bits in a byte?",
+          options: [2, 4, 8, 16],
+          answer: 2
+      },
+      {
+          question: "How many sub buses are there in the bus system of our processor?",
+          options: [3, 2, 1, 5],
+          answer: 0
+      },
+      {
+          question: "What is the name of the busses in our processor?",
+          options: ["system bus, control bus, ALU bus", "data bus, address bus, control bus",
+          "data bus, address bus, memory bus", "System clock, I/O bus, data bus"],
+          answer: 1
+      },
+      {
+          question: "How many instructions in EMU8086?",
+          option: [144, 80, 98, 116],
+          answer: 3
+      },
+      {
+          question:"combinational logic is a type of digital logic where the output depends solely on the present values of the inputs, with no memory of past inputs.",
+          options: ["True", "False"],
+          answer: 0
+      },
+      {
+          question: "Provide the data range (max - min) of a 2-byte variable.",
+          options: ["65535, 0", "65535, 1", "65536, 0", "65536, 1"],
+          answer: 0
+      },
+      {
+          question: "Provide the data range (max - min) of a 4 byte variable",
+          options: ["2^32, 1", "2^32 - 1, 1", "2^32 - 1, 0", "2^32, 0"],
+          answer: 2
+      },
+      {
+          question: "What is the value represented by “Big-Endian” format: (60012,18), (60013,2C), (60014,7F), (60015,39). (format: (address, data))",
+          options: ["39 7F 2C 18", "18 2C 7F 39", "18 39 2C 7F", "2C 7F 18 39"],
+          answer: 1
+      },
+      {
+          question: "What is the value represented by “Big-Endian” format: (60012,18), (60013,2C), (60014,7F), (60015,39). (format: (address, data))",
+          options: ["2C 7F 18 39", "18 2C 7F 39", "18 39 2C 7F", "39 7F 2C 18"],
+          answer: 3
+      },
+      {
+          question: "An integer data in the cpu is: A1 B2 C3 D4, how is this data stored in memory when using Little-Endian?",
+          options: ["A1B2C3D4", "D4C3B2A1", "A1D4B2C3", "B2C3D4A1"],
+          answer: 1
+      },
+      {
+          question: "An integer data in the cpu is: A1 B2 C3 D4, how is this data stored when using Big-Endian?",
+          options: ["A1B2C3D4", "D4C3B2A1", "A1D4B2C3", "B2C3D4A1"],
+          answer: 0
+      },
+      {
+          question: "Mean access time = c + (1 - h)*m for adding cache memory: M = 0.98ms c = 0.1ms h = 0.89 what will be the MAT?",
+          options: [0.02078, 0.278, 0.2078, 0.178],
+          answer: 2
+      },
+      // notebookLM genorated questions 
+      {
+          question: "Which of the following data types, when stored as 2 bytes, has an unsigned value range of 0 to 65,535?",
+          options: ["char", "int (when 4 bytes)", "unsigned short", "long Answer"],
+          answer: 2
+      },
+      {
+          question: "What is the standard component that primarily determines the range of a floating-point number?",
+          options: ["The sign of the mantissa", "The number of digits in the fraction (significand)",
+          "The number of digits in the exponent", "The location of the radix point"],
+          answer: 2
+        },
+        {
+          question: "Which alphanumeric data standard is defined as a 7-bit code but is commonly stored in 8-bit bytes?",
+          options: ["EBCDIC", "UNICODE", "ASCII", "BCD"],
+          answer: 2
+        },
+        {
+          question: "In the IEEE 754 single precision format, which reserved bit pattern in the exponent field indicates that the floating point value is 0?",
+          options: ["11111111", "10000000", "00000000", "01111111"],
+          answer: 2
+        },
+        {
+          question: "The two's complement system is the only representation system for negative integers.",
+          options: ["True", "False"],
+          answer: 1
+        },
+        {
+          question: "Overflow can occur in two's complement arithmetic if the addition of two negative numbers produces a positive result.",
+          options: ["True", "False"],
+          answer: 0
+        },
+        {
+          question: "One megabyte (1 MB) is equal to 2^10 x 2^10 bytes, or 1024 x 1024 bytes.",
+          options: ["True", "False"],
+          answer: 0
+        },
+        {
+          question: "The IEEE 754 standard for single precision includes a 53-bit significand, supported by a 'hidden' bit 1.",
+          options: ["True", "False"],
+          answer: 1
+        },
+        {
+          question: "The representation system for negative numbers that is obtained by adding a bias to the two's complement representation is called the ________ representation.",
+          options: ["Signed Magnitude", "Ten's Complement", "Excess (Biased)", "Normalized"],
+          answer: 2
+        },
+        {
+          question: "The CPU and memory always represent and process data in ________ form, which is a sequence of 0's and 1's.",
+          options: ["decimal", "hexadecimal", "alphanumeric", "binary"],
+          answer: 3
+        },
+        {
+          question: "In the two's binary complementary representation of a positive number, the second step requires replacing 0's by 1's and 1's by 0's, which is often called finding the ________.",
+          options: ["carry flag", "normalization", "complement", "overflow"],
+          answer: 2
+        },
+        {
+          question: "The IEEE 754 standard was developed in ________ to improve software portability and assure uniform accuracy of floating point calculations.",
+          options: ["1985", "1854", "2017", "1965"],
+          answer: 0
+        },
+        {
+          question: "What is the immediate result of Step 3 (Decode) in the Intel 8086 six-step instruction cycle?",
+          options: ["CPU writes result back to a register.", "Instruction is returned to the Decode Unit.",
+          "CPU executes the Micro Code.", "CPU translates the Instruction to Micro Code."],
+          answer: 3
+        },
+        {
+          question: "What register holds the segment portion of the 20-bit address when combined with the IP (Instruction Pointer) register on the Intel 8086 processor?",
+          options: ["AL register", "CS register", "SP register", "AX register"],
+          answer: 1
+        },
+        {
+          question: "Which statement is true regarding memory operations in CISC architecture?",
+          options: ["Only LOAD and STORE operations can access memory.", "Most arithmetic operations can address the memory.", 
+          "Memory operations are prohibited during execution step 4.", "Memory access must be explicitly handled by the Control Bus only."],
+          answer: 1
+        },
+        {
+          question: "The execution of a decoded CISC instruction generally requires several clock cycles.",
+          options: ["True", "False"],
+          answer: 0
+        },
+        {
+          question: "The 'imul' instruction is used to multiply two unsigned integers.",
+          options: ["True", "False"],
+          answer: 1
+        },
+        {
+          question: "In any operation other than a branch, the processor increments the Program Counter by the size of the instruction so the PC will point to the next instruction.",
+          options: ["True", "False"],
+          answer: 0
+        },
+        {
+          question: "The total theoretical maximum of 65,536 software interrupt sub-functions is fully supported by Emu8086.",
+          options: ["True", "False"],
+          answer: 1
+        },
+        {
+          question: "Software interrupts are triggered using the ________ instruction, where 'value' ranges from 0 to 255 (0FFh).",
+          options: ["HLT", "INT", "NOP", "RET"],
+          answer: 2
+        },
+        {
+          question: "When a branch operation is executed, the Program Counter (PC) register is set to the value stated in the branch instruction, affecting the program ________.",
+          options: ["data storage", "Micro Code translation", "Micro instruction count", "flow"],
+          answer: 3
+        },
+        {
+          question: "What characteristic distinguishes a Combinational Logic Unit (CLU) circuit?",
+          options: ["Output depends on previous states stored in registers.", "Output is strictly a function of the current inputs.", 
+          "It processes inputs sequentially using a clock.", "It requires continuous feedback from the output."],
+          answer: 1
+        },
+        {
+          question: "A Multiplexer (MUX) with *n* control inputs connects how many data inputs to a single data output?",
+          options: ["n inputs", "2n inputs", "n^2 inputs", "2^n inputs"],
+          answer: 3
+        },
+        {
+          question: "An integrated circuit (IC) containing 5,000 logic gates would typically be categorized under which level of integration?",
+          options: ["SSI (Small scale)", "MSI (Medium scale)", "LSI (Large scale)", "VLSI (Very large scale)"],
+          answer: 2
+        },
+        {
+          question: "Decoders are used in translating memory addresses into physical locations.",
+          options: ["True", "False"],
+          answer: 0
+        },
+        {
+          question: "In Negative Logic, the voltage assignment 1 corresponds to a high voltage.",
+          options: ["True", "False"],
+          answer: 1
+        },
+        {
+          question: "A smaller Boolean equation generally translates to a higher gate count in the target circuit.",
+          options: ["True", "False"],
+          answer: 1
+        },
+        {
+          question: "Using shift operations to multiply or divide numbers by a power of 2 is described as being much faster than other methods.",
+          options: ["True", "False"],
+          answer: 0
+        },
+        {
+          question: "A Decoder is a circuit that takes an n-bit number input to select one of the ________ output lines.",
+          options: ["n^2", "n divided by 2", "2^n", "2n"],
+          answer: 2
+        },
+        {
+          question: "In a Programmable Logic Array (PLA), if a fuse is disabled at an input to an AND gate, the gate behaves as if the input is tied to a ________.",
+          options: ["0", "low voltage", "1", "disabled state"],
+          answer: 2
+        },
+        {
+          question: "Which component is used in a ripple-carry chain to form a four-bit ripple-carry adder?",
+          options: ["Half Adder", "Multiplexer (MUX)", "Full Adder", "Priority Encoder"],
+          answer: 2
+        },
+        {
+          question: "The Priority Encoder is used for ________ among a number of devices that compete for the same resource.",
+          options: ["simplification", "ripple-carry addition", "arbitrating", "decoding"],
+          answer: 2
+        },
+        {
+          question: "What is the primary reason the ripple-carry adder may introduce too much delay into a system?",
+          options: ["The speed of arithmetic operations is limited by software.", "The number of gates is too high in an FA.", 
+          "The carry propagation time is proportional to the number of bits in the operands.", "It requires separate control unit for addition and subtraction."],
+          answer: 2
+        },
+        {
+          question: "What is the first step when adding or subtracting two floating-point (FP) numbers?",
+          options: ["Perform normalization by shifting the resulting mantissa.", "Multiply the two mantissas.", 
+          "Compare the magnitudes of two exponents and make suitable alignment.", "Perform the addition/subtraction."],
+          answer: 2
+        },
+        {
+          question: "When two n-bit unsigned integers are multiplied, what is the maximum size (in bits) of the resulting product?",
+          options: ["n bits", "n+1 bits", "2n-1 bits", "2n bits"],
+          answer: 3
+        },
+        {
+          question: "In a combined adder/subtractor unit, subtraction is performed when the control signal input is 0.",
+          options: ["True", "False"],
+          answer: 1
+        },
+        {
+          question: "When two n-bit unsigned numbers are divided, the result (quotient) can be larger than n bits.",
+          options: ["True", "False"],
+          answer: 1
+        },
+        {
+          question: "A 16-bit adder can be constructed from a cascade of how many 4-bit ripple-carry adders?",
+          options: ["Two", "Four", "Eight", "Sixteen"],
+          answer: 1
+        },
+        {
+          question: "The first step in the general algorithm for Floating Point Division is to compute the exponent by ________ the exponents.",
+          options: ["multiplying", "dividing", "adding", "subtracting"],
+          answer: 3
+        },
+        {
+          question: "The Booth multiplication algorithm primarily works to reduce the number of ________ for intermediate results.",
+          options: ["shifts", "comparisons", "additions", "subtractions"],
+          answer: 2
+        }
     ];
 
     let currentQuestion = 0;
