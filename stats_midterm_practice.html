@@ -123,8 +123,32 @@
   <button class="back-btn" onclick="window.location.href='main.html'">⬅ Back to Main Page</button>
   <script>
     const questions = [
-       
+       {
+          question: "Identify the level of measurement in the following question:<br>How would you describe your political ideology?<br>1. Very Liberal<br>2. Liberal<br>3. Middle of the Road<br>4. Conservative<br>5. Very Conservative",
+          options: ["Ordinal Scale", "Ratio Scale", "Interval Scale", "Nominal Scale"],
+          answer: 0
+        },
+        {
+          question: "Among these, which sampling is based on equal probability?",
+          options: ["Simple Random Sampling", "Stratified Sampling", "Systematic Sampling", "Cluster Sampling"],
+          answer: 0
+        },
+        {
+          question: "Among these, which sampling is based on equal probability?",
+          options: ["Simple Random Sampling", "Stratified Sampling", "Systematic Sampling", "Cluster Sampling"],
+          answer: 0
+        },
     ];
+
+    // Shuffle questions before showing
+    shuffleQuestions(questions);
+
+    function shuffleQuestions(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
 
     let currentQuestion = 0;
     let score = 0;
