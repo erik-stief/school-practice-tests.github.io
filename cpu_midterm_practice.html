@@ -527,23 +527,32 @@
     let currentQuestion = 0;
     let score = 0;
 
+    // --- New: Reference for next button ---
+    let nextButton;
+
     function showQuestion() {
       document.getElementById('progress').textContent =
         `Question ${currentQuestion + 1} of ${questions.length}`;
       const questionElement = document.getElementById('question');
       const optionsElement = document.getElementById('options');
       const resultElement = document.getElementById('result');
-      const current = questions[currentQuestion];
 
       questionElement.innerHTML = questions[currentQuestion].question;
       optionsElement.innerHTML = '';
       resultElement.textContent = '';
-      current.options.forEach((option, i) => {
+
+      questions[currentQuestion].options.forEach((option, i) => {
         const btn = document.createElement('button');
         btn.textContent = option;
         btn.onclick = () => checkAnswer(btn, i);
         optionsElement.appendChild(btn);
       });
+
+      // Remove 'Next' button if it exists
+      if (nextButton && nextButton.parentNode) {
+        nextButton.parentNode.removeChild(nextButton);
+        nextButton = null;
+      }
     }
 
     function checkAnswer(button, selectedIndex) {
@@ -560,20 +569,31 @@
         resultElement.textContent = `❌ Wrong. Answer: "${questions[currentQuestion].options[correctIndex]}"`;
       }
       Array.from(document.querySelectorAll('.options button')).forEach(btn => btn.disabled = true);
-      currentQuestion++;
-      setTimeout(() => {
-        if (currentQuestion < questions.length) {
-          showQuestion();
-        } else {
-          showResult();
-        }
-      }, 1200);
+
+      // --- New: Create and show 'Next Question' button ---
+      if (!nextButton) {
+        nextButton = document.createElement('button');
+        nextButton.textContent = currentQuestion < questions.length - 1 ? "Next Question" : "Show Result";
+        nextButton.className = "restart-btn";
+        nextButton.onclick = () => {
+          currentQuestion++;
+          if (currentQuestion < questions.length) {
+            showQuestion();
+          } else {
+            showResult();
+          }
+        };
+        document.querySelector('.quiz-container').appendChild(nextButton);
+      }
+      // Adjust button text dynamically
+      nextButton.textContent = currentQuestion < questions.length - 1 ? "Next Question" : "Show Result";
+      nextButton.style.display = 'block';
     }
 
     function showResult() {
       document.querySelector('.quiz-container').innerHTML =
         `<div class="score">Your score: ${score} of ${questions.length}</div>
-         <button class="restart-btn" onclick="location.reload()">Restart Quiz</button>`;
+        <button class="restart-btn" onclick="location.reload()">Restart Quiz</button>`;
     }
 
     showQuestion();
