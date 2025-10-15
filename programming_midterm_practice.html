@@ -124,14 +124,234 @@
   <script>
     const questions = [
       {
-        question: "Encryption and compression are functions of the _____ layer.",
-        options: ["Application", "Presentation", "Session", "Transport", "Network", "Data Link", "Physical"],
+        question: "Three of the following expressions have the same value. Which of the following’s value is different from the others?", 
+        options: ["*&Ptr", "&*Ptr", "*Ptr", "Ptr"], 
+        answer: 2 
+      },
+      {
+        question: "Which of the following does not initialize all of the array elements to 0?", 
+        options: ["int b[2][2]; b[0][0] = b[0][1] = b[1][0] = b[1][0] = 0", "int b[2][2] = 0", "int b[2][2]; for (int i = 0; i < 2; ++i){for(int j = 0; j < 2; ++j){b[i][j] = 0;}} ", "all of the above"], 
+        answer: 23
+      },
+      {
+        question: "The definition int *count;", 
+        options: ["is a syntax error because only pointers can be defined with * notation", "is a compile-time error", "is a logic error", "is a correct definition of integer pointer count"], 
+        answer: 3 
+      },
+      {
+        question: "Consider the following correct segment of a correct C program: p = 2; while (p < 2000){p = 2 * p;}", 
+        options: ["1023", "1024", "2047", "2048"], 
+        answer: 3 
+      },
+      {
+        question: "An array of structures is automatically passes ______",
+        options: ["by value", "by reference", "by aggregate", "by enumeration"], 
+        answer: 1 
+      },
+      {
+        question: "Why memory allocated with malloc is no longer needed, return that memory to the system immediately with ______", 
+        options: ["free_memory", "free_storage", "return", "free"], 
+        answer: 3 
+      },
+      {
+        question: "what will the following code display? int x = 23, y = 34, z = 45; cout << x << y << z << endl;", 
+        options: ["23 34 45", "23<br>34<br>35", "xyz", "233445"], 
+        answer: 3 
+      },
+      {
+        question: "If an error occurs while opening a file in any mode, function fopen returns ______", 
+        options: ["true", "NULL", "false", "-1"], 
+        answer: 1 
+      },
+      {
+        question: "The functions of the character-handling library typically manipulate characters as ______", 
+        options: ["ints", "floats", "longs", "bits"], 
+        answer: 0
+      },
+      {
+        question: "The unary * and ______ are complements of one another", 
+        options: ["/", "^", "&", "|"], 
+        answer: 2 
+      },
+      {
+        question: "Structures may be passed to functions by ______", 
+        options: ["passing individual structure members", "passing an entire structure", "passing a pointer to the structure", "all of these"], 
+        answer: 3 
+      },
+      {
+        question: "The ______, ______, and ______ are the only three forms of control necessary", 
+        options: ["switch, if, else", "sequence, selection, iteration", "break, continue, if…else", "for, while, do…while"], 
+        answer: 1 
+      },
+      {
+        question: "the statement y = &yPtr", 
+        options: ["assigns the address of the variable y to the pointer variable yPtr", "assigns the address of the variable yPtr to the pointer variable y", "is a compilation error", "is a logic error"], 
         answer: 1
       },
       {
-        question: "This OSI model layer is responsible for transmitting and recieving the bits that make up a frame, using electrical, radio or light signals.",
-        options: ["Application", "Presentation", "Session", "Transport", "Network", "Data Link", "Physical"],
-        answer: 6
+        question: "Which statement would be used to define a 10 element integer array c", 
+        options: ["Array c = int[10]", "c = int[10]", "int Array c[10]", "int c[10]"], 
+        answer: 3 
+      },
+      {
+        question: "In C, the conditions 4 > y > 1", 
+        options: ["evaluates correctly", "does not evaluate correctly and should be replaced by (4 > y && y > 1)", "does not evaluate correctly and should be replaced by (4 > y & y > 1)", "does not evaluate correctly and should be replaced by (4 > y || y > 1)"], 
+        answer: 1 
+      },
+      {
+        question: "As used in int square(int); int is not a(n)______", 
+        options: ["data type", "parameter type", "return type", "function prototype"], 
+        answer: 1 
+      },
+      {
+        question: "Which statement is true?", 
+        options: ["The break statement causes and immediate exit from a while, for, do..while or if … else statement", "The continue statement is designed for use with the while, for, do … while or switch statements", "An equivalent while statement for any for statement can always be formed", "The break statement causes an immediate exit from a while, for, do … while or switch statement"], 
+        answer: 3 
+      },
+      {
+        question: "Which statement is true?", 
+        options: ["They type of every parameter in a function parameter list must be included", "The type of every argument in a function call must be included", "It is not incorrect to use the same names for the arguments passed to a function and the corresponding parameters in the function definition", "Defining a function parameter again as a local variable within the function is a logic error"], 
+        answer: 2 
+      },
+      {
+        question: "What does the statement typedef struct card Card; do?", 
+        options: ["Defines card as a synonym for Card", "Defines Card as a synonym for card", "Defines Card as synonym for struct card", "Defines Card as a synonym for typedef struct card"], 
+        answer: 2 
+      },
+      {
+        question: "Which of the following is false about a function being passed on", 
+        options: ["it knows the size of the array it was passed", "it is passed the address of the first element in the array", "it is able to modify the values stored in the array", "all of the above is true"], 
+        answer: 0
+      },
+      {
+        question: "A valid reason for building programs out of functions is",
+        options: ["that the divide divide and conquer approach facilitates program construction", "that pre-existing functions can be used to create new programs", "the avoidance of code iteration within a program", "all of the above"], 
+        answer: 3
+      },
+      {
+        question: "Assuming that t is an array and tPtr is a pointer to that array, what expression refers to the address of element 3", 
+        options: ["*(tPtr +3)", "tPtr[3]", "&t[3]", "*(t + 3)"], 
+        answer: 2 
+      },
+      {
+        question: "If the array name arrayName is passed to a function, C automatically passes", 
+        options: ["&arrayName[0]", "arrayName[1]", "arrayName[0]", "*arrayName"], 
+        answer: 0
+      },
+      {
+        question: "______ memory allocation is the ability for a program to obtain more memory space at execution time and to release space no longer needed", 
+        options: ["Static", "Active", "Selective", "Dynamic"], 
+        answer: 3 
+      },
+      {
+        question: "Which of the following is a function that causes a program’s file position pointer to be repositioned to the beginning of the file",
+        options: ["rescan", "rewind", "return", "none of these"], 
+        answer: 1
+      },
+      {
+        question: "fread and fwrite", 
+        options: ["can not read and write arrays of data", "process all their data in human readable format", "process all their data in the same format used by fscanf and fprintf, respectively ", "process all their data in raw data format"], 
+        answer: 3 
+      },
+      {
+        question: "Given that k is an integer array starting at location 2000, kPtr is a pointer to k, and each integer is stored in 4 bytes of memory, what location does kPtr + 3 point to?", 
+        options: ["2003", "2006", "2012", "2024"], 
+        answer: 2 
+      },
+      {
+        question: "Which statement is used to skip the remainder of the body of an interaction statement and proceed with the next iteration of the loop?", 
+        options: ["skip", "proceed", "continue", "jump"], 
+        answer: 2 
+      },
+      {
+        question: "Which of the following is a poor programming practice", 
+        options: ["indenting the statements in the body of each control statement", "using floating-point values as the counter in counter-controlled iteration", "using more than two levels of nesting", "placing vertical spacing above and below control statements"], 
+        answer: 1
+      },
+      {
+        question: "Which is not a motivation for functionalizing a program", 
+        options: ["the divide and conquer approach makes program development more manageable", "software reusability - using existing building blocks to create new programs", "avoid repeating code", "executing performance - functionalized programs run faster"], 
+        answer: 3 
+      },
+      {
+        question: "A string in C is ______", 
+        options: ["an array of characters ending in the empty string", "a sequence of characters contained within single quotes", "&\a sequence of characters preceded by a length field", "an array of characters ending in the null character"], 
+        answer: 3
+      },
+      {
+        question: "Which of the following can have a pointer as an operand?", 
+        options: ["++", "*=", "%", "/"], 
+        answer: 0 
+      },
+      {
+        question: "Which of the following is true", 
+        options: ["To pass a structure by reference, pass the address of the structure variable", "A way to pass an array by value, is to create a structure with the array as a member then pass the name of the structure", "To pass a structure by reference, pass the name of the structure variable", "passing large structures by reference is more efficient than passing large structures by value"], 
+        answer: 2 
+      },
+      {
+        question: "If no memory is available malloc returns a(n)______ pointer", 
+        options: ["self", "NULL", "void", "empty"],
+        answer: 1
+      },
+      {
+        question: "which of the following gives the number of elements in the array int r[]?", 
+        options: ["sizeof(r)", "sizeof(*r)", "sizeof(r) / sizeof(int)", "sizeof(*r) / sizeof(int)"], 
+        answer: 2 
+      },
+      {
+        question: "A function prototype can always be omitted when a function______", 
+        options: ["is defined before it is first invoked", "is invoked before it is first demanded", "takes no arguments", "does not return a value"], 
+        answer: 0 
+      },
+      {
+        question: "Which of the following does not necessarily append the null character to its result?", 
+        options: ["strcpy", "strncpy", "strcat", "strncat"], 
+        answer: 2 
+      },
+      {
+        question: "Which mode would you use if you wanted to open a file for both reading and writing", 
+        options: ["r+", "w+", "a+", "all of the above"], 
+        answer: 3
+      },
+      {
+        question: "When calling a function with arguments that should be modified, the _____ of those arguments are passed", 
+        options: ["memory", "addresses", "values", "complements"], 
+        answer: 1
+      },
+      {
+        question: "Creating a new name with typedef", 
+        options: ["creates a new type", "creates a new type name", "creates a new variable name", "creates a new variable"], 
+        answer: 1
+      },
+      {
+        question: "______ may contain different data types", 
+        options: ["structures", "arrays", "both a and b", "none of these"], 
+        answer: 2 
+      },
+      {
+        question: "individual records of a randomly accessed file are normally______ ", 
+        options: ["fixed in length", "not fixed in length", "sorted by record key", "read using the fopen function"], 
+        answer: 0
+      },
+      {
+        question: "In a switch statement", 
+        options: ["a break is required after each case", "multiple actions do not need to be enclosed in braces", "a default case is required", "a break is required after the default case"], 
+        answer: 1 
+      },
+      {
+        question: "An array is a group of memory locations related by the fact that they all have ______ array name and ______ type", 
+        options: ["different, different", "same, different", "different, same", "same, same"], 
+        answer: 3
+      },
+      {
+        question: "keyword ______ introduces the structure definition", 
+        options: ["structure", "str", "strdef", "struct"], 
+        answer: 3 
+      },
+      {
+        question: "Which of the following is not true of static local variables?", 
+        options: ["They’re accessible outside of the function in which they are defined", "They retain their values when the function is exited", "They’re initialized to zero if no explicitly initialized by the programmer", "They can be pointers"], 
+        answer: 0
       }
     ];
 
