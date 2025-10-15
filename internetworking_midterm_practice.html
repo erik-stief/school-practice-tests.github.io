@@ -210,7 +210,7 @@
       {
         question: "If an IP packet contains a UDP segment, the number in the protocol field of the IP header will be ___.",
         options: ["1", "255", "17", "6"],
-        answer: 0
+        answer: 2
       },
       {
         question: "Which protocol resolves an IP address to a MAC address (i.e. finds the MAC address of an IP address on the LAN)?",
@@ -236,247 +236,332 @@
         question: "On which layer of the OSI model do routers primarily operate?",
         options: ["Layer 1 (Physical)", "Layer 2 (Data Link)", "Layer 3 (Network)", "Layer 4 (Transport)"],
         answer: 2
-    },
-    {
-        question: "Which field in the routing table represents the trustworthiness of a route?",
-        options: ["Metric", "Next Hop", "Interface", "Administrative Distance"],
+      },
+      {
+          question: "Which field in the routing table represents the trustworthiness of a route?",
+          options: ["Metric", "Next Hop", "Interface", "Administrative Distance"],
+          answer: 3
+      },
+      {
+          question: "What is the Administrative Distance (AD) value for a directly connected route?",
+          options: ["0", "1", "120", "255"],
+          answer: 0
+      },
+      {
+          question: "What is the command used to configure an encrypted password for privileged execution mode on a Cisco router?",
+          options: ["enable password", "enable secret", "console password", "hostname"],
+          answer: 1
+      },
+      {
+          question: "What are the ports on a router commonly referred to as?",
+          options: ["Slots", "Channels", "Interfaces", "Access Points"],
+          answer: 2
+      },
+      {
+          question: "During the routing process, if the destination address is not that of the gateway, what must the router use to determine the next action?",
+          options: ["A configuration file stored in NVRAM", "The default route only", "Its routing table", "The global configuration mode"],
+          answer: 2
+      },
+      {
+          question: "When configuring a static route, the metric field is considered 'invalid' because:",
+          options: ["Static routes always use a metric of 1", "Static routing does not consume bandwidth", "Static routes do not consider criteria for route selection", "Static routes use the longest match lookup"],
+          answer: 2
+      },
+      {
+          question: "A default route is best described as a static route that matches:",
+          options: ["Only the network connected to the ISP", "All destinations for which a specific route is unknown", "Routes with an Administrative Distance of 1", "Routes to internal subnets of the same enterprise"],
+          answer: 1
+      },
+      {
+          question: "What command is used to assign an IP address to the any destination (catch-all) network in a default route configuration?",
+          options: ["ip address 0.0.0.0 0.0.0.0", "ip route 255.255.255.255 255.255.255.255", "ip route 0.0.0.0 0.0.0.0", "ip routing enable"],
+          answer: 2
+      },
+      {
+        question: "Which of the following is listed as a function of a router?",
+        options: ["Calculating the time to convergence", "Forwarding packets to destination", "Encrypting layer 3 packets", "Setting the maximum hop count"],
+        answer: 1
+      },
+      {
+        question: "What characteristic is true for static routing?",
+        options: ["It uses a metric which is a function of bandwidth and delay", "It cannot adapt to changing network conditions such as link failure", "It sends periodic updates to neighbors", "It relies on the Bellman-Ford algorithm"],
+        answer: 1
+      },
+      {
+        question: "What type of routing protocol is characterized by having updates that carry subnet mask information and supporting Variable Length Subnet Masking (VLSM)?",
+        options: ["Interior Gateway Protocol (IGP)", "Classful Protocol", "Distance Vector Protocol", "Classless Protocol"],
         answer: 3
-    },
-    {
-        question: "What is the Administrative Distance (AD) value for a directly connected route?",
-        options: ["0", "1", "120", "255"],
+      },
+      {
+        question: "What is the term for a protocol, such as IP, that encapsulates the data to be routed?",
+        options: ["Routing Protocol", "Routed Protocol", "Exterior Gateway Protocol", "Link State Protocol"],
         answer: 0
-    },
-    {
-        question: "What is the command used to configure an encrypted password for privileged execution mode on a Cisco router?",
-        options: ["enable password", "enable secret", "console password", "hostname"],
+      },
+      {
+        question: "The goal of an Exterior Routing Protocol (EGP) is to enable connectivity between:",
+        options: ["Networks within the same corporate structure", "Autonomous systems, ensuring end-to-end reachability across the Internet", "Routers in a single OSPF area", "Two subnets separated by a network of another class"],
         answer: 1
-    },
-    {
-        question: "What are the ports on a router commonly referred to as?",
-        options: ["Slots", "Channels", "Interfaces", "Access Points"],
-        answer: 2
-    },
-    {
-        question: "During the routing process, if the destination address is not that of the gateway, what must the router use to determine the next action?",
-        options: ["A configuration file stored in NVRAM", "The default route only", "Its routing table", "The global configuration mode"],
-        answer: 2
-    },
-    {
-        question: "When configuring a static route, the metric field is considered 'invalid' because:",
-        options: ["Static routes always use a metric of 1", "Static routing does not consume bandwidth", "Static routes do not consider criteria for route selection", "Static routes use the longest match lookup"],
-        answer: 2
-    },
-    {
-        question: "A default route is best described as a static route that matches:",
-        options: ["Only the network connected to the ISP", "All destinations for which a specific route is unknown", "Routes with an Administrative Distance of 1", "Routes to internal subnets of the same enterprise"],
-        answer: 1
-    },
-    {
-        question: "What command is used to assign an IP address to the any destination (catch-all) network in a default route configuration?",
-        options: ["ip address 0.0.0.0 0.0.0.0", "ip route 255.255.255.255 255.255.255.255", "ip route 0.0.0.0 0.0.0.0", "ip routing enable"],
-        answer: 2
-    },
-    {
-      question: "Which of the following is listed as a function of a router?",
-      options: ["Calculating the time to convergence", "Forwarding packets to destination", "Encrypting layer 3 packets", "Setting the maximum hop count"],
-      answer: 1
-    },
-    {
-      question: "What characteristic is true for static routing?",
-      options: ["It uses a metric which is a function of bandwidth and delay", "It cannot adapt to changing network conditions such as link failure", "It sends periodic updates to neighbors", "It relies on the Bellman-Ford algorithm"],
-      answer: 1
-    },
-    {
-      question: "What type of routing protocol is characterized by having updates that carry subnet mask information and supporting Variable Length Subnet Masking (VLSM)?",
-      options: ["Interior Gateway Protocol (IGP)", "Classful Protocol", "Distance Vector Protocol", "Classless Protocol"],
-      answer: 3
-    },
-    {
-      question: "What is the term for a protocol, such as IP, that encapsulates the data to be routed?",
-      options: ["Routing Protocol", "Routed Protocol", "Exterior Gateway Protocol", "Link State Protocol"],
-      answer: 0
-    },
-    {
-      question: "The goal of an Exterior Routing Protocol (EGP) is to enable connectivity between:",
-      options: ["Networks within the same corporate structure", "Autonomous systems, ensuring end-to-end reachability across the Internet", "Routers in a single OSPF area", "Two subnets separated by a network of another class"],
-      answer: 1
-    },
-    {
-      question: "What is the default Administrative Distance (AD) value for Routing Information Protocol (RIP)?",
-      options: ["0", "90", "110", "120"],
-      answer: 3
-    },
-    {
-      question: "What is the maximum hop count allowed by RIP, beyond which a destination is considered unreachable?",
-      options: ["8", "15", "16", "255"],
-      answer: 2
-    },
-    {
-      question: "The convergence problem in Distance Vector Protocols, where packets bounce around infinitely without preventive measures, is often referred to as what?",
-      options: ["Split horizon", "Count-to-infinity problems", "Unicast updates", "Triggered updates"],
-      answer: 1
-    },
-    {
-      question: "In Distance-vector routing protocols, how often does RIP generally broadcast its full routing table to each neighbor router?",
-      options: ["Every 10 seconds", "Every 30 seconds", "Only when a topology change occurs (triggered update)", "Every 180 seconds"],
-      answer: 1
-    },
-    {
-      question: "Which algorithm does OSPF use to find the best path?",
-      options: ["Bellman-Ford Algorithm", "Shortest Path First (SPF) algorithm", "Path Vector Protocol", "DVP Algorithm"],
-      answer: 1
-    },
-    {
-      question: "Which of the following is listed as a primary function of Layer 3 (Network Layer)?",
-      options: [
-        "Encryption and compression",
-        "Best effort delivery of messages",
-        "Framing and error detection",
-        "Physical signaling"
-      ],
-      answer: 1
-    },
-    {
-      question: "Which protocol is responsible for providing mapping between a MAC address and an IP address?",
-      options: [
-        "Internet Protocol (IP)",
-        "Internet Control Messaging Protocol (ICMP)",
-        "Address Resolution Protocol (ARP)",
-        "Internet Group Management Protocol (IGMP)"
-      ],
-      answer: 2
-    },
-    {
-      question: "If a host knows the destination's IP address but needs to find its MAC address, which two messages are involved in the standard dynamic resolution process?",
-      options: [
-        "Echo Request and Echo Reply",
-        "Hardware Request and Hardware Reply",
-        "ARP Request and ARP Reply",
-        "Source Quench and Redirection"
-      ],
-      answer: 2
-    },
-    {
-      question: "When a computer wants to send an ARP request, it sends it to which address on the local LAN?",
-      options: [
-        "Its default gateway's unicast address",
-        "The local LAN’s broadcast address (255.255.255.255)",
-        "A multicast address reserved for ARP",
-        "The destination host's IP address"
-      ],
-      answer: 1
-    },
-    {
-      question: "In the ARP packet format, what is the 16-bit field defining the type of packet, where 1 means Request and 2 means Reply?",
-      options: [
-        "Hardware type",
-        "Protocol type",
-        "Protocol length",
-        "Operation"
-      ],
-      answer: 3
-    },
-    {
-      question: "Which specific Classful address range is reserved for multicast addresses?",
-      options: [
-        "Class A",
-        "Class B",
-        "Class C",
-        "Class D"
-      ],
-      answer: 3
-    },
-    {
-      question: "An IP address beginning with 192.168 belongs to which reserved private addressing range?",
-      options: [
-        "Class A",
-        "Class B",
-        "Class C",
-        "Loopback"
-      ],
-      answer: 2
-    },
-    {
-      question: "How does a computer determine if a destination IP is local or remote?",
-      options: [
-        "By checking if the IP address is 32 bits long",
-        "By comparing the MAC address of the destination to its own MAC address",
-        "By using the subnet mask and a logical AND operation to find the network ID",
-        "By sending a PING to the destination and checking the response time"
-      ],
-      answer: 2
-    },
-    {
-      question: "If a destination is determined to be remote (not local), where must the packet be sent?",
-      options: [
-        "To the default gateway (router)",
-        "Directly to the destination host using ARP",
-        "To the broadcast address",
-        "To the nearest Layer 2 switch"
-      ],
-      answer: 0
-    },
-    {
-      question: "What is the process of merging multiple contiguous smaller networks into one larger network, often used by ISPs to reduce routing table size?",
-      options: [
-        "Subnetting",
-        "VLSM",
-        "CIDR",
-        "Supernetting"
-      ],
-      answer: 3
-    },
-    {
-        question: "Routers operate at the _____ layer of the OSI reference model.",
-        options: ["Transport", "Data Link", "Network", "Physical"],
-        answer: 2
-    },
-    {
-        question: "Which feature is listed as a benefit that routers provide?",
-        options: ["Connections between local networks", "Load balancing across servers", "Automated malware detection", "Client desktop configuration"],
-        answer: 0
-    },
-    {
-        question: "The primary user interface provided by a Cisco router is the _____.",
-        options: ["Web Interface", "Command-Line Interface (CLI)", "System Configuration Dialog Menu", "Setup Wizard"],
-        answer: 1
-    },
-    {
-        question: "The console cable connection typically establishes a connection using which baud rate (bits per second)?",
-        options: ["1200", "9600", "56000", "115200"],
-        answer: 1
-    },
-    {
-        question: "Which of the following methods allows you to access a router?",
-        options: ["Trivial File Transfer Protocol (TFTP) server", "File Transfer Protocol (FTP) client", "Secure Shell (SSH)", "Hypertext Transfer Protocol (HTTP)"],
-        answer: 0
-    },
-    {
-        question: "The mode displayed by the prompt 'Router>' is the _____ mode, which is used mostly to view statistics.",
-        options: ["Global configuration", "User", "Interface configuration", "Privileged EXEC"],
-        answer: 1
-    },
-    {
-        question: "To enter privileged EXEC mode from user mode, you must type which command?",
-        options: ["config t", "show enable", "enable", "exec"],
-        answer: 2
-    },
-    {
-        question: "Typing 'end' or pressing the Ctrl+Z keys will take a user back to the _____ prompt from any configuration mode.",
-        options: ["User mode", "Interface configuration mode", "Global configuration mode", "Enable (privileged EXEC) mode"],
+      },
+      {
+        question: "What is the default Administrative Distance (AD) value for Routing Information Protocol (RIP)?",
+        options: ["0", "90", "110", "120"],
         answer: 3
-    },
-    {
-        question: "Which router storage component is volatile, meaning its information is not maintained in the event of a router reboot?",
-        options: ["NVRAM", "Flash memory", "ROM", "RAM/DRAM"],
-        answer: 3
-    },
-    {
-        question: "During the router boot sequence, where does the IOS software look for the startup-config file?",
-        options: ["Flash memory", "NVRAM", "ROM", "The local TFTP server"],
+      },
+      {
+        question: "What is the maximum hop count allowed by RIP, beyond which a destination is considered unreachable?",
+        options: ["8", "15", "16", "255"],
+        answer: 2
+      },
+      {
+        question: "The convergence problem in Distance Vector Protocols, where packets bounce around infinitely without preventive measures, is often referred to as what?",
+        options: ["Split horizon", "Count-to-infinity problems", "Unicast updates", "Triggered updates"],
         answer: 1
-    }
+      },
+      {
+        question: "In Distance-vector routing protocols, how often does RIP generally broadcast its full routing table to each neighbor router?",
+        options: ["Every 10 seconds", "Every 30 seconds", "Only when a topology change occurs (triggered update)", "Every 180 seconds"],
+        answer: 1
+      },
+      {
+        question: "Which algorithm does OSPF use to find the best path?",
+        options: ["Bellman-Ford Algorithm", "Shortest Path First (SPF) algorithm", "Path Vector Protocol", "DVP Algorithm"],
+        answer: 1
+      },
+      {
+        question: "Which of the following is listed as a primary function of Layer 3 (Network Layer)?",
+        options: [
+          "Encryption and compression",
+          "Best effort delivery of messages",
+          "Framing and error detection",
+          "Physical signaling"
+        ],
+        answer: 1
+      },
+      {
+        question: "Which protocol is responsible for providing mapping between a MAC address and an IP address?",
+        options: [
+          "Internet Protocol (IP)",
+          "Internet Control Messaging Protocol (ICMP)",
+          "Address Resolution Protocol (ARP)",
+          "Internet Group Management Protocol (IGMP)"
+        ],
+        answer: 2
+      },
+      {
+        question: "If a host knows the destination's IP address but needs to find its MAC address, which two messages are involved in the standard dynamic resolution process?",
+        options: [
+          "Echo Request and Echo Reply",
+          "Hardware Request and Hardware Reply",
+          "ARP Request and ARP Reply",
+          "Source Quench and Redirection"
+        ],
+        answer: 2
+      },
+      {
+        question: "When a computer wants to send an ARP request, it sends it to which address on the local LAN?",
+        options: [
+          "Its default gateway's unicast address",
+          "The local LAN’s broadcast address (255.255.255.255)",
+          "A multicast address reserved for ARP",
+          "The destination host's IP address"
+        ],
+        answer: 1
+      },
+      {
+        question: "In the ARP packet format, what is the 16-bit field defining the type of packet, where 1 means Request and 2 means Reply?",
+        options: [
+          "Hardware type",
+          "Protocol type",
+          "Protocol length",
+          "Operation"
+        ],
+        answer: 3
+      },
+      {
+        question: "Which specific Classful address range is reserved for multicast addresses?",
+        options: [
+          "Class A",
+          "Class B",
+          "Class C",
+          "Class D"
+        ],
+        answer: 3
+      },
+      {
+        question: "An IP address beginning with 192.168 belongs to which reserved private addressing range?",
+        options: [
+          "Class A",
+          "Class B",
+          "Class C",
+          "Loopback"
+        ],
+        answer: 2
+      },
+      {
+        question: "How does a computer determine if a destination IP is local or remote?",
+        options: [
+          "By checking if the IP address is 32 bits long",
+          "By comparing the MAC address of the destination to its own MAC address",
+          "By using the subnet mask and a logical AND operation to find the network ID",
+          "By sending a PING to the destination and checking the response time"
+        ],
+        answer: 2
+      },
+      {
+        question: "If a destination is determined to be remote (not local), where must the packet be sent?",
+        options: [
+          "To the default gateway (router)",
+          "Directly to the destination host using ARP",
+          "To the broadcast address",
+          "To the nearest Layer 2 switch"
+        ],
+        answer: 0
+      },
+      {
+        question: "What is the process of merging multiple contiguous smaller networks into one larger network, often used by ISPs to reduce routing table size?",
+        options: [
+          "Subnetting",
+          "VLSM",
+          "CIDR",
+          "Supernetting"
+        ],
+        answer: 3
+      },
+      {
+          question: "Routers operate at the _____ layer of the OSI reference model.",
+          options: ["Transport", "Data Link", "Network", "Physical"],
+          answer: 2
+      },
+      {
+          question: "Which feature is listed as a benefit that routers provide?",
+          options: ["Connections between local networks", "Load balancing across servers", "Automated malware detection", "Client desktop configuration"],
+          answer: 0
+      },
+      {
+          question: "The primary user interface provided by a Cisco router is the _____.",
+          options: ["Web Interface", "Command-Line Interface (CLI)", "System Configuration Dialog Menu", "Setup Wizard"],
+          answer: 1
+      },
+      {
+          question: "The console cable connection typically establishes a connection using which baud rate (bits per second)?",
+          options: ["1200", "9600", "56000", "115200"],
+          answer: 1
+      },
+      {
+          question: "Which of the following methods allows you to access a router?",
+          options: ["Trivial File Transfer Protocol (TFTP) server", "File Transfer Protocol (FTP) client", "Secure Shell (SSH)", "Hypertext Transfer Protocol (HTTP)"],
+          answer: 0
+      },
+      {
+          question: "The mode displayed by the prompt 'Router>' is the _____ mode, which is used mostly to view statistics.",
+          options: ["Global configuration", "User", "Interface configuration", "Privileged EXEC"],
+          answer: 1
+      },
+      {
+          question: "To enter privileged EXEC mode from user mode, you must type which command?",
+          options: ["config t", "show enable", "enable", "exec"],
+          answer: 2
+      },
+      {
+          question: "Typing 'end' or pressing the Ctrl+Z keys will take a user back to the _____ prompt from any configuration mode.",
+          options: ["User mode", "Interface configuration mode", "Global configuration mode", "Enable (privileged EXEC) mode"],
+          answer: 3
+      },
+      {
+          question: "Which router storage component is volatile, meaning its information is not maintained in the event of a router reboot?",
+          options: ["NVRAM", "Flash memory", "ROM", "RAM/DRAM"],
+          answer: 3
+      },
+      {
+          question: "During the router boot sequence, where does the IOS software look for the startup-config file?",
+          options: ["Flash memory", "NVRAM", "ROM", "The local TFTP server"],
+          answer: 1
+      },
+      {
+        question: "At which OSI layer does a network switch primarily operate?",
+        options: ["Layer 1 - Physical Layer", "Layer 2 - Data Link Layer", "Layer 3 - Network Layer", "Layer 4 - Transport Layer"],
+        answer: 1
+      },
+      {
+          question: "Which layer of the OSI model does a hub operate at?",
+          options: ["Layer 1 - Physical Layer", "Layer 2 - Data Link Layer", "Layer 3 - Network Layer", "Layer 4 - Transport Layer"],
+          answer: 0
+      },
+      {
+          question: "In a standard Ethernet MAC frame, how many bytes are used to store the source MAC address?",
+          options: ["4 bytes", "6 bytes", "8 bytes", "2 bytes"],
+          answer: 1
+      },
+      {
+          question: "What is the purpose of the Frame Check Sequence (FCS) in an Ethernet frame?",
+          options: [
+              "To verify frame integrity using a checksum",
+              "To indicate the end of transmission",
+              "To define the EtherType of the frame",
+              "To store the next hop MAC address"
+          ],
+          answer: 0
+      },
+      {
+          question: "Which transport protocol is most commonly used for web browsing and email due to its reliability and connection orientation?",
+          options: ["TCP", "UDP", "ICMP", "OSPF"],
+          answer: 0
+      },
+      {
+          question: "Which of the following applications would most likely use UDP instead of TCP?",
+          options: ["File transfer", "Email", "Video streaming", "Web browsing"],
+          answer: 2
+      },
+      {
+          question: "What is a key advantage of using virtual networks compared to physical networks?",
+          options: ["They are faster to set up and cheaper", "They require less configuration", "They always offer higher performance", "They eliminate all hardware dependencies"],
+          answer: 0
+      },
+      {
+          question: "In virtualization, which statement best describes a Type-1 hypervisor?",
+          options: [
+              "It runs directly on physical hardware without a host OS",
+              "It runs on top of a host operating system",
+              "It provides slower performance but easier setup",
+              "It is only used for software simulations"
+          ],
+          answer: 0
+      },
+      {
+          question: "In a Software Defined Network (SDN), which plane is responsible for forwarding packets according to control plane instructions?",
+          options: ["Control plane", "Data plane", "Management plane", "Routing plane"],
+          answer: 1
+      },
+      {
+          question: "Which field in the IPv4 header specifies how many 32-bit words are used to describe the header length?",
+          options: ["Version", "Internet Header Length (IHL)", "Total Length", "Header Checksum"],
+          answer: 1
+      },
+      {
+          question: "In the ARP protocol, what operation code value represents an ARP reply?",
+          options: ["0", "1", "2", "3"],
+          answer: 2
+      },
+      {
+          question: "During the router boot process, what happens immediately after the POST (Power-On Self Test) completes successfully?",
+          options: [
+              "The router loads the IOS from flash memory",
+              "The router runs ROM Monitor mode",
+              "The router loads the startup-config from NVRAM",
+              "The router begins executing the control plane"
+          ],
+          answer: 0
+      },
+      {
+          question: "In a routing table, what does the 'Administrative Distance' (AD) value represent?",
+          options: [
+              "The time it takes for a packet to reach its destination",
+              "The number of hops to the destination network",
+              "The trustworthiness of the routing source",
+              "The bandwidth available along the route"
+          ],
+          answer: 2
+      }
     ];
 
     // Shuffle questions before showing
