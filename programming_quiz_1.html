@@ -1957,7 +1957,7 @@
       } else {
         button.style.background = "#f8b7b7";
         button.style.color = "#ae2530";
-        resultElement.textContent = `❌ Wrong. Answer: "${questions[currentQuestion].options[correctIndex]}"`;
+        resultElement.textContent = `❌ Wrong. Answer: "${questions[currentQuestion].options[correctIndex-1]}"`;
       }
       Array.from(document.querySelectorAll('.options button')).forEach(btn => btn.disabled = true);
 
