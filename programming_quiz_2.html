@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multiple Choice Test</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(125deg, #d5f6e7 0%, #eafbee 100%);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    .quiz-container {
+      background: #f2fff8;
+      padding: 40px 36px 32px 36px;
+      max-width: 420px;
+      margin: 54px auto;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(41, 234, 143, .13), 0 1.5px 3px #b4edca;
+    }
+    .question {
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-bottom: 22px;
+      color: #289d4a;
+      letter-spacing: 0.5px;
+    }
+    #progress {
+      font-size: 0.98rem;
+      color: #349c59;
+      margin-bottom: 16px;
+      text-align: right;
+    }
+    .options {
+      margin-bottom: 20px;
+    }
+    .options button {
+      display: block;
+      margin: 10px 0;
+      width: 100%;
+      padding: 13px 0;
+      font-size: 1.07rem;
+      font-weight: 500;
+      background: #e4faed;
+      color: #289d4a;
+      border: 2px solid #b7eec6;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(.47,1.64,.41,.8);
+      outline: none;
+      box-shadow: 0 1.5px 6px #e0ffe4;
+    }
+    .options button:hover, .options button:focus {
+      background: #34c471;
+      color: #fff;
+      border-color: #289d4a;
+      transform: scale(1.03);
+      box-shadow: 0 2.5px 18px #c2f7cf;
+    }
+    #result {
+      margin-top: 10px;
+      font-weight: 700;
+      font-size: 1.08rem;
+      text-align: center;
+      color: #24642f;
+      opacity: 0.95;
+    }
+    .score {
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-align: center;
+      color: #289d4a;
+      margin-top: 38px;
+      margin-bottom: 10px;
+    }
+    .restart-btn {
+      margin: 16px auto 0;
+      padding: 13px 44px;
+      background: #289d4a;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: block;
+      transition: background 0.20s;
+      box-shadow: 0 2px 10px #b7eec6;
+    }
+    .restart-btn:hover {
+      background: #24642f;
+      color: #e4faed;
+    }
+    .back-btn {
+      margin: 24px auto 0;
+      padding: 12px 38px;
+      background: #289d4a;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: block;
+      transition: background 0.20s;
+      box-shadow: 0 2px 10px #b7eec6;
+    }
+    .back-btn:hover {
+      background: #24642f;
+      color: #e4faed;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <div id="progress"></div>
+    <div id="question" class="question"></div>
+    <div id="options" class="options"></div>
+    <div id="result"></div>
+  </div>
+  <button class="back-btn" onclick="window.location.href='main.html'">⬅ Back to Main Page</button>
+  <script>
+    const questions = [
+        {
+        question: "1. ________ may contain different data types.",
+        options: ["1) structures", "2) arrays", "3) both 1 and 2", "4) none of these"],
+        answer: 1
+        },
+        {
+        question: "2. __________ are collections of related variables—sometimes referred to as aggregates—under one name.",
+        options: ["1) Members", "2) Enumerations", "3) Structures", "4) Files"],
+        answer: 3
+        },
+        {
+        question: "3. Structures may contain variables of many different data types—in contrast to ___________ that contain only elements of the same data type.",
+        options: ["1) files", "2) arrays", "3) constants", "4) functions"],
+        answer: 2
+        },
+        {
+        question: "4. Two structure variables with the same member values",
+        options: ["1) always compare equally", "2) never compare equally", "3) sometimes compare equally", "4) only compare equally if both contain holes"],
+        answer: 3
+        },
+        {
+        question: "5. What does the deck[52] array contain in: struct card a, deck[52], *cPtr;",
+        options: ["1) card structure elements", "2) a structure elements", "3) *cPtr elements", "4) none of these"],
+        answer: 1
+        },
+        {
+        question: "6. Keyword __________ introduces the structure definition.",
+        options: ["1) structure", "2) str", "3) strdef", "4) struct"],
+        answer: 4
+        },
+        {
+        question: "7. A structure containing a member that’s a pointer to the same structure type is referred to as a __________ structure.",
+        options: ["1) self-referential", "2) self-describing", "3) self-recursive", "4) self-elemental"],
+        answer: 1
+        },
+        {
+        question: "8. Which statement is false?",
+        options: ["1) Structures are derived data types", "2) Each structure definition must end with a semicolon", "3) A structure can contain an instance of itself", "4) Structures may not be compared using == and !="],
+        answer: 3
+        },
+        {
+        question: "9. Which of the following is not a valid operation on a structure?",
+        options: ["1) Assigning structure variables of same type", "2) Taking the address of a structure variable", "3) Using sizeof on a structure variable", "4) Comparing structures with relational operators"],
+        answer: 4
+        },
+        {
+        question: "10. Structure variables may not be initialized by",
+        options: ["1) setting user-defined defaults in struct", "2) assigning values to members", "3) array-like initializer lists", "4) assignment statements"],
+        answer: 1
+        },
+        {
+        question: "11. What does: struct card a = {&quot;Three&quot;, &quot;Hearts&quot;}; do?",
+        options: ["1) Creates variable card of type struct", "2) Creates variables Three and Hearts", "3) Creates variable a of type struct card and initializes it", "4) Creates variables Three and Hearts of type struct card"],
+        answer: 3
+        },
+        {
+        question: "12. If there are fewer __________ in the list than members in the structure, the remaining are initialized to 0 or NULL.",
+        options: ["1) quantifiers", "2) initializers", "3) numerators", "4) variables"],
+        answer: 2
+        },
+        {
+        question: "13. Structures can be initialized in __________ statements.",
+        options: ["1) assignment", "2) null", "3) scope", "4) empty"],
+        answer: 1
+        },
+        {
+        question: "14. Arrays are",
+        options: ["1) always passed call-by-reference", "2) passed call-by-reference unless inside a structure", "3) always passed call-by-value", "4) passed call-by-value unless inside a structure"],
+        answer: 2
+        },
+        {
+        question: "15. The ________ accesses a structure member via the structure variable name.",
+        options: ["1) structure member operator", "2) structure pointer operator", "3) structure arrow operator", "4) none of these"],
+        answer: 1
+        },
+        {
+        question: "16. The expression aptr->suit is equivalent to __________.",
+        options: ["1) aptr.suit", "2) *aptr.suit", "3) (*aptr).suit", "4) *aptr.(suit)"],
+        answer: 3
+        },
+        {
+        question: "17. Which of the following is false?",
+        options: ["1) Structure member names must be unique program-wide", "2) Referring to a member without structure name is error", "3) Inserting space in -> is error", "4) Dot operator (.) is structure member operator"],
+        answer: 1
+        },
+        {
+        question: "18. Structures may be passed to functions by ________.",
+        options: ["1) passing individual members", "2) passing entire structure", "3) passing pointer to structure", "4) all of these"],
+        answer: 4
+        },
+        {
+        question: "19. Arrays of structures ________.",
+        options: ["1) are automatically passed by reference", "2) are automatically passed by value", "3) cannot be passed by reference", "4) None of the above"],
+        answer: 1
+        },
+        {
+        question: "20. A structure of arrays is automatically passed __________.",
+        options: ["1) by value", "2) by reference", "3) by aggregate", "4) by masking"],
+        answer: 1
+        },
+        {
+        question: "21. An array of structures is automatically passed __________.",
+        options: ["1) by value", "2) by reference", "3) by aggregate", "4) by enumeration"],
+        answer: 2
+        },
+        {
+        question: "22. Which of the following is false?",
+        options: ["1) To pass a structure by reference, pass its address", "2) To pass array by value, wrap in struct", "3) To pass a structure by reference, pass its name", "4) Passing large structures by reference is more efficient"],
+        answer: 3
+        },
+        {
+        question: "23. typedef is used to",
+        options: ["1) create alias for a data type", "2) create new data types", "3) cast one struct to another", "4) initialize struct members"],
+        answer: 1
+        },
+        {
+        question: "24. Advantages of typedef do not include",
+        options: ["1) portability", "2) shorter type names", "3) readability", "4) increasing efficiency of accessing members"],
+        answer: 4
+        },
+        {
+        question: "25. Creating a new name with typedef __________.",
+        options: ["1) creates a new type", "2) creates a new type name", "3) creates a new variable name", "4) creates a new variable"],
+        answer: 2
+        },
+        {
+        question: "26. Which statement is true?",
+        options: ["1) typedef often creates synonyms for basic types", "2) typedef creates antonyms for basic types", "3) typedef creates longer type names", "4) typedef names must be capitalized"],
+        answer: 1
+        },
+        {
+        question: "27. What does: typedef struct card Card; do?",
+        options: ["1) Defines card as synonym for Card", "2) Defines Card as synonym for card", "3) Defines Card as synonym for struct card", "4) Defines Card as synonym for typedef struct card"],
+        answer: 3
+        },
+        {
+        question: "28. Which of the following is always a syntax error?",
+        options: ["1) Not using srand with rand", "2) Not using rand with srand", "3) Not using const when passing array", "4) Forgetting array subscript when referring to structures in array"],
+        answer: 4
+        },
+        {
+        question: "1. ________ are used for permanent retention of large amounts of data.",
+        options: ["1) Structures", "2) Arrays", "3) Records", "4) Files"],
+        answer: 4
+        },
+        {
+        question: "2. Which of the following is false?",
+        options: ["1) Storage of data in memory variables is temporary; all such data is lost when a program terminates.", "2) Computers store files on primary storage devices, typically disk storage devices.", "3) Files are used for permanent retention of data (typically large amounts of data).", "4) Storage of data in memory arrays is temporary; all such data is lost when a program terminates."],
+        answer: 2
+        },
+        {
+        question: "3. Which of the following is not a stream associated with C files?",
+        options: ["1) stdin", "2) stdout", "3) stdchar", "4) stderr"],
+        answer: 3
+        },{
+        question: "4. Which of the following is not part of the FILE structure specified in <stdio.h>?",
+        options: ["1) file descriptor", "2) open file table", "3) read/write methods", "4) file control block"],
+        answer: 3
+        },
+        {
+        question: "5. C views each file simply as a sequential stream of __________.",
+        options: ["1) bits", "2) bytes", "3) fields", "4) records"],
+        answer: 2
+        },
+        {
+        question: "6. Which of the following is not automatically opened when a C program begins?",
+        options: ["1) standard error", "2) standard output", "3) standard dialog", "4) standard input"],
+        answer: 3
+        },
+        {
+        question: "7. __________ provide communication channels between files and programs.",
+        options: ["1) Streams", "2) Records", "3) File descriptors", "4) File control blocks (FCBs)"],
+        answer: 1
+        },
+        {
+        question: "8. The standard __________ stream enables a program to read data from the keyboard.",
+        options: ["1) read", "2) keyboard", "3) dialog", "4) input"],
+        answer: 4
+        },
+        {
+        question: "9. Function __________ reads one character from a file.",
+        options: ["1) fgetcharacter", "2) fgetc", "3) fgetchar", "4) fgetbyte"],
+        answer: 2
+        },
+        {
+        question: "10. Function fputs writes a __________ to a file.",
+        options: ["1) character", "2) stream", "3) line", "4) standard output"],
+        answer: 3
+        },
+        {
+        question: "11. Which mode would you use if you wanted to open a file for both reading and writing?",
+        options: ["1) r+", "2) w+", "3) a+", "4) all of these"],
+        answer: 4
+        },
+        {
+        question: "12. If an error occurs while opening a file in any mode, function fopen returns ________.",
+        options: ["1) true", "2) NULL", "3) false", "4) -1"],
+        answer: 2
+        },
+        {
+        question: "13. Which statement is true?",
+        options: ["1) C imposes no structure on a file.", "2) C imposes record structure on a file.", "3) C imposes sequential access on a file.", "4) C imposes hierarchical access on a file."],
+        answer: 1
+        },
+        {
+        question: "14. Which statement is false?",
+        options: ["1) The programmer must provide any file structure to meet the requirements of each particular application.", "2) A programmer can impose a record structure on a file.", "3) Records must be written to a C file in order by record key.", "4) The notion of a record of a file does not exist in C."],
+        answer: 3
+        },
+        {
+        question: "15. Which of the following statements is false?",
+        options: ["1) The programmer must know the specifics of the FILE structure to use files.", "2) The FILE structure for a file leads indirectly to the operating system’s file control block (FCB) for a file.", "3) If a file does not exist and is opened for writing fopen creates the file.", "4) A C program administers each file with a separate FILE structure."],
+        answer: 1
+        },
+        {
+        question: "16. Before a file can be accessed it must first be",
+        options: ["1) copied", "2) read", "3) written", "4) opened"],
+        answer: 4
+        },
+        {
+        question: "17. If an existing file is opened for writing __________.",
+        options: ["1) the contents of the file are preserved", "2) the contents of the file are discarded and an error code is returned", "3) the contents of the file are discarded without warning", "4) the newly written data is appended to the end of the file"],
+        answer: 3
+        },
+        {
+        question: "18. Function feof __________.",
+        options: ["1) forces an end-of-file condition", "2) determines whether the end-of-file indicator is set for a file", "3) sets the end-of-file indicator for a file", "4) flushes the contents of the file from the current position to the end"],
+        answer: 2
+        },
+        {
+        question: "19. Which statement is true?",
+        options: ["1) Function fprintf is equivalent to printf.", "2) Function fprintf is equivalent to printf except that fprintf also receives as an argument a file pointer for the file to which the data will be written.", "3) Function fprintf is equivalent to printf except that fprintf also receives as an argument a file control block for the file to which the data will be written.", "4) Function fprintf is equivalent to printf except that fprintf also disables the file end-of-file indicator."],
+        answer: 2
+        },
+        {
+        question: "20. If a file is not closed explicitly by a program __________.",
+        options: ["1) the operating system normally will close the file when program execution terminates", "2) the file will be left open when the program terminates, creating a possible security breach", "3) the operating system will query the user to determine if he or she wishes to close the file when the program terminates", "4) the operating system will not allow the owner of that program to run any other programs"],
+        answer: 1
+        },
+        {
+        question: "21. Which statement is false?",
+        options: ["1) Each file used in a program must have a unique name and will have a different file pointer returned by fopen.", "2) All subsequent file processing functions after the file is opened must refer to the file with the appropriate file control block.", "3) To create a file use file open mode 'w'.", "4) To add records to an existing file, open the file for appending ('a')."],
+        answer: 2
+        },
+        {
+        question: "22. If an error occurs while opening a file in any mode, fopen __________.",
+        options: ["1) causes program termination", "2) returns NULL", "3) issues the message 'can’t open file'", "4) diagnoses the error, waits five minutes and retries"],
+        answer: 2
+        },
+        {
+        question: "23. Which statement is true?",
+        options: ["1) fopen returns a FILE structure.", "2) fopen returns a pointer to a FILE structure.", "3) fopen returns a file control block (FCB).", "4) fopen returns a pointer to a file control block (FCB)."],
+        answer: 2
+        },
+        {
+        question: "24. Function fscanf takes an argument of type ________.",
+        options: ["1) FILE pointer", "2) cfPtr", "3) char", "4) int"],
+        answer: 1
+        },
+        {
+        question: "25. Which of the following is a function that causes a program’s file position pointer to be repositioned to the beginning of the file?",
+        options: ["1) rescan", "2) rewind", "3) return", "4) none of these"],
+        answer: 2
+        },
+        {
+        question: "26. Function fscanf is equivalent to function scanf, except that fscanf",
+        options: ["1) can have only a single argument.", "2) can read only from standard streams.", "3) can read only from open streams.", "4) receives as an argument a file pointer for the file from which the data is read."],
+        answer: 4
+        },
+        {
+        question: "27. The rewind statement causes __________.",
+        options: ["1) the disk to stop spinning, then spin in reverse until it repositions to the beginning of the file.", "2) the contents of the file to be erased.", "3) a program’s file position pointer to be repositioned to the beginning of the file (i.e., byte 0).", "4) a file to be closed and then re-opened."],
+        answer: 3
+        },
+        {
+        question: "1. Individual records of a randomly accessed file are normally ________.",
+        options: ["1) fixed in length", "2) not fixed in length", "3) sorted by record key", "4) read using the fopen function"],
+        answer: 1
+        },
+        {
+        question: "2. Which of the following is false?",
+        options: ["1) Data can be inserted in a randomly accessed file without destroying other data in the file.", "2) There is more than one way to implement randomly accessed files.", "3) Randomly accessed files cannot be accessed directly without searching through other records.", "4) Data stored previously can be updated or deleted without rewriting the entire file."],
+        answer: 3
+        },
+        {
+        question: "3. Which statement is false?",
+        options: ["1) Randomly accessed files are popular in transaction processing systems.", "2) Data stored previously in a randomly accessed file can be updated or deleted without rewriting the entire file.", "3) Records of a randomly accessed file are normally fixed in length (i.e., all the record in the file are the same length).", "4) A record of a randomly accessed file is normally located by searching the portion of that file which precedes that record."],
+        answer: 4
+        },
+        {
+        question: "4. What is the significance of the 1 in the following statement? fwrite(&number, sizeof(int), 1, fPtr);",
+        options: ["1) It specifies that the file is to be opened for updating.", "2) It specifies the number of elements in the array that should be written to disk.", "3) It specifies the byte size of the element being written to disk", "4) none of these"],
+        answer: 2
+        },
+        {
+        question: "5. Function fwrite __________.",
+        options: ["1) is equivalent to function fprintf", "2) transfers a specified number of bytes beginning at a specified location in memory to a location in a file indicated by the file position pointer", "3) transfers a specified number of bytes beginning at a specified location in memory to a location in a file indicated by one of its arguments", "4) is equivalent to function fprintf, except that fwrite can only write to standard streams"],
+        answer: 2
+        },
+        {
+        question: "6. fread and fwrite",
+        options: ["1) can not read and write arrays of data", "2) process all their data in human readable format", "3) process all their data in the same format used by fscanf and fprintf, respectively", "4) process all their data in “raw data” format"],
+        answer: 4
+        },
+        {
+        question: "7. Which statement is true?",
+        options: ["1) Random access file-processing programs typically read and write one field at a time.", "2) Random access file-processing programs typically read and write one struct at a time.", "3) The sizeof operator is a run-time unary operator that returns the size in bytes of its operand.", "4) The expression sizeof(int) always returns 4."],
+        answer: 2
+        },
+        {
+        question: "8. sizeof",
+        options: ["1) is a compile-time function", "2) is a compile-time unary operator", "3) is a run-time unary operator", "4) is a run-time function"],
+        answer: 2
+        },
+        {
+        question: "9. Which of the following is an argument of the fseek function that can have the values SEEK_SET, SEEK_CUR or SEEK_END?",
+        options: ["1) stream", "2) offset", "3) whence", "4) none of these"],
+        answer: 3
+        },
+        {
+        question: "10. Which statement is true?",
+        options: ["1) fseek searches for a record by its record key.", "2) fseek sets the file position pointer to a specific byte location in the file.", "3) fseek moves the read-write head on the disk to the location on disk that corresponds to a specific location in a file.", "4) fseek must immediately follow each call to fread or fwrite."],
+        answer: 2
+        },
+        {
+        question: "11. The symbolic constant __________ indicates that the file position pointer is to be positioned relative to the beginning of the file by the amount of the offset.",
+        options: ["1) SEEK_SET", "2) SEEK_BEGIN", "3) SEEK_START", "4) SEEK_CUR"],
+        answer: 1
+        },
+        {
+        question: "12. Which of the following is a function that reads a specified number of bytes from a file into memory?",
+        options: ["1) fseek", "2) fwrite", "3) fread", "4) fopen"],
+        answer: 3
+        },
+        {
+        question: "13. Which statement is true?",
+        options: ["1) fread always reads a record at a time from a file into memory.", "2) fread reads a specified number of bytes from a file into memory.", "3) Every fread call must include an argument with sizeof.", "4) fread reads bytes from a position in the file specified as one of fread’s arguments."],
+        answer: 2
+        },
+        {
+        question: "14. In the statement fseek(fPtr, (account – 1) * sizeof(struct clientData), SEEK_SET); why are we adjusting account by –1?",
+        options: ["1) Because the account numbers start at 0 and the file starts at position 0.", "2) Because the account numbers start at 0 and the file starts at position 1.", "3) Because the account numbers start at 1 and the file starts at position 0.", "4) Because the account numbers start at 1 and the file starts at position 1."],
+        answer: 3
+        },
+        {
+        question: "1. A __________ occurs when dynamically allocated memory is not returned when it’s no longer needed.",
+        options: ["1) memory leak", "2) self-referential error", "3) allocation error", "4) sizeof error"],
+        answer: 1
+        },
+        {
+        question: "2. __________ memory allocation is the ability for a program to obtain more memory space at execution time and to release space no longer needed.",
+        options: ["1) Static", "2) Active", "3) Selective", "4) Dynamic"],
+        answer: 4
+        },
+        {
+        question: "3. Function malloc takes as an argument the number of bytes to be allocated, and returns a pointer of type __________ to the allocated memory.",
+        options: ["1) char *", "2) int *", "3) void *", "4) NULL *"],
+        answer: 3
+        },
+        {
+        question: "4. If no memory is available malloc returns a(n) __________ pointer.",
+        options: ["1) self", "2) NULL", "3) void", "4) empty"],
+        answer: 2
+        },
+        {
+        question: "5. Not returning dynamically allocated memory when it is no longer needed can cause a system to run out of memory prematurely. This is called a(n) __________.",
+        options: ["1) outage", "2) memory hole", "3) memory access violation", "4) memory leak"],
+        answer: 4
+        },
+        {
+        question: "6. When memory allocated with malloc is no longer needed, return that memory to the system immediately with __________.",
+        options: ["1) free_memory", "2) free_storage", "3) return", "4) free"],
+        answer: 4
+        },
+        {
+        question: "7. Which of these is not a common programming error?",
+        options: ["1) Referring to memory that has been freed.", "2) Freeing memory (with free) that was not dynamically allocated.", "3) Assuming that the size of a structure is simply the sum of the sizes of its members.", "4) Calling malloc in a statement without using sizeof."],
+        answer: 4
+        },
+        {
+        question: "8. realloc is conventionally used to",
+        options: ["1) allocate memory for a single object", "2) allocate memory for an array of objects", "3) change the size of an object previously allocated", "4) change the contents of an object previously allocated"],
+        answer: 3
+        }
+    ];
+
+    // Shuffle questions before showing
+    shuffleQuestions(questions);
+
+    function shuffleQuestions(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    // --- New: Reference for next button ---
+    let nextButton;
+
+    function showQuestion() {
+      document.getElementById('progress').textContent =
+        `Question ${currentQuestion + 1} of ${questions.length}`;
+      const questionElement = document.getElementById('question');
+      const optionsElement = document.getElementById('options');
+      const resultElement = document.getElementById('result');
+
+      questionElement.innerHTML = questions[currentQuestion].question;
+      optionsElement.innerHTML = '';
+      resultElement.textContent = '';
+
+      questions[currentQuestion].options.forEach((option, i) => {
+        const btn = document.createElement('button');
+        btn.textContent = option;
+        btn.onclick = () => checkAnswer(btn, i);
+        optionsElement.appendChild(btn);
+      });
+
+      // Remove 'Next' button if it exists
+      if (nextButton && nextButton.parentNode) {
+        nextButton.parentNode.removeChild(nextButton);
+        nextButton = null;
+      }
+    }
+
+    function checkAnswer(button, selectedIndex) {
+      const resultElement = document.getElementById('result');
+      const correctIndex = questions[currentQuestion].answer;
+      if (selectedIndex === correctIndex) {
+        score++;
+        button.style.background = "#b0edac";
+        button.style.color = "#24642f";
+        resultElement.textContent = "🎉 Correct!";
+      } else {
+        button.style.background = "#f8b7b7";
+        button.style.color = "#ae2530";
+        resultElement.textContent = `❌ Wrong. Answer: "${questions[currentQuestion].options[correctIndex]}"`;
+      }
+      Array.from(document.querySelectorAll('.options button')).forEach(btn => btn.disabled = true);
+
+      // --- New: Create and show 'Next Question' button ---
+      if (!nextButton) {
+        nextButton = document.createElement('button');
+        nextButton.textContent = currentQuestion < questions.length - 1 ? "Next Question" : "Show Result";
+        nextButton.className = "restart-btn";
+        nextButton.onclick = () => {
+          currentQuestion++;
+          if (currentQuestion < questions.length) {
+            showQuestion();
+          } else {
+            showResult();
+          }
+        };
+        document.querySelector('.quiz-container').appendChild(nextButton);
+      }
+      // Adjust button text dynamically
+      nextButton.textContent = currentQuestion < questions.length - 1 ? "Next Question" : "Show Result";
+      nextButton.style.display = 'block';
+    }
+
+    function showResult() {
+      document.querySelector('.quiz-container').innerHTML =
+        `<div class="score">Your score: ${score} of ${questions.length}</div>
+        <button class="restart-btn" onclick="location.reload()">Restart Quiz</button>`;
+    }
+
+    showQuestion();
+  </script>
+</body>
+</html>

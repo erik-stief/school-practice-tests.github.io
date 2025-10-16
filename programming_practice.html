@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&family=Montserrat:wght@500;700&display=swap');
+    body {
+      font-family: 'Fira Mono', 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(120deg, #181b23 50%, #23273e 100%);
+      margin: 0; min-height: 100vh;
+      color: #aaf2fa;
+      letter-spacing: 0.03em;
+      position: relative;
+      overflow-x: hidden;
+    }
+    .hub-container {
+      background: rgba(36,41,62,0.97);
+      border-radius: 19px;
+      box-shadow: 0 7px 30px 0 #0e1c3299, 0 2px 6px #11122c44;
+      padding: 46px 38px 30px 38px;
+      max-width: 470px;
+      margin: 68px auto;
+      border-top: 4px solid #29ccbe;
+      border-bottom: 4px solid #5285f5;
+      position: relative;
+    }
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #53ffa9;
+      text-align: center;
+      letter-spacing: 0.04em;
+      margin-bottom: 34px;
+      text-shadow: 0 3px 14px #21294180;
+      position: relative;
+    }
+    h1::after {
+      content: "_";
+      color: #00ffe7;
+      animation: blink 1.05s steps(1) infinite;
+      margin-left: 0.1em;
+      font-family: 'Fira Mono', monospace;
+      font-size: 1.15em;
+    }
+    @keyframes blink { 0%,100% { opacity:1 } 50% { opacity:0 } }
+    .quiz-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .quiz-list li {
+      margin-bottom: 23px;
+      position: relative;
+    }
+    .quiz-link {
+      display: block;
+      padding: 16px;
+      font-size: 1.21rem;
+      letter-spacing: 0.01em;
+      background: linear-gradient(93deg, #232b3a 60%, #232f5c 100%);
+      color: #98eefb;
+      border: 2px solid #27303b;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px #20264752;
+      font-family: 'Fira Mono', 'Montserrat', monospace;
+      font-weight: 500;
+      transition: all 0.16s cubic-bezier(0.45,1.72,0.38,0.78);
+      text-align: center;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .quiz-link:before {
+      content: ">";
+      color: #00f6d7;
+      font-family: 'Fira Mono', monospace;
+      font-weight: 700;
+      position: absolute;
+      left: 14px; top: 15px;
+      font-size: 1.2em;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+    .quiz-link:hover, .quiz-link:focus {
+      background: linear-gradient(93deg,#211056 40%,#12477d 100%);
+      color: #53ffa9;
+      border-color: #00ffe7;
+      box-shadow: 0 4px 22px #00ffe755, 0 0.5px 4px #222;
+      transform: translateY(-1.5px) scale(1.035);
+    }
+    .quiz-link:active {
+      box-shadow: none;
+      transform: scale(1);
+    }
+    .credit {
+      text-align: center;
+      font-size: 0.94rem;
+      color: #3ce8c9;
+      margin-top: 32px;
+      font-family: 'Fira Mono', 'Montserrat', monospace;
+      opacity: 0.89;
+      letter-spacing: 0.06em;
+    }
+    /* Subtle animated code rain background */
+    .code-rain {
+      pointer-events: none;
+      position: fixed;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      opacity: 0.14;
+      mix-blend-mode: lighten;
+    }
+  </style>
+</head>
+<body>
+  <canvas class="code-rain"></canvas>
+  <div class="hub-container">
+    <h1>Practice Quiz Hub</h1>
+    <ul class="quiz-list">
+      <li><a href="programming_quiz_1.html" class="quiz-link">Quiz 1 Practice</a></li>
+      <li><a href="programming_quiz_2.html" class="quiz-link">Quiz 2 Practice</a></li>
+      <li><a href="programming_midterm_practice.html" class="quiz-link">Programming Midterm Practice(WIP)</a></li>
+    </ul>
+    <div class="credit">Hosted with GitHub Pages</div>
+  </div>
+  <script>
+    // Minimal "code rain" animation
+    const canvas = document.querySelector('.code-rain');
+    const ctx = canvas.getContext('2d');
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let fontSize = 21, columns, drops;
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      columns = Math.floor(canvas.width / fontSize);
+      drops = Array.from({length: columns}, () => Math.random()*canvas.height/fontSize|0);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+    function draw() {
+      ctx.fillStyle = 'rgba(15,21,33, 0.25)';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.font = fontSize+"px 'Fira Mono','Consolas',monospace";
+      for(let i=0; i<drops.length; i++) {
+        const text = letters[Math.floor(Math.random()*letters.length)];
+        ctx.fillStyle = "#00ffe7";
+        ctx.globalAlpha = 0.15 + 0.35*Math.random();
+        ctx.fillText(text, i*fontSize, drops[i]*fontSize);
+        ctx.globalAlpha = 1;
+        drops[i]++;
+        if(drops[i]*fontSize > canvas.height && Math.random() > 0.975)
+          drops[i]=0;
+      }
+    }
+    setInterval(draw, 63);
+  </script>
+</body>
+</html>

@@ -1,0 +1,1993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multiple Choice Test</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(125deg, #d5f6e7 0%, #eafbee 100%);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    .quiz-container {
+      background: #f2fff8;
+      padding: 40px 36px 32px 36px;
+      max-width: 420px;
+      margin: 54px auto;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(41, 234, 143, .13), 0 1.5px 3px #b4edca;
+    }
+    .question {
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-bottom: 22px;
+      color: #289d4a;
+      letter-spacing: 0.5px;
+    }
+    #progress {
+      font-size: 0.98rem;
+      color: #349c59;
+      margin-bottom: 16px;
+      text-align: right;
+    }
+    .options {
+      margin-bottom: 20px;
+    }
+    .options button {
+      display: block;
+      margin: 10px 0;
+      width: 100%;
+      padding: 13px 0;
+      font-size: 1.07rem;
+      font-weight: 500;
+      background: #e4faed;
+      color: #289d4a;
+      border: 2px solid #b7eec6;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(.47,1.64,.41,.8);
+      outline: none;
+      box-shadow: 0 1.5px 6px #e0ffe4;
+    }
+    .options button:hover, .options button:focus {
+      background: #34c471;
+      color: #fff;
+      border-color: #289d4a;
+      transform: scale(1.03);
+      box-shadow: 0 2.5px 18px #c2f7cf;
+    }
+    #result {
+      margin-top: 10px;
+      font-weight: 700;
+      font-size: 1.08rem;
+      text-align: center;
+      color: #24642f;
+      opacity: 0.95;
+    }
+    .score {
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-align: center;
+      color: #289d4a;
+      margin-top: 38px;
+      margin-bottom: 10px;
+    }
+    .restart-btn {
+      margin: 16px auto 0;
+      padding: 13px 44px;
+      background: #289d4a;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: block;
+      transition: background 0.20s;
+      box-shadow: 0 2px 10px #b7eec6;
+    }
+    .restart-btn:hover {
+      background: #24642f;
+      color: #e4faed;
+    }
+    .back-btn {
+      margin: 24px auto 0;
+      padding: 12px 38px;
+      background: #289d4a;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: block;
+      transition: background 0.20s;
+      box-shadow: 0 2px 10px #b7eec6;
+    }
+    .back-btn:hover {
+      background: #24642f;
+      color: #e4faed;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <div id="progress"></div>
+    <div id="question" class="question"></div>
+    <div id="options" class="options"></div>
+    <div id="result"></div>
+  </div>
+  <button class="back-btn" onclick="window.location.href='main.html'">⬅ Back to Main Page</button>
+  <script>
+    const questions = [
+    {
+        question: "1. Which of the following is not a valid integer value?",
+        options: ["1) -3", "2) 0", "3) 2134859", "4) 1.1"],
+        answer: 4
+    },
+    {
+        question: "2. Which of the following is an invalid identifier (variable name)?",
+        options: ["1) _Test", "2) TEST", "3) 5test", "4) test1"],
+        answer: 3
+        },
+        {
+        question: "3. Which statement prints “hi” on the screen?",
+        options: ["1) puts(&quot;hi&quot;);", "2) put &quot;hi&quot;;", "3) puts &quot;hi&quot;;", "4) none of the above"],
+        answer: 1
+        },
+        {
+        question: "4. The __________ sign is also known as the __________ operator.",
+        options: ["1) +, assignment", "2) =, assignment", "3) *, stream manipulator", "4) &, stream insertion"],
+        answer: 2
+        },
+        {
+        question: "5. A(n) __________ is a location in the computer's memory where a value can be stored for use by a program.",
+        options: ["1) unknown", "2) name", "3) variable", "4) declaration"],
+        answer: 3
+        },
+        {
+        question: "6. Which of these is not a valid identifier?",
+        options: ["1) a_valid_identifier", "2) a1_valid_identifier", "3) a_valid_identifier_", "4) 1_valid_identifier"],
+        answer: 4
+        },
+        {
+        question: "7. Which of the following statements is false?",
+        options: ["1) C is case sensitive.", "2) Uppercase and lowercase letters are different in C.", "3) identifier and IdEnTiFiEr are identical identifiers in C.", "4) Identifiers can be of any length"],
+        answer: 3
+        },
+        {
+        question: "8. Which of the following multiple word variable names does not conform to the good programming practices in the text?",
+        options: ["1) multiple_word_variable_name", "2) multipleWordVariableName", "3) multiplewordvariablename", "4) aReallyReallyLongMultipleWordVa"],
+        answer: 3
+        },
+        {
+        question: "9. The address operator is",
+        options: ["1) &&", "2) %", "3) @", "4) &"],
+        answer: 4
+        },
+        {
+        question: "10. Which statement is false?",
+        options: ["1) in the statement sum = integer1 + integer2; both = and + are binary operators.", "2) The statement in part a) is an example of an assignment statement.", "3) The spaces around each of the binary operators in the statement of part a) are required.", "4) In part a), the = operator’s two operands are sum and the value of the expression integer1 + integer2."],
+        answer: 3
+        },
+        {
+        question: "11. Which of the following is false?",
+        options: ["1) Each variable being input in a scanf statement is generally preceded by an &.", "2) Each variable being output in a printf statement is generally not preceded by an &.", "3) In a printf statement, the comma that separates the format control string from the expressions to be printed is placed inside the format control string.", "4) Calculations can be performed inside printf statements."],
+        answer: 3
+        },
+        {
+        question: "12. Variable names actually correspond to __________.",
+        options: ["1) locations in the computer's memory", "2) operators", "3) integers", "4) data types"],
+        answer: 1
+        },
+        {
+        question: "13. When a number gets assigned to a variable that already has a value __________.",
+        options: ["1) the new number overwrites the previous value at that memory location", "2) the new number gets assigned to a neighboring memory location", "3) the computer issues an error", "4) the new value is destroyed and the old value remains"],
+        answer: 1
+        },
+        {
+        question: "14. Every variable has all the attributes below, except",
+        options: ["1) name", "2) value", "3) alias", "4) type"],
+        answer: 3
+        },
+        {
+        question: "15. Which of the following is false?",
+        options: ["1) Reading a value into a memory location destroys the previous value.", "2) Reading a value out of a memory location destroys that value.", "3) sum = integer1 + integer2; involves destructive read-in.", "4) The statement in part c) also involves nondestructive read-out."],
+        answer: 2
+        },
+        {
+        question: "16. Which operation will find the remainder when 15 is divided by 6?",
+        options: ["1) 15 / 6", "2) 15 % 6", "3) 15 ^ 6", "4) 15 * 6"],
+        answer: 2
+        },
+        {
+        question: "17. Evaluate the expression 3 * 4 % 6 + 4 * 5",
+        options: ["1) 20", "2) 26", "3) 12", "4) 32"],
+        answer: 1
+        },
+        {
+        question: "18. Which statement is false?",
+        options: ["1) In algebra, we write ab to multiply a times b.", "2) In C, we write ab to multiply a times b.", "3) In C, the remainder operator is %.", "4) In C, integer division yields an integer result."],
+        answer: 2
+        },
+        {
+        question: "19. Which statement about C arithmetic is false?",
+        options: ["1) 6 / 3 yields 2", "2) 5 / 2 yields 2.5", "3) 7 % 3 yields 1", "4) 6 % 3 yields 0"],
+        answer: 2
+        },
+        {
+        question: "20. a * ( b + c ) may also be written in C as",
+        options: ["1) ab + ac", "2) (a * b ) + c", "3) a * b + c", "4) a * b + a * c"],
+        answer: 4
+        },
+        {
+        question: "21. Which statement about precedence is false?",
+        options: ["1) Parentheses may be used to force the order of evaluation to occur in any sequence desired by the programmer.", "2) Nested, or embedded parentheses are evaluated last.", "3) Multiplication has a higher precedence than addition.", "4) Subtraction has a lower precedence than division."],
+        answer: 2
+        },
+        {
+        question: "22. Which expression is true?",
+        options: ["1) The expression a * (b + c) + c * (d + e) contains nested parentheses.", "2) The expression y = a * x * x + b * x + c does exponentiation without an exponentiation operator.", "3) The C standard library provides function power to perform exponentiation.", "4) When we say evaluation of an expression proceeds from left to right we are referring to the additivity of the operators."],
+        answer: 2
+        },
+        {
+        question: "1. C's if statement executes the statement inside its body if a specified __________ is __________.",
+        options: ["1) condition, true", "2) condition, false", "3) equality operator, true", "4) relational operator, true"],
+        answer: 1
+        },
+        {
+        question: "2. Which of the following is an equality operator?",
+        options: ["1) ==", "2) =", "3) >", "4) >="],
+        answer: 1
+        },
+        {
+        question: "3. Which statement is false?",
+        options: ["1) Executable C statements either perform actions or make decisions.", "2) If the condition in an if statement is met, the statement in the body of the if statement is executed.", "3) All the relational operators have the same level of precedence.", "4) The equality operators have a higher level of precedence than the relational operators."],
+        answer: 4
+        },
+        {
+        question: "4. Which statement is false?",
+        options: ["1) Whitespace characters such as tabs, newlines and spaces are generally ignored by the C compiler.", "2) The statements in an if statement must be indented.", "3) Placing a blank line before and after every control structure can improve program readability.", "4) There can be (but should not be) more than one statement per line."],
+        answer: 2
+        },
+        {
+        question: "5. Which statement is false?",
+        options: ["1) It is not correct to split an identifier with a space, a tab or a newline.", "2) Statements and comments may be split over several lines.", "3) The equals sign (=) is not an operator.", "4) A good programming practice is to break a line after a comma in a lengthy comma-separated list."],
+        answer: 3
+        },
+        {
+        question: "6. Which of the following is not a keyword?",
+        options: ["1) int", "2) return", "3) if", "4) main"],
+        answer: 4
+        },
+        {
+        question: "7. Which statement is false?",
+        options: ["1) The assignment operator associates from left to right.", "2) The arithmetic operators associate from left to right.", "3) The equality operators associate from left to right.", "4) The relational operators associate from left to right."],
+        answer: 1
+        },
+        {
+        question: "8. The order in which statements are __________ is called flow of control.",
+        options: ["1) entered in a source file", "2) preprocessed", "3) compiled", "4) executed"],
+        answer: 4
+        },
+        {
+        question: "9. The two key attributes of an algorithm are:",
+        options: ["1) actions and start activity", "2) flow and order of flow", "3) actions and order of actions", "4) flow and start activity"],
+        answer: 3
+        },
+        {
+        question: "10. Which of the following is true of pseudocode programs?",
+        options: ["1) they are executed by the computer", "2) they help the programmer “think out” a program", "3) they typically include definitions and all types of statements", "4) all of the above are false"],
+        answer: 2
+        },
+        {
+        question: "11. Pseudocode does not typically include __________.",
+        options: ["1) definitions", "2) input/output", "3) action statements", "4) control statements"],
+        answer: 1
+        },
+        {
+        question: "12. Which statement is false?",
+        options: ["1) Pseudocode is an artificial and informal language that helps you develop algorithms.", "2) Pseudocode is similar to everyday English.", "3) Pseudocode is an actual programming language.", "4) Pseudocode programs are not actually executed on computers."],
+        answer: 3
+        },
+        {
+        question: "13. Which statement is false?",
+        options: ["1) Pseudocode helps you “think out” a program before attempting to write it in a programming language such as C.", "2) Pseudocode programs consist purely of characters so programmers may conveniently type pseudocode programs into a computer using an editor program.", "3) A carefully prepared pseudocode program is only a beginning; it still takes a tremendous amount of work to convert a pseudocode program into a C program.", "4) Pseudocode consists only of action statements."],
+        answer: 3
+        },
+        {
+        question: "14. Which of the following encompasses the other three?",
+        options: ["1) sequence structure", "2) iteration structure", "3) control structure", "4) selection structure"],
+        answer: 3
+        },
+        {
+        question: "15. In a flowchart of an algorithm, what is the shape of the decision symbol?",
+        options: ["1) circle", "2) rectangle", "3) diamond", "4) rounded rectangle"],
+        answer: 3
+        },
+        {
+        question: "16. Which of the following is an iteration statement?",
+        options: ["1) if", "2) if…else", "3) do…while", "4) switch"],
+        answer: 3
+        },
+        {
+        question: "17. How many types of control statements exist in C?",
+        options: ["1) 3", "2) 7", "3) 5", "4) 2"],
+        answer: 1
+        },
+        {
+        question: "18. Normally, statements in a program are executed one after the other in the order in which they are written. This is called __________ execution.",
+        options: ["1) inline", "2) seeking", "3) ordered", "4) sequential"],
+        answer: 4
+        },
+        {
+        question: "19. Bohm and Jacopini’s work demonstrated that all programs could be written in terms of only three control statements, namely sequence, __________ and iteration.",
+        options: ["1) selection", "2) serialization", "3) sorting", "4) searching"],
+        answer: 1
+        },
+        {
+        question: "20. Which statement is true?",
+        options: ["1) Unless directed otherwise, the computer automatically executes C statements one before the other.", "2) The sequence structure is essentially built into C.", "3) A flowchart is a pseudocode representation of an algorithm or a portion of an algorithm.", "4) Like pseudocode, flowcharts are useful for developing and representing algorithms, although flowcharts are preferred by most programmers."],
+        answer: 2
+        },
+        {
+        question: "21. The __________ flowchart symbol is also called the action symbol.",
+        options: ["1) small circle", "2) diamond", "3) rounded rectangle", "4) rectangle"],
+        answer: 4
+        },
+        {
+        question: "22. Flowchart symbols are connected by arrows called __________.",
+        options: ["1) flowlines", "2) flow of control", "3) flow delimiters", "4) darts"],
+        answer: 1
+        },
+        {
+        question: "23. Small circle symbols in a flowchart are often called __________ symbols.",
+        options: ["1) little circle", "2) collision", "3) connector", "4) collator"],
+        answer: 3
+        },
+        {
+        question: "24. The diamond flowcharting symbol is also called the __________ symbol.",
+        options: ["1) determination", "2) derision", "3) declarative", "4) decision"],
+        answer: 4
+        },
+        {
+        question: "25. The __________ selection statement performs an action if a condition is true and skips that action if the condition is false.",
+        options: ["1) if", "2) when", "3) if …else", "4) switch"],
+        answer: 1
+        },
+        {
+        question: "26. The __________ selection statement performs an action if a condition is true and performs a different action if the condition is false.",
+        options: ["1) if", "2) when", "3) if…else", "4) switch"],
+        answer: 3
+        },
+        {
+        question: "27. The __________ selection statement performs one of many different actions, depending on the value of an expression.",
+        options: ["1) if", "2) when", "3) if…else", "4) switch"],
+        answer: 4
+        },
+        {
+        question: "28. The __________ is called a single-selection statement.",
+        options: ["1) if", "2) when", "3) if…else", "4) switch"],
+        answer: 1
+        },
+        {
+        question: "29. The __________ is called a double selection statement.",
+        options: ["1) if", "2) when", "3) if …else", "4) switch"],
+        answer: 3
+        },
+        {
+        question: "30. The __________ is called a multiple selection statement.",
+        options: ["1) if", "2) when", "3) if …else", "4) switch"],
+        answer: 4
+        },
+        {
+        question: "31. Which is not a C iteration statement?",
+        options: ["1) while", "2) do…while", "3) for", "4) do…for"],
+        answer: 4
+        },
+        {
+        question: "32. Which statement is true?",
+        options: ["1) Each of C’s control statements is characterized as being single-entry, single-exit.", "2) Each of C’s control statements is characterized as being single-entry, multiple-exit.", "3) Each of C’s control statements is characterized as being multiple-entry, single-exit.", "4) Each of C’s control statements is characterized as being multiple-entry, multiple-exit."],
+        answer: 1
+        },
+        {
+        question: "33. If grade has the value of 60 what will the following code print?<br><br> if (grade >= 60) {<br>     puts(&quot;Passed&quot;);<br> }",
+        options: ["1) nothing", "2) 60", "3) Passed", "4) puts(&quot;Passed&quot;);"],
+        answer: 3
+        },
+        {
+        question: "34. Indentation in the if selection statement is ________.",
+        options: ["1) always mandatory", "2) always optional", "3) only mandatory if there is more than one statement following the if statement", "4) only optional if there is more than one statement following the if statement"],
+        answer: 2
+        },
+        {
+        question: "35. The C compiler ignores __________ characters like blanks, tabs and newlines used for indentation and vertical spacing.",
+        options: ["1) transparent", "2) translucent", "3) white", "4) whitespace"],
+        answer: 4
+        },
+        {
+        question: "36. Which statement is true about the contents of a correct diamond symbol in a correct flowchart.",
+        options: ["1) It must contain an expression that evaluates to zero or one.", "2) It must contain a condition or expression that can be either true or false.", "3) It must contain relational operators.", "4) It must contain equality operators."],
+        answer: 2
+        },
+        {
+        question: "37. A correct decision symbol has __________ flowlines emerging from it.",
+        options: ["1) 4", "2) 3", "3) 2", "4) 1"],
+        answer: 3
+        },
+        {
+        question: "38. Which of the following statements correctly prints “Passed” if the student’s grade is greater than or equal to 60 and “Failed” if the student’s grade is less than 60?",
+        options: ["1) printf(&quot;%s<br>&quot;, grade >= 60 : &quot;Passed&quot; : &quot;Failed&quot;);", "2) grade >= 60 : puts(&quot;Passed &quot;) ? puts(&quot;Failed &quot;);", "3) printf(&quot;%s<br>&quot;, grade >= 60 ? &quot;Passed&quot; : &quot;Failed&quot;);", "4) grade >= 60 ? puts(&quot;Passed &quot;) ? puts(&quot;Failed &quot;);"],
+        answer: 3
+        },
+        {
+        question: "39. Which statement is false?",
+        options: ["1) A compound statement can be placed anywhere in a program that a single statement can be placed.", "2) The if selection statement can have only one statement in its body.", "3) A set of statements contained within a pair of braces ({ and }) is called a compound statement.", "4) An if selection statement can have a compound statement in its body."],
+        answer: 2
+        },
+        {
+        question: "40. The conditional operator (?:) ________.",
+        options: ["1) is the only ternary operator in C", "2) is a unary operator", "3) associates from left to right", "4) accepts two operands"],
+        answer: 1
+        },
+        {
+        question: "41. Which of the following will generate an error?",
+        options: ["1) if (answer == 7) { puts(&quot;correct&quot;); } else { puts(&quot;incorrect&quot;); }", "2) puts(answer == 7 : &quot;correct&quot; : &quot;incorrect&quot;);", "3) printf(&quot;%s\<br>&quot;, answer == 7 ? &quot;correct&quot; : &quot;incorrect&quot;);", "4) answer == 7 ? puts(&quot;correct&quot;) : puts(&quot;incorrect&quot;);"],
+        answer: 2
+        },
+        {
+        question: "42. Placing a semicolon after the parenthesized condition in an if statement leads to a __________ error in single-selection if statements and a __________ error in double-selection if statements.",
+        options: ["1) logic, logic", "2) logic, syntax", "3) syntax, logic", "4) syntax, syntax"],
+        answer: 2
+        },
+        {
+        question: "43. The empty statement is represented by placing __________ where a statement would normally be.",
+        options: ["1) empty", "2) ;", "3) null", "4) :"],
+        answer: 2
+        },
+        {
+        question: "1. What is wrong with the following loop?<br><br>While (sum <= 1000) {<br>   sum = sum + 30;<br>}",
+        options: ["1) The parenthesis should be braces.", "2) The braces around sum = sum +30; should be removed.", "3) While should be while.", "4) There should be a semicolon after While (sum <=1000)."],
+        answer: 3
+        },
+        {
+        question: "2. How many times will the following program print hello?<br><br>i = 1;<br>while (i <= 10) {<br>   puts(&quot;hello&quot;);<br>}",
+        options: ["1) 10", "2) 8", "3) an infinite number of times", "4) 0"],
+        answer: 3
+        },
+        {
+        question: "3. Consider the following correct segment of a correct C program:<br><br>p = 2;<br>while (p < 2000) {<br>   p = 2 * p;<br>}<br><br>What is the value of p after this while loop completes its execution?",
+        options: ["1) 1023", "2) 1024", "3) 2047", "4) 2048"],
+        answer: 4
+        },
+        {
+        question: "4. An uninitialized variable contains ________.",
+        options: ["1) the value last stored in the memory location reserved for that variable", "2) no value", "3) a value of zero", "4) a randomly assigned value"],
+        answer: 1
+        },
+        {
+        question: "5. Counter-controlled iteration is often called __________ iteration because the number of iterations is known before the loop begins executing.",
+        options: ["1) indefinite", "2) sentinel", "3) definite", "4) determinate"],
+        answer: 3
+        },
+        {
+        question: "6. Indefinite iteration is controlled by a",
+        options: ["1) counter", "2) sentinel value", "3) data value", "4) non-constant condition"],
+        answer: 2
+        },
+        {
+        question: "7. A fatal logic error is always caused by:",
+        options: ["1) not initializing variables before executing an iteration statement", "2) choosing a sentinel value that is also a data value", "3) using a counter variable in a calculation after the loop", "4) an attempt to divide by zero"],
+        answer: 4
+        },
+        {
+        question: "8. In indefinite iteration, an input value",
+        options: ["1) should always be evaluated before being processed", "2) should always be processed directly after it is entered", "3) should never be modified", "4) can be entered, processed, and evaluated in any order"],
+        answer: 1
+        },
+        {
+        question: "9. What is the final value of x after performing the following operations?<br><br>int x = 21;<br>double y = 6;<br>double z = 14;<br>y = x / z;<br>x = 5.5 * y;",
+        options: ["1) 8.25", "2) 5.5", "3) 5", "4) 8"],
+        answer: 4
+        },
+        {
+        question: "10. Which operation does not take place in the following example?<br><br>int x = 21;<br>double y = 6;<br>double z = 14;<br>y = x / z;<br>x = 5.5 * y;",
+        options: ["1) implicit conversion", "2) promotion", "3) explicit conversion", "4) truncation"],
+        answer: 3
+        },
+        {
+        question: "11. Which of the following is not a synonym for “sentinel value.”",
+        options: ["1) signal value", "2) dummy value", "3) counter value", "4) flag value"],
+        answer: 3
+        },
+        {
+        question: "12. Having a loop within a loop is known as",
+        options: ["1) recursion", "2) doubling up", "3) nesting", "4) a redundancy"],
+        answer: 3
+        },
+        {
+        question: "13. Which statement is true?",
+        options: ["1) With nested control statements, the inner control statement is executed in sequence after the outer control statement completes its own execution.", "2) With nested control statements, the inner control statement is executed exactly once.", "3) Experience has shown that the most difficult part of solving a problem on a computer is converting an already correct algorithm to a C program.", "4) A double-selection statement can be nested in an iteration statement."],
+        answer: 4
+        },
+        {
+        question: "14. If x = 3, which of the following sets x to 7?",
+        options: ["1) x *= 4;", "2) x += 4;", "3) x =+ 4;", "4) x + 4 = x;"],
+        answer: 2
+        },
+        {
+        question: "15. Which assignment expression is equivalent to c = c / 2 ?",
+        options: ["1) c / = 2", "2) c / c = 2", "3) c /= 2", "4) c =/ 2"],
+        answer: 3
+        },
+        {
+        question: "16. Which of the following will not increment variable c by one?",
+        options: ["1) c + 1;", "2) c++;", "3) ++c;", "4) c += 1;"],
+        answer: 1
+        },
+        {
+        question: "17. In which of the following is y not equal to 5 after execution? Assume that x is equal to 4.",
+        options: ["1) y = 5;", "2) y = x++;", "3) y = ++x;", "4) y = x = 5;"],
+        answer: 2
+        },
+        {
+        question: "18. Which statement is true?",
+        options: ["1) The expression ++(a + 1) adds 2 to a.", "2) The expression **a multiplies a by 1.", "3) The ANSI standard for the C programming language specifies the order in which each operator’s operands will be evaluated.", "4) The expression --(abc * 37) is a syntax error"],
+        answer: 4
+        },
+        {
+        question: "1. Which is not an iteration statement?",
+        options: ["1) continue", "2) for", "3) while", "4) do … while"],
+        answer: 1
+        },
+        {
+        question: "2. Which statement is used to skip the remainder of the body of an iteration statement and proceed with the next iteration of the loop?",
+        options: ["1) skip", "2) proceed", "3) continue", "4) jump"],
+        answer: 3
+        },
+        {
+        question: "3. ________ iteration is sometimes called definite iteration.",
+        options: ["1) counter-controlled", "2) sentinel-controlled", "3) variable-controlled", "4) none of these"],
+        answer: 1
+        },
+        {
+        question: "4. ________ iteration is sometimes called indefinite iteration.",
+        options: ["1) counter-controlled", "2) sentinel-controlled", "3) variable-controlled", "4) none of these"],
+        answer: 2
+        },
+        {
+        question: "5. Which statement is false?",
+        options: ["1) Counter-controlled repetition is sometimes called definite iteration.", "2) Sentinel-controlled iteration is sometimes called indefinite iteration.", "3) The sentinel value typically indicates “end of data.”", "4) In counter-controlled iteration, the control variable is always incremented by 1 each time the group of instructions is performed."],
+        answer: 4
+        },
+        {
+        question: "6. Which statement is true?",
+        options: ["1) Sentinel values are used to control iteration when the precise number of iterations is known in advance.", "2) In a counter controlled-loop, the counter may not count downward.", "3) Sentinels must be distinct from regular data items.", "4) Sentinel-controlled iteration is often called definite iteration."],
+        answer: 3
+        },
+        {
+        question: "7. Which of the following does counter-controlled iteration not require?",
+        options: ["1) an initial value", "2) a condition that tests for the final value", "3) an increment or decrement by which the control variable is modified each time through the loop", "4) counter controlled iteration requires all of the above"],
+        answer: 4
+        },
+        {
+        question: "8. The statement while (--counter >= 1) { printf(&quot;%s\<br>&quot;, counter % 2 ? &quot;even&quot; : &quot;odd&quot;); } can not be rewritten as",
+        options: ["1) while (--counter >= 1) { if (counter % 2) { puts(&quot;even&quot;); } else { puts(&quot;odd&quot;); } }", "2) while (counter >= 1) { if (counter % 2) { puts(&quot;even&quot;); } else { puts(&quot;odd&quot;); } } --counter;", "3) while (counter >= 1) { if (counter % 2) { puts(&quot;even&quot;); } else { puts(&quot;odd&quot;); } --counter; }", "4) do { printf(&quot;%s\<br>&quot;, counter % 2 ? &quot;odd&quot; : &quot;even&quot;); --counter; } while (counter >= 2);"],
+        answer: 2
+        },
+        {
+        question: "9. Which of the following is a poor programming practice?",
+        options: ["1) indenting the statements in the body of each control statement", "2) using floating-point values as the counter in counter-controlled iteration", "3) using more than two levels of nesting", "4) placing vertical spacing above and below control statements"],
+        answer: 2
+        },
+        {
+        question: "10. Which is not always required by counter-controlled iteration?",
+        options: ["1) The name of a control variable (or loop counter).", "2) The initial value of the control variable.", "3) The decrement by which the control variable is modified each time through the loop.", "4) The condition that tests for the final value of the control variable (i.e., whether looping should continue)."],
+        answer: 3
+        },
+        {
+        question: "11. In the context of counter-controlled iteration, which of the following is not accomplished by the control-variable initialization statement? int c = 10;",
+        options: ["1) Names the control variable.", "2) Defines the control variable to be an integer.", "3) Specifies the sentinel value.", "4) Sets the initial value of the control variable to 10."],
+        answer: 3
+        },
+        {
+        question: "12. Which data type should normally not be used to control a counting loop?",
+        options: ["1) int", "2) float", "3) short", "4) long"],
+        answer: 2
+        },
+        {
+        question: "13. Which statement is generally false?",
+        options: ["1) Control counting loops with integer values.", "2) Indent the statements in the body of each control statement for clarity.", "3) Put a blank line before and after each major control statement to make it stand out in the program.", "4) The more deeply nested a program is, the easier it is to understand."],
+        answer: 4
+        },
+        {
+        question: "14. Which statement automatically handles all the details of counter-controlled iteration.",
+        options: ["1) for", "2) while", "3) do …while", "4) continue"],
+        answer: 1
+        },
+        {
+        question: "15. Which of the following is not specified by the following code segment: for (c = 1; c <= 10; c++)",
+        options: ["1) initial value of the loop counter", "2) loop continuation test", "3) increment of the loop counter", "4) body statement of the loop"],
+        answer: 4
+        },
+        {
+        question: "16. A programmer writes a for statement to count from 1 to 10 and explicitly mentions the 1 and the 10 in the for “header.” Which relational operator would probably be used in the loop-continuation test?",
+        options: ["1) >", "2) >=", "3) <", "4) <="],
+        answer: 4
+        },
+        {
+        question: "17. Using an incorrect relational operator or using an incorrect final value of a loop counter in the condition of a while or for statement is a frequent cause of __________ errors.",
+        options: ["1) syntax", "2) compilation", "3) off-by-one", "4) divide-by-zero"],
+        answer: 3
+        },
+        {
+        question: "18. The comma operator is most often used in __________ statements.",
+        options: ["1) while", "2) do … while", "3) for", "4) switch"],
+        answer: 3
+        },
+        {
+        question: "19. Which statement is false?",
+        options: ["1) Comma operators evaluate lists of expressions from right to left.", "2) The value of a comma-separated list of expressions is the value of the rightmost expression in the list.", "3) The type of a comma-separated list of expressions is the type of the rightmost expression in the list.", "4) The comma operator is often used to specify multiple initializations in one particular type of iteration statement."],
+        answer: 1
+        },
+        {
+        question: "20. What happens if the loop-continuation test is omitted in a for-statement?",
+        options: ["1) C assumes the condition is false, so the loop terminates.", "2) A syntax error occurs.", "3) C assumes the condition is true, so the loop executes one more time, then terminates.", "4) An infinite loop."],
+        answer: 4
+        },
+        {
+        question: "21. A programmer intentionally creates a for-loop with the following for header: for (; ;) The programmer’s intent was most likely to create",
+        options: ["1) a syntax error", "2) an infinite loop", "3) a logic error", "4) a divide-by-zero error"],
+        answer: 2
+        },
+        {
+        question: "22. Which of the following is an incorrect expression to increment c by 1 in the increment expression of a for “header?”",
+        options: ["1) c += 1", "2) ++c", "3) c++", "4) c + 1 = c"],
+        answer: 4
+        },
+        {
+        question: "23. If the loop-continuation condition in a for statement is initially false, ________.",
+        options: ["1) the body portion of the loop is not performed", "2) execution proceeds with the statement following the for statement", "3) both a and b", "4) none of the above"],
+        answer: 3
+        },
+        {
+        question: "24. If the increment of the for statement is ________ then the loop counts ________.",
+        options: ["1) true, downwards", "2) false, downwards", "3) positive, downwards", "4) negative, downwards"],
+        answer: 4
+        },
+        {
+        question: "25. Which statement regarding for statements is false?",
+        options: ["1) In a for statement, the initialization, loop-continuation condition, and increment can contain arithmetic expressions.", "2) The increment must be greater than zero.", "3) If the loop-continuation condition is initially false, the body of the loop is not performed.", "4) It is common to use the control variable for controlling iteration while never mentioning it in the body of the loop."],
+        answer: 2
+        },
+        {
+        question: "26. Which statement about a correct for statement with an initialization expression, a loop-continuation test, an increment expression and a loop body is false?",
+        options: ["1) The initialization expression is executed only once.", "2) The loop-continuation test is evaluated each time through the loop.", "3) The initialization is performed each time through the loop.", "4) The increment expression is performed after the loop body."],
+        answer: 3
+        },
+        {
+        question: "27. The for statement header for (i = 1; i < 100; ++i) performs the body of the loop for",
+        options: ["1) values of the control variable from 1 to 100 in increments of 1.", "2) values of the control variable from 1 to 99 in increments of 1.", "3) values of the control variable from 0 to 100 in increments of 1.", "4) values of the control variable from 0 to 99 in increments of 1."],
+        answer: 2
+        },
+        {
+        question: "28. What is the highest value assumed by the loop counter in a correct for statement with the following header? for (i = 7; i <= 72; i += 7)",
+        options: ["1) 7", "2) 77", "3) 70", "4) 72"],
+        answer: 2
+        },
+        {
+        question: "29. What is produced by a for statement with a correct body and with the following header for (i = 20; i >= 2; i += 2)",
+        options: ["1) a syntax error", "2) a divide-by-zero error", "3) an infinite loop", "4) the even values of i from 20 down to 2."],
+        answer: 3
+        },
+        {
+        question: "30. Which statement is generally false?",
+        options: ["1) Statements preceding a for and statements in the body of a for should typically be merged into the for header.", "2) Limit the size of control statement headers to a single line, if possible.", "3) Initialization of a for loop control variable can occur before the for loop executes and not in the loop itself.", "4) The increment portion of a for header can be a decrement."],
+        answer: 1
+        },
+        {
+        question: "31. Which expression raises x to the y power?",
+        options: ["1) x ** y", "2) x ^ y", "3) x pow y", "4) pow(x, y)"],
+        answer: 4
+        },
+        {
+        question: "32. Which statement is true?",
+        options: ["1) Use float variables to perform monetary calculations in C.", "2) Use double variables to perform monetary calculations C.", "3) Monetary calculations can be performed in C.", "4) Printing with %.2f guarantees correct monetary calculations in C."],
+        answer: 3
+        },
+        {
+        question: "33. Which statement is true?",
+        options: ["1) The conversion specifier %7.2f prints a floating-point value with a field width of 10 positions.", "2) The conversion specifier %7.2f prints a floating-point value with 7 positions to the left of the decimal point.", "3) The conversion specifier %7.2f prints a floating-point value with 5 positions to the left of the decimal point.", "4) The conversion specifier %7.2f prints a floating-point value with 4 positions to the left of the decimal point."],
+        answer: 4
+        },
+        {
+        question: "1. A switch statement should be used",
+        options: ["1) as a single-selection statement", "2) as a double-selection statement", "3) when a variable may assume many different values which must be tested", "4) to replace all if and if…else statements"],
+        answer: 3
+        },
+        {
+        question: "2. In a switch statement",
+        options: ["1) a break is required after each case", "2) multiple actions do not need to be enclosed in braces", "3) a default case is required", "4) a break is required after the default case"],
+        answer: 2
+        },
+        {
+        question: "3. Which statement regarding the switch statement is false?",
+        options: ["1) It’s appropriate for algorithms that contain a series of decisions in which a variable or expression is tested separately for each of the constant integral values it may assume.", "2) The default case is required.", "3) The default case must be at the bottom of the switch after all the non-default cases.", "4) Many cases may all invoke the same code."],
+        answer: 2
+        },
+        {
+        question: "4. Which statement is true?",
+        options: ["1) EOF must have the value 1 on all C systems.", "2) EOF is a symbolic constant defined in the <symbol.h> header file.", "3) EOF is a symbolic variable defined in the <stdio.h> header file.", "4) EOF is a symbolic integer constant defined in the <stdio.h> header file."],
+        answer: 4
+        },
+        {
+        question: "5. If a do…while statement is used,",
+        options: ["1) an infinite loop will not take place", "2) the counter must be preincremented if it’s also the condition", "3) the body of the loop will execute at least once", "4) an off-by-one error will not occur"],
+        answer: 3
+        },
+        {
+        question: "6. The program segment int counter = 1; do { printf(&quot;%i &quot;, counter); } while (++counter <= 10); will ________.",
+        options: ["1) print the numbers 1 through 11", "2) print the numbers 1 through 10", "3) print the numbers 1 through 9", "4) cause a syntax error"],
+        answer: 2
+        },
+        {
+        question: "7. Which statement is true?",
+        options: ["1) The do … while iteration statement is an alternate notation for the while iteration statement; these statements function identically.", "2) The do … while iteration statement tests the loop-continuation condition before the loop body is performed.", "3) The loop body of a correct do … while iteration statement is always executed at least once.", "4) The braces delineating the body of a do … while statement are always required."],
+        answer: 3
+        },
+        {
+        question: "8. Which of the following is false?",
+        options: ["1) break and continue statements alter the flow of control.", "2) continue statements skip the remaining statements in the body of the loop in which they are embedded.", "3) break statements exit from the loop in which they are embedded.", "4) a continue statement can never appear in the else part of an if statement."],
+        answer: 4
+        },
+        {
+        question: "9. Which statement is true?",
+        options: ["1) The break statement causes an immediate exit from a while, for, do … while or if … else statement.", "2) The continue statement is designed for use with the while, for, do … while or switch statements.", "3) An equivalent while statement for any for statement can always be formed.", "4) The break statement causes an immediate exit from a while, for, do … while or switch statement."],
+        answer: 4
+        },
+        {
+        question: "10. In C, the condition 4 > y > 1",
+        options: ["1) evaluates correctly", "2) does not evaluate correctly and should be replaced by (4 > y && y > 1)", "3) does not evaluate correctly and should be replaced by (4 > y & y > 1)", "4) does not evaluate correctly and should be replaced by (4 > y || y > 1)"],
+        answer: 2
+        },
+        {
+        question: "11. The OR (||) operator",
+        options: ["1) has higher precedence than the AND (&&) operator", "2) stops evaluation upon finding one condition to be true", "3) associates from right to left", "4) is a ternary operator"],
+        answer: 2
+        },
+        {
+        question: "12. The condition num != 65 cannot be replaced by:",
+        options: ["1) num > 65 || num < 65", "2) !(num == 65)", "3) num – 65", "4) !(num – 65)"],
+        answer: 4
+        },
+        {
+        question: "13. An operator that associates from right to left is",
+        options: ["1) !=", "2) ,", "3) ()", "4) ?:"],
+        answer: 4
+        },
+        {
+        question: "14. An example of a unary operator is",
+        options: ["1) a relational operator", "2) an assignment operator", "3) an increment operator", "4) a logical operator"],
+        answer: 3
+        },
+        {
+        question: "15. Which statement is true?",
+        options: ["1) To test multiple conditions in the process of making a decision requires logical operators.", "2) The keywords for the logical operators are AND, OR and NOT.", "3) The logical AND of two expressions is true if and only if each of the conditions is true.", "4) Truth tables deal only with cases in which all conditions are truthful (i.e., true)."],
+        answer: 3
+        },
+        {
+        question: "16. Which statement is true?",
+        options: ["1) Operator || has a higher precedence than operator &&.", "2) In expressions involving operator ||, making the condition that is most likely to be false the leftmost condition can often reduce execution time.", "3) The logical negation operator is a binary operator.", "4) In expressions using operator &&, making the condition that is most likely to be false the leftmost condition can often reduce execution time."],
+        answer: 4
+        },
+        {
+        question: "17. Non-constant variables are also known as",
+        options: ["1) lvalues, but can be used as rvalues", "2) lvalues, and can not be used as rvalues", "3) rvalues, but can be used as lvalues", "4) constant variables"],
+        answer: 1
+        },
+        {
+        question: "18. Consider the following code, assuming that x is an integer variable with an initial value of 12:<br><br>if (x = 6) {<br>   printf(&quot;%i&quot;, x);<br>}<br><br>What is the output?",
+        options: ["1) 6", "2) 12", "3) nothing", "4) a syntax error is produced"],
+        answer: 1
+        },
+        {
+        question: "19. Of the following, which is not a logic error?",
+        options: ["1) Using the assignment (=) operator instead of the (==) equality operator to determine if two values are equal", "2) Dividing by zero", "3) Failing to initialize counter and total variables before the body of a loop", "4) Using commas instead of the two required semicolons in a for header"],
+        answer: 4
+        },
+        {
+        question: "20. Which statement is false?",
+        options: ["1) Any expression in C that produces a value can be used in the decision portion of any control statement.", "2) When tested for truth or falsity, an expression that produces a nonzero value is treated as true.", "3) Assignments in C produce a value, namely the value that the left-hand side of the assignment had prior to the assignment.", "4) Operator == is for comparisons; operator = is for assignment."],
+        answer: 3
+        },
+        {
+        question: "21. The ____________, __________, and ____________ are the only three forms of control necessary.",
+        options: ["1) switch, if, else", "2) sequence, selection, iteration", "3) break, continue, if…else", "4) for, while, do…while"],
+        answer: 2
+        },
+        {
+        question: "22. Which statement is true?",
+        options: ["1) Connecting flowchart symbols arbitrarily always forms structured programs.", "2) In a structured program, control statements can only be stacked or sequenced.", "3) In the “Rules for Forming Structured Programs (and Structured Flowcharts),” the rule that states, “Any rectangle (action) can be replaced by any control statement” is called the “nesting rule.”", "4) Structured programming does not improve the program-development process."],
+        answer: 3
+        },
+        {
+        question: "1. All of the following are true of functions except:",
+        options: ["1) they define specific tasks that can be used at many points in a program", "2) a function call must specify the name and arguments of the function", "3) the definition of a function is always visible to other functions", "4) the implementation of a function is hidden from the caller"],
+        answer: 3
+        },
+        {
+        question: "2. Experience has shown that the best way to construct a program is from small pieces. This is called __________.",
+        options: ["1) bottom up", "2) the whole is greater than the sum of the parts", "3) divide and conquer", "4) recursion"],
+        answer: 3
+        },
+        {
+        question: "3. Which is not an ANSI standard library function?",
+        options: ["1) printf", "2) main", "3) scanf", "4) pow"],
+        answer: 2
+        },
+        {
+        question: "4. Which one item is most different from the other three?",
+        options: ["1) worker function", "2) caller", "3) calling function", "4) boss function"],
+        answer: 1
+        },
+        {
+        question: "5. When a called function completes its task, it normally",
+        options: ["1) terminates program execution normally", "2) aborts program execution", "3) logs its results", "4) returns to the calling function"],
+        answer: 4
+        },
+        {
+        question: "6. Which statement is true?",
+        options: ["1) The boss function normally knows how the worker function performs its designated tasks.", "2) A worker function may not call other worker functions.", "3) “Hiding” of implementation details makes it difficult to understand software.", "4) The boss function is normally unaware when a worker function calls another function."],
+        answer: 4
+        },
+        {
+        question: "7. Functions are __________ by a function call.",
+        options: ["1) inveigled", "2) invoked", "3) internalized", "4) inverted"],
+        answer: 2
+        },
+        {
+        question: "8. All functions in the math library return the data type __________.",
+        options: ["1) float", "2) int", "3) long", "4) double"],
+        answer: 4
+        },
+        {
+        question: "9. If a = 7.0, b = 7.0 and c = 6.0, then what is printed by printf(&quot;%.2f&quot;, sqrt(a + b * c));",
+        options: ["1) 49", "2) 7.00", "3) 7", "4) 49.00"],
+        answer: 2
+        },
+        {
+        question: "10. What is the value of fabs(-5.0)?",
+        options: ["1) 5", "2) 5.0", "3) -5", "4) -5.0"],
+        answer: 2
+        },
+        {
+        question: "11. Which of the following is not included in <math.h>?",
+        options: ["1) pow", "2) floor", "3) ln", "4) log10"],
+        answer: 3
+        },
+        {
+        question: "12. A valid reason for building programs out of functions is",
+        options: ["1) that the divide-and-conquer approach facilitates program construction", "2) that pre-existing functions can be used to create new programs", "3) the avoidance of code iteration within a program", "4) all of the above"],
+        answer: 4
+        },
+        {
+        question: "13. Which is not a motivation for “functionalizing” a program?",
+        options: ["1) The divide-and-conquer approach makes program development more manageable.", "2) Software reusability—using existing building blocks to create new programs.", "3) Avoid repeating code.", "4) Execution performance—functionalized programs run faster."],
+        answer: 4
+        },
+        {
+        question: "14. Which statement is false?",
+        options: ["1) Each function should be limited to performing a single, well-defined task.", "2) If you cannot choose a concise name that expresses what a function does, it’s possible that the function is attempting to perform too many diverse tasks.", "3) Every function should be broken into smaller functions.", "4) A function’s parameters are local variables."],
+        answer: 3
+        },
+        {
+        question: "15. The function prototype double mySqrt(int x);",
+        options: ["1) defines a function called mySqrt which takes an integer as an argument and returns a double", "2) defines a function called double which calculates square roots", "3) defines a function called mySqrt which takes an argument of type x and returns a double", "4) defines a function called mySqrt which takes a double as an argument and returns an integer"],
+        answer: 1
+        },
+        {
+        question: "16. Which of the following will not produce a syntax error?",
+        options: ["1) Omitting a return type from a function definition if the function prototype specifies a return type other than int", "2) Returning a value from a function defined as void", "3) Defining a function parameter again inside a function", "4) Using the same names for arguments passed to a function and the corresponding parameters in the function definition"],
+        answer: 4
+        },
+        {
+        question: "17. Which of the following is not an indication that a function may be too complex?",
+        options: ["1) it has a large size", "2) it has a large parameter list", "3) its name is a clear reflection of its function", "4) it performs multiple tasks"],
+        answer: 3
+        },
+        {
+        question: "18. Which of the following code segments does not contain any errors?",
+        options: ["1) void printnum (int x) { print(&quot;%i&quot;, x); return x; }", "2) int cube(int s) { int s; return (s * s * s); }", "3) double triple(float n) { return (3 * n); }", "4) double circumference (int r) return (3.14 * 2 * r);"],
+        answer: 3
+        },
+        {
+        question: "19. int square(int); is an example of a function __________.",
+        options: ["1) datatype", "2) stereotype", "3) prototype", "4) proceduretype"],
+        answer: 3
+        },
+        {
+        question: "20. As used in int square(int); int is not a(n) __________.",
+        options: ["1) data type", "2) parameter type", "3) return type", "4) function prototype"],
+        answer: 4
+        },
+        {
+        question: "21. The type of a parameter whose type is omitted in a function definition is __________.",
+        options: ["1) int", "2) double", "3) long", "4) float"],
+        answer: 1
+        },
+        {
+        question: "22. The most concise notation to use to define function parameters x and y as double is __________.",
+        options: ["1) x, y", "2) x, double y", "3) double x, y", "4) double x, double y"],
+        answer: 4
+        },
+        {
+        question: "23. Placing a semicolon after the right parenthesis enclosing the parameter list of a function definition is a __________ error.",
+        options: ["1) logic", "2) syntax", "3) fatal runtime", "4) nonfatal runtime"],
+        answer: 2
+        },
+        {
+        question: "24. Which statement is true?",
+        options: ["1) The type of every parameter in a function parameter list must be included.", "2) The type of every argument in a function call must be included.", "3) It is not incorrect to use the same names for the arguments passed to a function and the corresponding parameters in the function definition.", "4) Defining a function parameter again as a local variable within the function is a logic error."],
+        answer: 3
+        },
+        {
+        question: "25. Which statement is true?",
+        options: ["1) Programs should be written as collections of small functions.", "2) A function must be no longer than one page.", "3) The best engineered functions have many parameters and perform many distinct tasks.", "4) Every function must include an explicit return statement."],
+        answer: 1
+        },
+        {
+        question: "26. A function prototype does not have to ________.",
+        options: ["1) include parameter names", "2) terminate with a semicolon", "3) agree with the function definition", "4) match with all calls to the function"],
+        answer: 1
+        },
+        {
+        question: "27. A function prototype can always be omitted when a function ________.",
+        options: ["1) is defined before it is first invoked", "2) is invoked before it is first defined", "3) takes no arguments", "4) does not return a value"],
+        answer: 1
+        },
+        {
+        question: "28. Which statement is false?",
+        options: ["1) The compiler uses function prototypes to validate function calls.", "2) Prior to ANSI C, C did not include function prototypes.", "3) A function prototype tells the compiler the type of data returned by the function, the number of parameters the function expects to receive, the types of these parameters and the order in which parameters of these types are expected.", "4) The designers of ANSI C++ borrowed the notion of function prototypes from the developers of C."],
+        answer: 4
+        },
+        {
+        question: "29. The forcing of arguments to the appropriate types is commonly called __________.",
+        options: ["1) conversion", "2) casting", "3) coercion", "4) transmogrification"],
+        answer: 3
+        },
+        {
+        question: "1. Each standard library has a corresponding __________.",
+        options: ["1) function", "2) variable type", "3) header file", "4) cd-rom"],
+        answer: 3
+        },
+        {
+        question: "2. Which standard library header file contains function prototypes for conversions of numbers to text and text to numbers, memory allocation, random numbers and other utility functions.",
+        options: ["1) <stdarg.h>", "2) <stdlib.h>", "3) <stdutl.h>", "4) <stddef.h>"],
+        answer: 2
+        },
+        {
+        question: "3. When arguments are passed by __________, the caller allows the called function to modify the original variable’s value.",
+        options: ["1) value", "2) reference", "3) both a and b", "4) none of these"],
+        answer: 2
+        },
+        {
+        question: "4. Which statement is true?",
+        options: ["1) When an argument is passed call by reference, a copy of the argument’s value is made and passed to the called function.", "2) With call by reference, changes to the passed value do not affect the original variable’s value in the calling functions.", "3) Call by value should be used whenever the called function does not need to modify the value of the caller’s original value.", "4) Call by value should only be used with trusted called functions that need to modify the original variable."],
+        answer: 3
+        },
+        {
+        question: "5. The rand function generates a data value of the type",
+        options: ["1) unsigned int", "2) int", "3) long int", "4) short int"],
+        answer: 2
+        },
+        {
+        question: "6. A variable that can have values only in the range 0 to 65535 is a",
+        options: ["1) four-byte int", "2) four-byte unsigned int", "3) two-byte int", "4) two-byte unsigned int"],
+        answer: 4
+        },
+        {
+        question: "7. In the expression n = a + rand() % b;",
+        options: ["1) b is the shifting value", "2) a is the scaling value", "3) b is equal to the width of the desired range of integers", "4) both (a) and (c)"],
+        answer: 3
+        },
+        {
+        question: "8. srand",
+        options: ["1) should be called before each call to rand", "2) should be used instead of rand to generate truly random numbers", "3) is unnecessary in C", "4) can use time as an automatically input seed value"],
+        answer: 4
+        },
+        {
+        question: "9. Which statement is false?",
+        options: ["1) Function rand generates an integer between 0 and MAX.", "2) The range of values produced directly by rand is often different than what is needed in a specific application.", "3) The number 6 in the expression rand % 6 is called a scaling factor.", "4) The rand function prototype is in <stdlib.h>."],
+        answer: 1
+        },
+        {
+        question: "10. An identifier’s storage class",
+        options: ["1) determines the period during which that identifier exists in memory", "2) determines whether an identifier in a multiple-source-file program is known only in the current source file or in any source file with proper definitions", "3) determines where the identifier can be referenced in a program", "4) all of the above"],
+        answer: 4
+        },
+        {
+        question: "11. Which of the following is not true of static local variables?",
+        options: ["1) They’re accessible outside of the function in which they are defined.", "2) They retain their values when the function is exited.", "3) They’re initialized to zero if not explicitly initialized by the programmer.", "4) They can be pointers."],
+        answer: 1
+        },
+        {
+        question: "12. Which is not an attribute of a variable?",
+        options: ["1) name", "2) definition", "3) type", "4) value"],
+        answer: 2
+        },
+        {
+        question: "13. An identifier’s __________ is where the identifier can be referenced in a program.",
+        options: ["1) locality", "2) vicinity", "3) neighborhood", "4) scope"],
+        answer: 4
+        },
+        {
+        question: "14. Which is not a scope for an identifier?",
+        options: ["1) function scope", "2) record scope", "3) block scope", "4) file scope"],
+        answer: 2
+        },
+        {
+        question: "15. A recursive function is a function that ________.",
+        options: ["1) returns a double", "2) takes 3 arguments", "3) calls itself", "4) is inside of another function"],
+        answer: 3
+        },
+        {
+        question: "16. What value does function mystery return when called with a value of 4?<br><br>int mystery (int number)<br>{<br>   if (number <= 1) {<br>      return 1;<br>   }<br>   else {<br>      return number * mystery(number – 1);<br>   }<br>}",
+        options: ["1) 1", "2) 24", "3) 0", "4) 4"],
+        answer: 2
+        },
+        {
+        question: "17. Recursion is memory-intensive because ________.",
+        options: ["1) it must occur numerous times before it terminates", "2) previous function calls are still open when the function calls itself and the arguments of these previous calls still occupy space on the call stack", "3) many copies of the function code are created", "4) it requires large data values"],
+        answer: 2
+        },
+        {
+        question: "18. Which statement is false?",
+        options: ["1) A recursive function is a function that calls itself either directly or indirectly through another function.", "2) A recursive function knows how to solve only one or more base cases.", "3) The recursion step executes after the original call to the function terminates.", "4) In order for the recursion to eventually terminate, each time the function calls itself with a slightly simpler version of the original problem, this sequence of smaller and smaller problems must eventually converge on a base case."],
+        answer: 3
+        },
+        {
+        question: "19. Assuming the following pseudocode for the Fibonacci series, what is the value of fibonacci(5)?<br><br>fibonacci(0) = 0<br>fibonacci(1) = 1<br>fibonacci(n) = fibonacci(n – 1) + fibonacci(n – 2)",
+        options: ["1) 8", "2) 1", "3) 3", "4) 5"],
+        answer: 4
+        },
+        {
+        question: "20. Which statement is false?",
+        options: ["1) The ANSI C standard does not specify the order in which the operands of most operators are to be evaluated.", "2) The ANSI C standard specifies the order of evaluation of operators &&, ||, comma, and ?:. ", "3) A program that evaluates Fibonacci numbers recursively achieves high performance because of exponential complexity.", "4) Programs that depend on the order of evaluation of the operands of operators other than &&, ||, comma, and ?: can function differently on systems with different compilers."],
+        answer: 3
+        },
+        {
+        question: "21. Recursion is to the base case as iteration is to ________?",
+        options: ["1) the counter", "2) an iteration statement", "3) failure of the loop continuation test", "4) a selection statement"],
+        answer: 3
+        },
+        {
+        question: "22. All of the following are reasons to use recursion except:",
+        options: ["1) an iterative solution is not apparent", "2) the resulting program is easier to debug", "3) it more naturally mirrors the problem", "4) it maximizes software performance"],
+        answer: 4
+        },
+        {
+        question: "23. Which statement is false?",
+        options: ["1) Both recursion and iteration are based on a control statement.", "2) Both iteration and recursion involve iteration.", "3) Iteration with sentinel-controlled iteration and recursion each gradually approach termination.", "4) Both iteration and recursion can occur infinitely."],
+        answer: 3
+        },
+        {
+        question: "1. Arrays are data structures consisting of related data items of the same __________.",
+        options: ["1) sort order", "2) subscript", "3) type", "4) element"],
+        answer: 3
+        },
+        {
+        question: "2. Arrays and structures are __________ entities in that they remain the same size throughout program execution.",
+        options: ["1) dynamic", "2) automatic", "3) register", "4) static"],
+        answer: 4
+        },
+        {
+        question: "3. Lists, queues, stacks and trees are __________ data structures that may grow and shrink as programs execute.",
+        options: ["1) flexible", "2) automatic", "3) dynamic", "4) static"],
+        answer: 3
+        },
+        {
+        question: "4. An array is not ________.",
+        options: ["1) a consecutive group of memory locations", "2) indexed by integers", "3) pointer-based", "4) a dynamic entity"],
+        answer: 4
+        },
+        {
+        question: "5. Which of the following is false?",
+        options: ["1) the first element of an array is the zeroth", "2) the last element of an array is the array size - 1", "3) the position number contained within square brackets is called a subscript", "4) a subscript cannot be an expression."],
+        answer: 4
+        },
+        {
+        question: "6. An array is a group of memory locations related by the fact that they all have __________ array name and __________ type.",
+        options: ["1) different, different", "2) same, different", "3) different, same", "4) same, same"],
+        answer: 4
+        },
+        {
+        question: "7. The first element in every array is the __________ element.",
+        options: ["1) null", "2) 1", "3) 0", "4) empty"],
+        answer: 3
+        },
+        {
+        question: "8. Which statement is false?",
+        options: ["1) The brackets used to enclose the subscript of an array are not an operator in C.", "2) To refer to a particular element in an array, we specify the name of the array and the position number of the element in the array.", "3) The position number within an array is more formally called a subscript.", "4) “Array element seven” and the “seventh element of an array” do not mean the same thing. This is a frequent source of off-by-one errors."],
+        answer: 1
+        },
+        {
+        question: "9. Which statement would be used to define a 10 element integer array c?",
+        options: ["1) Array c = int[10];", "2) c = int[10];", "3) int Array c[10];", "4) int c[10];"],
+        answer: 4
+        },
+        {
+        question: "10. Which definition tells the computer to reserve 12 elements for integer array c?",
+        options: ["1) c[12] int;", "2) int c [11];", "3) c[11] int;", "4) int c[12];"],
+        answer: 4
+        },
+        {
+        question: "11. Which of the following is not a correct way to initialize an array?",
+        options: ["1) int n[5] = {0, 7, 0, 3, 8, 2};", "2) int n[] = {0, 7, 0, 3, 8, 2};", "3) int n[5] = {7};", "4) int n[5] = {6, 6, 6};"],
+        answer: 1
+        },
+        {
+        question: "12. Constant variables",
+        options: ["1) can be assigned values in executable statements", "2) do not have to be initialized when they are defined", "3) can be used to specify array sizes, thereby making programs more scalable", "4) can be used to specify array sizes, but this makes programs harder to understand"],
+        answer: 3
+        },
+        {
+        question: "13. Referencing elements outside the array bounds",
+        options: ["1) can result in changes to the value of an unrelated variable", "2) is impossible because C checks to make sure it does not happen", "3) is a syntax error", "4) enlarges the size of the array"],
+        answer: 1
+        },
+        {
+        question: "14. Suppose a program contains the code for (i = 1; i <= 10; i++) { n[i] = 0; } Which statement about this code must be true?",
+        options: ["1) It contains an off-by-one error.", "2) It contains a syntax error.", "3) It is initializing the first 10 elements of an array.", "4) It is initializing successive elements of an array."],
+        answer: 4
+        },
+        {
+        question: "15. What’s wrong with this code? int[] = (1, 2, 3, 4, 5);",
+        options: ["1) The array size must be specified in the square brackets.", "2) The parentheses should be square brackets.", "3) The square brackets should be curly braces.", "4) The parentheses should be curly braces."],
+        answer: 4
+        },
+        {
+        question: "16. If there are fewer initializers than elements in the array, the remaining elements are __________.",
+        options: ["1) deleted", "2) ignored", "3) initialized to empty", "4) initialized to zero"],
+        answer: 4
+        },
+        {
+        question: "17. Which statement is true?",
+        options: ["1) Arrays are automatically initialized to zero.", "2) To initialize all array elements to zeros, the array definition must explicitly initialize each element to zero.", "3) Array elements can be initialized to zero by the array definition only at compile time.", "4) Definitions for automatic arrays initialize the arrays at execution time."],
+        answer: 4
+        },
+        {
+        question: "18. The following array definition int n[5] = {32, 27, 64, 18, 95, 14};",
+        options: ["1) is correct", "2) causes a syntax error because there are only five initializers and six array elements.", "3) causes a logic error because there are only five elements but there are six initializers.", "4) causes a syntax error because there are six initializers but only five array elements."],
+        answer: 4
+        },
+        {
+        question: "19. Which statement is true?",
+        options: ["1) A symbolic constant is an identifier that is replaced with replacement text by the C preprocessor after the program is compiled.", "2) Using symbolic constants to specify array sizes makes programs run faster.", "3) Preprocessor directives are not C statements.", "4) The #define preprocessor directive must end in a semicolon."],
+        answer: 3
+        },
+        {
+        question: "20. Which statement is true?",
+        options: ["1) Assigning a value to a symbolic constant in an executable statement is a syntax error.", "2) A symbolic constant is a variable.", "3) Space is reserved for both symbolic constants and variables that hold values at execution time.", "4) Only uppercase letters can be used for symbolic constant names."],
+        answer: 1
+        },
+        {
+        question: "21. Which statement is true regarding the statement ++frequency[responses[answer]];",
+        options: ["1) This statement increases the appropriate frequency counter depending on the value of responses[answer].", "2) This statement increases the appropriate answer counter depending on the value of frequency[responses].", "3) This statement increases the appropriate responses counter depending on the value of frequency[answer].", "4) This statement produces a syntax error because subscripts cannot be nested."],
+        answer: 1
+        },
+        {
+        question: "22. Which statement is false?",
+        options: ["1) C has no built-in bounds checking to prevent the computer from referring to an array element that does not exist.", "2) The programmer is responsible for implementing array bounds checking.", "3) Referring to an element outside the array bounds is a syntax error.", "4) Referring to an element outside the array bounds is a logic error."],
+        answer: 3
+        },
+        {
+        question: "1. Unless otherwise specified, entire arrays are passed __________ and individual array elements are passed __________.",
+        options: ["1) call-by-value, call-by-reference", "2) call-by-reference, call-by-value", "3) call-by-value, call-by-value", "4) call-by-reference, call-by-reference"],
+        answer: 2
+        },
+        {
+        question: "2. Which of the following is false about a function being passed an array?",
+        options: ["1) it knows the size of the array it was passed", "2) it is passed the address of the first element in the array", "3) it is able to modify the values stored in the array", "4) all of the above are true"],
+        answer: 1
+        },
+        {
+        question: "3. To prevent modification of array values in a function,",
+        options: ["1) the array must be defined static in the function.", "2) the array parameter can be preceded by the const qualifier.", "3) a copy of the array must be made inside the function.", "4) the array must be passed call-by-reference."],
+        answer: 2
+        },
+        {
+        question: "4. To pass an array to a function, specify",
+        options: ["1) the name of the array without any brackets.", "2) the name of the array preceded by an empty pair of brackets.", "3) the name of the array followed by a pair of brackets including the size of the array.", "4) the name of the array followed by a pair of brackets including a number one less than the size of the array."],
+        answer: 1
+        },
+        {
+        question: "5. Which statement is false?",
+        options: ["1) C automatically passes arrays to functions using simulated call by reference.", "2) When C passes an array to a function, the called function normally can modify the element values in the caller’s original array.", "3) The name of an array is actually the address of the first element of the array.", "4) When an array is passed in a function call, the calling function knows precisely where in the called function’s memory the passed array is."],
+        answer: 4
+        },
+        {
+        question: "6. The special conversion specifier for printing addresses is __________.",
+        options: ["1) %a", "2) %m", "3) %p", "4) %loc"],
+        answer: 3
+        },
+        {
+        question: "7. Which statement is true?",
+        options: ["1) Entire arrays are passed simulated call by reference and individual array elements are normally passed simulated call by reference.", "2) Entire arrays are passed simulated call by reference and individual array elements are normally passed call by value.", "3) Entire arrays are passed call by value and individual array elements are normally passed simulated call by reference.", "4) Entire arrays are passed call by value and individual array elements are normally passed call by value."],
+        answer: 2
+        },
+        {
+        question: "8. Which statement about bubble sort is true?",
+        options: ["1) a maximum of n passes are needed to sort the array, where n is the number of elements", "2) swapping values requires two assignments", "3) performance is maximized", "4) the algorithm is very simple compared to other sorting procedures"],
+        answer: 4
+        },
+        {
+        question: "9. Which statement about the bubble sort is false?",
+        options: ["1) It is easy to program.", "2) It is a high-performance sort.", "3) It compares only adjacent elements with one another.", "4) The bubble sort compares successive pairs of elements."],
+        answer: 2
+        },
+        {
+        question: "10. A bubble sort of 1000 elements requires a maximum of __________ passes.",
+        options: ["1) 1001", "2) 1000", "3) 999", "4) 998"],
+        answer: 3
+        },
+        {
+        question: "11. In order to calculate the __________ of an array of values, the array must be sorted.",
+        options: ["1) median", "2) mode", "3) mean", "4) (a), (b), and (c)"],
+        answer: 1
+        },
+        {
+        question: "12. The _____ is the average value of a set of data items.",
+        options: ["1) mean", "2) median", "3) mode", "4) matrix"],
+        answer: 1
+        },
+        {
+        question: "13. Calculating which of the following normally requires the data to be sorted first",
+        options: ["1) mean", "2) median", "3) mode", "4) total"],
+        answer: 2
+        },
+        {
+        question: "14. The __________ is the value that occurs most frequently in the data.",
+        options: ["1) mean", "2) median", "3) mode", "4) master"],
+        answer: 3
+        },
+        {
+        question: "15. The binary search technique",
+        options: ["1) is better suited to small arrays", "2) is better suited to unsorted arrays", "3) can only be used on a sorted array", "4) is slower than a linear search"],
+        answer: 3
+        },
+        {
+        question: "16. The maximum number of comparisons needed for the binary search of a 2000 element array is",
+        options: ["1) 9", "2) 15", "3) 11", "4) 14"],
+        answer: 3
+        },
+        {
+        question: "17. Which of these is generally thought of as a high-performance technique?",
+        options: ["1) bubble sort", "2) linear search", "3) binary search", "4) iteration"],
+        answer: 3
+        },
+        {
+        question: "18. Which of the following statements is false?",
+        options: ["1) The linear searching method works well for small arrays.", "2) The linear searching method works well for unsorted arrays.", "3) The binary search algorithm eliminates from consideration one half of the elements in a sorted array after each comparison.", "4) The binary search terminates only when the search key is equal to the middle element of a subarray."],
+        answer: 4
+        },
+        {
+        question: "19. A sorted array of a million elements can be searched by a binary search in __________ or fewer comparisons.",
+        options: ["1) 10", "2) 20", "3) 30", "4) 999,999"],
+        answer: 2
+        },
+        {
+        question: "20. A two-dimensional array element incorrectly referenced as a[x, y] is actually evaluated as",
+        options: ["1) a[x][y]", "2) a[y]", "3) a[x]", "4) a[0]"],
+        answer: 2
+        },
+        {
+        question: "21. Given the following definitions, what is the value of b[1][0]? int b[2][2] = {{1}, {3, 4}};",
+        options: ["1) 0", "2) 1", "3) 3", "4) this isn’t a valid definition"],
+        answer: 3
+        },
+        {
+        question: "22. Which of the following does not initialize all of the array elements to 0?",
+        options: ["1) int b[2][2]; b[0][0] = b[0][1] = b[1][0] = b[1][1] = 0;", "2) int b[2][2] = {0};", "3) int b[2][2]; for (int i = 0; i < 2; ++i) { for (int j = 0; j < 2; ++j) { b[i][j] = 0; } }", "4) all of the above initialize all of their elements to 0."],
+        answer: 4
+        },
+        {
+        question: "23. Which statement is false about multidimensional arrays?",
+        options: ["1) C supports multidimensional arrays.", "2) A common use of multidimensional arrays is to arrange data into tables consisting of rows and columns.", "3) To identify a particular table element requires two indices.", "4) Every ANSI C system can support arrays with as many indices as the programmer chooses."],
+        answer: 4
+        },
+        {
+        question: "24. An array containing 3 columns and 4 rows is typically referred to as a __________.",
+        options: ["1) 12-element array", "2) 3-by-4 array", "3) 13-element array, because of the zero element", "4) 4-by-3 array"],
+        answer: 4
+        },
+        {
+        question: "25. Which initialization is not performed by the following definition? int b[2][2] = {{1}, {3, 4}};",
+        options: ["1) b[0][0] is set to 1", "2) b[0][1] is set to 1", "3) b[1][0] is set to 3", "4) b[1][1] is set to 4"],
+        answer: 2
+        },
+        {
+        question: "1. sizeof",
+        options: ["1) is a binary operator", "2) returns the total number of elements in an array", "3) usually returns a double", "4) returns the total number of bytes in an array"],
+        answer: 4
+        },
+        {
+        question: "2. Which of the following gives the number of elements in the array int r[]?",
+        options: ["1) sizeof (r)", "2) sizeof (*r)", "3) sizeof (r) / sizeof (int)", "4) sizeof (*r) / sizeof (int)"],
+        answer: 3
+        },
+        {
+        question: "3. Which statement is false?",
+        options: ["1) Using global variables, instead of passing arguments, can increase program performance, but reduce effective software engineering.", "2) Hardcoding into a function the size of an array that will be passed as an argument rather than passing the size of the array as a parameter, reduces the software reusability of that function.", "3) sizeof is an operator that calculates the size of its argument in bytes at compile time.", "4) When applied to the name of an array, sizeof returns the number of elements in the array."],
+        answer: 4
+        },
+        {
+        question: "4. An expression such as sizeof(arrayName) / sizeof(double) might typically be used to determine",
+        options: ["1) the size of an array", "2) the number of elements in an array", "3) the number of elements in half an array", "4) the size of an element of an array"],
+        answer: 2
+        },
+        {
+        question: "5. Which of the following can have a pointer as an operand?",
+        options: ["1) ++", "2) *=", "3) %", "4) /"],
+        answer: 1
+        },
+        {
+        question: "6. Given that k is an integer array starting at location 2000, kPtr is a pointer to k, and each integer is stored in 4 bytes of memory, what location does kPtr + 3 point to?",
+        options: ["1) 2003", "2) 2006", "3) 2012", "4) 2024"],
+        answer: 3
+        },
+        {
+        question: "7. A pointer cannot be assigned to",
+        options: ["1) another pointer of the same type", "2) a pointer to void", "3) a pointer of a type other than its own type and void", "4) any other pointer by using the cast operator"],
+        answer: 3
+        },
+        {
+        question: "8. Comparing pointers and performing arithmetic on them is meaningless unless",
+        options: ["1) they point to members of the same array", "2) they point to arrays of the same type", "3) they point to arrays of equal size", "4) they point to different locations"],
+        answer: 1
+        },
+        {
+        question: "9. Which statement is false?",
+        options: ["1) A pointer may be incremented or decremented.", "2) An integer may be added to a pointer.", "3) All operators normally used in arithmetic expressions, assignment expressions and comparison expressions are valid in conjunction with pointer variables.", "4) A pointer may not be added to a pointer."],
+        answer: 3
+        },
+        {
+        question: "10. Which statement is false?",
+        options: ["1) A pointer can always be assigned to another pointer of the same type.", "2) A cast operator must always be used to convert the pointer on the right of an assignment to the pointer type on the left of the assignment.", "3) Variables of all pointer types can be assigned a pointer to void.", "4) A pointer to void can be assigned a pointer of any type."],
+        answer: 2
+        },
+        {
+        question: "11. Assuming that t is an array and tPtr is a pointer to that array, what expression refers to the address of element 3?",
+        options: ["1) *(tPtr + 3)", "2) tPtr[3]", "3) &t[3]", "4) *(t + 3)"],
+        answer: 3
+        },
+        {
+        question: "12. Consider the following function:<br><br>void reverse(char * string1, const char * string2)<br>{<br>   int stringsize = sizeof(string1)/sizeof(char);<br><br>   *(string1 + stringsize – 1) = '\\0';<br>   string1 = string1 + stringsize – 2;<br><br>   for (; *string2 != '\\0'; --string1, ++string2) {<br>      *string1 = *string2;<br>   }<br>}<br><br>What method does the function use to refer to array elements?",
+        options: ["1) array/subscript notation", "2) array/offset notation", "3) pointer/subscript notation", "4) pointer/offset notation"],
+        answer: 4
+        },
+        {
+        question: "13. If bPtr is assigned b (the name of an array), then array element b[3] can alternatively be referenced with the pointer expression __________.",
+        options: ["1) bPtr + 3", "2) b[bPtr + 3]", "3) *b [bPtr + 3]", "4) *(bPtr + 3)"],
+        answer: 4
+        },
+        {
+        question: "1. Pointers cannot be used to",
+        options: ["1) find the address of a variable in memory.", "2) reference values directly.", "3) simulate call-by-reference.", "4) manipulate dynamic data structures."],
+        answer: 2
+        },
+        {
+        question: "2. Pointers may be assigned which of the following?",
+        options: ["1) all integer values", "2) an address", "3) NULL", "4) both (b) and (c)"],
+        answer: 4
+        },
+        {
+        question: "3. Pointers are variables that contain __________ as their values.",
+        options: ["1) strings", "2) flowlines", "3) memory addresses", "4) directions"],
+        answer: 3
+        },
+        {
+        question: "4. A non-pointer variable name __________ references a value and a pointer variable name __________ references a value.",
+        options: ["1) directly, directly", "2) directly, indirectly", "3) indirectly, directly", "4) indirectly, indirectly"],
+        answer: 2
+        },
+        {
+        question: "5. The definition int *count;",
+        options: ["1) is a syntax error because only pointers can be defined with * notation.", "2) is a compile-time error.", "3) is a logic error.", "4) is a correct definition of integer pointer count."],
+        answer: 4
+        },
+        {
+        question: "6. Referencing a value through a pointer is called __________.",
+        options: ["1) interdiction", "2) indirection", "3) intermediation", "4) redirection"],
+        answer: 2
+        },
+        {
+        question: "7. Which statement about pointers is false?",
+        options: ["1) They can be defined to point to objects of any data type.", "2) The indirection operator * distributes to all comma-separated variable names in a definition.", "3) The letters Ptr in a pointer variable name are optional.", "4) A pointer may be initialized to 0, NULL or an address."],
+        answer: 2
+        },
+        {
+        question: "8. Which statement about pointers is false?",
+        options: ["1) A pointer with the value NULL points to nothing.", "2) NULL is a symbolic constant defined in the <stdio.h> header file.", "3) Initializing a pointer to 0 is equivalent to initializing a pointer to NULL, but NULL is preferred.", "4) The values 0 and 1 are the only values that can be assigned directly to a pointer variable."],
+        answer: 4
+        },
+        {
+        question: "9. The & operator can not be applied to",
+        options: ["1) constants", "2) variables of char type", "3) local variables", "4) global variables"],
+        answer: 1
+        },
+        {
+        question: "10. Three of the following expressions have the same value. Which of the following’s value is different from the others?",
+        options: ["1) *&Ptr", "2) &*Ptr", "3) *Ptr", "4) Ptr"],
+        answer: 3
+        },
+        {
+        question: "11. The __________, or address operator, is a unary operator that returns the address of its operand.",
+        options: ["1) &", "2) &&", "3) *", "4) **"],
+        answer: 1
+        },
+        {
+        question: "12. The statement y = &yPtr;",
+        options: ["1) assigns the address of the variable y to pointer variable yPtr.", "2) assigns the address of the variable yPtr to pointer variable y.", "3) is a compilation error.", "4) is a logic error."],
+        answer: 2
+        },
+        {
+        question: "13. Which statement is false?",
+        options: ["1) The operand of the address operator must be a variable.", "2) The address operator cannot be applied to constants.", "3) The address operator can be applied to operators like addition (+).", "4) The address operator cannot be applied to expressions."],
+        answer: 3
+        },
+        {
+        question: "14. Which statement is false?",
+        options: ["1) The unary * operator is called the indirection operator or the dereferencing operator.", "2) The operand of the unary * operator must be a pointer.", "3) The unary * operator returns the value of its operand.", "4) Placing a * operator before a pointer dereferences the pointer."],
+        answer: 3
+        },
+        {
+        question: "15. Which statement is generally false?",
+        options: ["1) Initializing pointers is optional.", "2) Dereferencing an uninitialized pointer could lead to a fatal execution time error.", "3) Dereferencing an uninitialized pointer could accidentally modify important data.", "4) Dereferencing an uninitialized pointer causes a syntax error."],
+        answer: 4
+        },
+        {
+        question: "16. The unary * and __________ are complements of one another.",
+        options: ["1) /", "2) ^", "3) &", "4) |"],
+        answer: 3
+        },
+        {
+        question: "17. When a compiler encounters a function parameter for a single-subscripted array of the form int a[], it converts the parameter to",
+        options: ["1) int a", "2) int &a", "3) int * a", "4) int * const a"],
+        answer: 3
+        },
+        {
+        question: "18. Which statement is false?",
+        options: ["1) All function calls in C pass arguments call-by-value.", "2) Call-by-reference enables a called function to modify variables in the calling function.", "3) Call-by-value is always more efficient than call-by-reference.", "4) In C, programmers use pointers and the indirection operator to simulate call-by-reference."],
+        answer: 3
+        },
+        {
+        question: "19. When calling a function with arguments that should be modified, the __________ of those arguments are passed.",
+        options: ["1) memory", "2) addresses", "3) values", "4) complements"],
+        answer: 2
+        },
+        {
+        question: "20. If array name arrayName is passed to a function, C automatically passes __________.",
+        options: ["1) &arrayName[0]", "2) arrayName[1]", "3) arrayName[0]", "4) *arrayName"],
+        answer: 1
+        },
+        {
+        question: "21. When the __________ of a variable is passed to a function, the indirection operator (*) may be used in the function to modify the __________ at that location in the caller’s memory.",
+        options: ["1) address, address", "2) value, address", "3) value, value", "4) address, value"],
+        answer: 4
+        },
+        {
+        question: "22. Which statement is false?",
+        options: ["1) It’s necessary to include names of pointer arguments in function prototypes.", "2) A function receiving an address as an argument must define a pointer parameter to receive the address.", "3) The compiler does not distinguish between a function that receives a pointer and a function that receives a single-subscripted array.", "4) The function must “know” whether it is receiving a single-subscripted array or simply a single variable for which it is to perform simulated call by reference."],
+        answer: 1
+        },
+        {
+        question: "23. A function that modifies an array by using pointer arithmetic to process every value should have a parameter that is",
+        options: ["1) a nonconstant pointer to nonconstant data", "2) a nonconstant pointer to constant data", "3) a constant pointer to nonconstant data", "4) a constant pointer to constant data"],
+        answer: 1
+        },
+        {
+        question: "24. A function that prints a string should have a parameter that’s a",
+        options: ["1) nonconstant pointer to nonconstant data.", "2) nonconstant pointer to constant data.", "3) constant pointer to nonconstant data.", "4) constant pointer to constant data."],
+        answer: 2
+        },
+        {
+        question: "25. What method should be used to pass an array to a function that does not modify the array and only looks at it using array subscript notation?",
+        options: ["1) A constant pointer to constant data.", "2) A constant pointer to nonconstant data.", "3) A nonconstant pointer to constant data.", "4) A nonconstant pointer to constant data."],
+        answer: 1
+        },
+        {
+        question: "26. Which statement is false?",
+        options: ["1) The const qualifier enables the programmer to inform the compiler that the value of a particular variable should not be modified.", "2) The const qualifier did not exist in early versions of C; it was added to the language by the ANSI C committee.", "3) Using the const qualifier typically violates the principle of least privilege", "4) Adding const to C programs that do not use it presents significant opportunities for improvement in the software engineering of that code."],
+        answer: 3
+        },
+        {
+        question: "27. Which of the following most closely reflects the principle of least privilege.",
+        options: ["1) Always grant a function at least enough access to the data in its parameters to accomplish its specified task.", "2) Always grant a function enough access to the data in its parameters to accomplish its specified task, but no more.", "3) Always grant a function the least amount of access to the data in its parameters.", "4) Never grant a function access to the data in its parameters."],
+        answer: 2
+        },
+        {
+        question: "28. Which statement is false?",
+        options: ["1) If a value should not change in the body of a function to which it is passed, the value should be defined const to ensure that it is not accidentally modified.", "2) Attempts to modify the value of a variable defined const are caught at execution time.", "3) One way to pass a pointer to a function is to use a non-constant pointer to non-constant data.", "4) It is dangerous to pass a non-pointer into a pointer argument."],
+        answer: 2
+        },
+        {
+        question: "29. The highest level of data access is granted by a",
+        options: ["1) non-constant pointer to non-constant data.", "2) non-constant pointer to constant data.", "3) constant pointer to non-constant data.", "4) constant pointer to constant data."],
+        answer: 1
+        },
+        {
+        question: "30. Which statement is false?",
+        options: ["1) Arrays and structures are aggregate data types.", "2) Structures in C are sometimes called records in other languages.", "3) A structure is capable of storing many related data items of different data types.", "4) Structures are always passed call by reference."],
+        answer: 4
+        },
+        {
+        question: "31. When a structure must be passed to a function, we can use pointers to constant data to get the performance of a call by __________ and the protection of a call by __________.",
+        options: ["1) value, value", "2) value, reference", "3) reference, value", "4) reference, reference"],
+        answer: 3
+        },
+        {
+        question: "32. The least access privilege is granted by a __________ pointer to __________ data.",
+        options: ["1) non-constant, non-constant", "2) non-constant, constant", "3) constant, non-constant", "4) constant, constant"],
+        answer: 4
+        },
+        {
+        question: "33. Which statement is false?",
+        options: ["1) The notations int *array and int array[] are interchangeable.", "2) Function prototypes may not be placed inside functions.", "3) Good advice: To encourage software reusability, when passing an array, also pass the size of the array.", "4) Global variables violate the principle of least privilege."],
+        answer: 2
+        },
+        {
+        question: "1. Which of the following is false?",
+        options: ["1) A string may include letters, digits, and various special characters (i.e., +, -, * ).", "2) A string in C is an array of characters ending in the null character (‘\\0’).", "3) String literals are written inside of single quotes", "4) A string may be assigned in a definition to either a character array or a variable of type char *."],
+        answer: 3
+        },
+        {
+        question: "2. A character constant is a(n) __________ value represented as a character in single quotes.",
+        options: ["1) short", "2) int", "3) long", "4) double"],
+        answer: 2
+        },
+        {
+        question: "3. '\<br>' represents the integer value of",
+        options: ["1) the character n", "2) the string n", "3) newline", "4) nextline"],
+        answer: 3
+        },
+        {
+        question: "4. +, \\ and $ are all examples of __________.",
+        options: ["1) special characters", "2) strings", "3) operators", "4) literals"],
+        answer: 1
+        },
+        {
+        question: "5. A string in C is __________.",
+        options: ["1) an array of characters ending in the empty string", "2) a sequence of characters contained within single quotes", "3) a sequence of characters preceded by a length field", "4) an array of characters ending in the null character"],
+        answer: 4
+        },
+        {
+        question: "6. In C, it is appropriate to say that a string is a(n) __________.",
+        options: ["1) pointer", "2) integer", "3) double quote", "4) sequence of characters contained in single quotes"],
+        answer: 1
+        },
+        {
+        question: "7. The number 4 typically takes up _________ bit(s) when stored as a character on most of today’s computers.",
+        options: ["1) 1", "2) 2", "3) 3", "4) 8"],
+        answer: 4
+        },
+        {
+        question: "8. The functions of the character-handling library typically manipulate characters as ___________.",
+        options: ["1) ints.", "2) floats.", "3) longs.", "4) bits."],
+        answer: 1
+        },
+        {
+        question: "9. The isxdigit (is hex digit) function would return false on",
+        options: ["1) a", "2) A", "3) 2", "4) g"],
+        answer: 4
+        },
+        {
+        question: "10. Which character-handling library function returns a true value if its argument is a letter and 0 otherwise?",
+        options: ["1) isalphanumeric", "2) isalphabetic", "3) isalpha", "4) isletter"],
+        answer: 3
+        },
+        {
+        question: "11. Which character-handling library function converts lowercase letters to uppercase letters?",
+        options: ["1) lowertoupper", "2) isupper", "3) touppercase", "4) toupper"],
+        answer: 4
+        },
+        {
+        question: "12. Which of the following is not a whitespace character?",
+        options: ["1) '\<br>'", "2) '\\f'", "3) '\\r'", "4) '\\w'"],
+        answer: 4
+        },
+        {
+        question: "13. Which character handling library function returns true if its argument is a printing character?",
+        options: ["1) ispchar", "2) isprintablechar", "3) isprint", "4) isprintchar"],
+        answer: 3
+        },
+        {
+        question: "1. The strtol and stroul functions do not",
+        options: ["1) need a special header file in order to be used.", "2) take three arguments.", "3) have to convert the entire string they are given.", "4) have the ability to output data in base 8."],
+        answer: 3
+        },
+        {
+        question: "2. The general utilities library is",
+        options: ["1) stdutil", "2) stdlibrary", "3) stdutility", "4) stdlib"],
+        answer: 4
+        },
+        {
+        question: "3. Which statement is false?",
+        options: ["1) Function atof returns a double version of its argument.", "2) If the converted value cannot be represented, the behavior of atoi is undefined.", "3) When using functions from the general utilities library, its header file must be included.", "4) Function strtol receives three arguments."],
+        answer: 3
+        },
+        {
+        question: "4. __________ values can consist of the digits 0 through 9 and the letters A through F.",
+        options: ["1) hexadecimal", "2) binary", "3) octal", "4) decimal"],
+        answer: 1
+        },
+        {
+        question: "5. Which function does not read data from standard input?",
+        options: ["1) scanf", "2) sscanf", "3) sprintf", "4) getchar"],
+        answer: 3
+        },
+        {
+        question: "6. Function __________ inputs the next character from the standard input and returns it as an integer.",
+        options: ["1) inputchr", "2) getchr", "3) inputchar", "4) getchar"],
+        answer: 4
+        },
+        {
+        question: "7. Function __________ prints the character equivalent of its integer argument.",
+        options: ["1) putchar", "2) putch", "3) printchar", "4) printch"],
+        answer: 1
+        },
+        {
+        question: "8. Function fgets appends a __________ to its array target in memory.",
+        options: ["1) leading null character", "2) leading end-of-file character", "3) terminating null character", "4) terminating end-of-file character"],
+        answer: 3
+        },
+        {
+        question: "9. Which statement is true?",
+        options: ["1) sprintf takes its input from a character array.", "2) sprintf prints its output in string format on the screen.", "3) sprintf stores its output in a character array.", "4) sprintf is a secure version of printf."],
+        answer: 3
+        },
+        {
+        question: "10. Which of the following does not necessarily append the null character to its result?",
+        options: ["1) strcpy", "2) strncpy", "3) strcat", "4) strncat"],
+        answer: 2
+        },
+        {
+        question: "11. Which is not a capability of the string-handling library?",
+        options: ["1) tokenizing strings", "2) comparing strings", "3) searching strings", "4) inputting strings"],
+        answer: 4
+        },
+        {
+        question: "12. Every function of the string handling library except for __________ appends the null character to its result.",
+        options: ["1) strncpy", "2) strncat", "3) strcpy", "4) strcat"],
+        answer: 1
+        },
+        {
+        question: "13. The integral type of the value returned by operator sizeof is __________.",
+        options: ["1) size-t", "2) sizet", "3) size.t", "4) size_t"],
+        answer: 4
+        },
+        {
+        question: "14. Which statement is false?",
+        options: ["1) Function strcpy copies its first argument into its second argument.", "2) Function strncpy does not necessarily copy the terminating null character of its second argument.", "3) A common error is not appending a terminating null character to the first argument of a strncpy when the third argument is less than or equal to the length of the string in the second argument.", "4) The first character of the second argument of strcat replaces the null character that terminates the string in the first argument."],
+        answer: 1
+        },
+        {
+        question: "15. Assuming that string1 = “hello” and string2 = “hello world”, Which of the following returns 0?",
+        options: ["1) strcmp(string1, string2);", "2) strcmp(string1, string2, 6);", "3) strncmp(string1, string2, 6);", "4) strncmp(string1, string2, 5);"],
+        answer: 4
+        },
+        {
+        question: "16. Function strcmp returns __________ if its first argument is equal to its second argument.",
+        options: ["1) specifically 1", "2) any non-zero value (i.e., true)", "3) specifically 0", "4) any negative value"],
+        answer: 3
+        },
+        {
+        question: "17. Function __________ compares up to n characters of its first argument with its second argument.",
+        options: ["1) nstrcmp", "2) strncmp", "3) strcmpn", "4) strcmp"],
+        answer: 2
+        },
+        {
+        question: "18. When the computer compares two strings, it actually compares the __________ in the strings.",
+        options: ["1) number of characters", "2) numeric codes of the characters", "3) character bits", "4) lengths of the leading alphabetic portions"],
+        answer: 2
+        },
+        {
+        question: "19. strtok does not",
+        options: ["1) replace each delimiting character with '\\0'", "2) return a pointer to the token it creates", "3) tokenize the entire a string when it’s called", "4) modify the input string"],
+        answer: 3
+        },
+        {
+        question: "20. Which function would be the most useful for determining if a certain word is contained in a string representing a sentence?",
+        options: ["1) strcspn", "2) strchr", "3) strstr", "4) strrchr"],
+        answer: 3
+        },
+        {
+        question: "21. Function __________ searches for the first occurrence of a character in a string.",
+        options: ["1) firstchar", "2) getfirst", "3) firstchr", "4) strchr"],
+        answer: 4
+        },
+        {
+        question: "22. Which statement about strtok is false?",
+        options: ["1) It breaks a string into tokens.", "2) Subsequent calls to continue tokenizing the same string contain NULL as the first argument.", "3) The length of the current token is returned by each call.", "4) If there are no more tokens when the function is called, NULL is returned."],
+        answer: 3
+        },
+        {
+        question: "23. Which statement is true?",
+        options: ["1) strtok modifies the input string.", "2) strtok makes a backup copy of the input string.", "3) The first argument of each call to strtok is the string being tokenized.", "4) strtok works only with a set of four predefined delimiters."],
+        answer: 1
+        },
+        {
+        question: "24. The strlen function returns ________.",
+        options: ["1) the number of characters in a string excluding the null character", "2) the number of characters in a string including the null character", "3) the ASCII representation of the character", "4) none of these"],
+        answer: 1
+        },
+        {
+        question: "1. The __________ is(are) used to display information on the computer's screen.",
+        options: ["1) opening and closing braces", "2) opening and closing quotation marks", "3) cout object", "4) backslash", "5) None of these"],
+        answer: 3
+        },
+        {
+        question: "2. Which of the following must be included in any program that uses the cout object?",
+        options: ["1) opening and closing braces", "2) the header file <iostream>", "3) comments", "4) a namespace", "5) None of these"],
+        answer: 2
+        },
+        {
+        question: "3. In a cout statement, which of the following will advance the output position to the beginning of the next line?",
+        options: ["1) endl or \<br>", "2) end1 or /n", "3) \<br> or \\t", "4) \\t or \\b", "5) \\\\ or \\'"],
+        answer: 1
+        },
+        {
+        question: "4. What will the following code display?<br><br>cout << &quot;Monday&quot;;<br>cout << &quot;Tuesday&quot;;<br>cout << &quot;Wednesday&quot;;",
+        options: ["1) Monday\<br>Tuesday\<br>Wednesday", "2) Monday Tuesday Wednesday", "3) MondayTuesdayWednesday", "4) &quot;Monday&quot;\<br>&quot;Tuesday&quot;\<br>&quot;Wednesday&quot;", "5) &quot;Monday&quot; &quot;Tuesday&quot; &quot;Wednesday&quot;"],
+        answer: 3
+        },
+        {
+        question: "5. What will the following code display?<br><br>int number = 23;<br>cout << &quot;The number is &quot; << &quot;number&quot; << endl;",
+        options: ["1) The number is 23", "2) The number is23", "3) The number is number", "4) The number is null", "5) The number is"],
+        answer: 3
+        },
+        {
+        question: "6. What will the following code display?<br><br>cout << &quot;Four\<br>&quot; << &quot;score\<br>&quot;;<br>cout << &quot;and&quot; << &quot;\<br>seven&quot;;<br>cout << &quot;\<br>years&quot; << &quot; ago&quot; << endl;",
+        options: ["1) Four\<br>score\<br>and\<br>seven\<br>years ago", "2) Four score and seven\<br>years ago", "3) Four\<br>score\<br>and seven\<br>years ago", "4) Four score\<br>and seven\<br>years ago"],
+        answer: 1
+        },
+        {
+        question: "7. What will the following code display?<br><br>cout << &quot;Roses &quot; << &quot;are red&quot;;<br>cout << &quot;and &quot; << &quot;violets/n&quot;<br>cout << &quot;are&quot; << &quot;blue&quot; << endl;",
+        options: ["1) Roses are red\<br>and violets\<br>are blue", "2) Roses are red and violets/nare blue", "3) Roses are redand violets/nareblue", "4) Roses are red and violets/n are blue"],
+        answer: 3
+        },
+        {
+        question: "8. What will the following code display?<br><br>int x = 23, y = 34, z = 45;<br>cout << x << y << z << endl;",
+        options: ["1) 23 34 45", "2) 23\<br>34\<br>45", "3) xyz", "4) 233445"],
+        answer: 4
+        },
+        {
+        question: "9. Assuming that a program has the following string object definition, which statement correctly assigns the string literal &quot;Jane&quot; to the string object?<br><br>string name;",
+        options: ["1) name = Jane;", "2) name = 'Jane';", "3) name = &quot;Jane&quot;;", "4) name = <Jane>;", "5) string name = {Jane};"],
+        answer: 3
+        },
+        {
+        question: "10. In memory, C++ automatically places a(n) __________ at the end of string literals which __________.",
+        options: ["1) semicolon, indicates the end of the statement", "2) \<br>, indicates an escape sequence", "3) null terminator, marks the end of the string", "4) bracket, marks the end of the string", "5) None of these"],
+        answer: 3
+        },
+        {
+        question: "11. The data type of a variable whose value can be either true or false is",
+        options: ["1) int", "2) binary", "3) bool", "4) Boolean", "5) T/F"],
+        answer: 3
+        },
+        {
+        question: "12. What will be the output after the following lines of code execute?<br><br>bool choice;<br>choice = true;<br>cout << &quot;Your choice is &quot; << choice << endl;",
+        options: ["1) true", "2) Your choice is true", "3) Your choice is 1", "4) Your choice is choice", "5) None of these"],
+        answer: 3
+        },
+        {
+        question: "13. What data type does the compiler determine for the variable cost in the following statement?<br><br>auto cost = 14.95;",
+        options: ["1) int", "2) double", "3) bool", "4) char", "5) string"],
+        answer: 2
+        },
+        {
+        question: "14. The __________ causes a program to wait until information is typed at the keyboard and the [Enter] key is pressed.",
+        options: ["1) output stream", "2) cin object", "3) cout object", "4) preprocessor", "5) None of these"],
+        answer: 2
+        },
+        {
+        question: "15. The __________ operator always follows the cin object, and the __________ operator follows the cout object.",
+        options: ["1) binary, unary", "2) conditional, binary", "3) >>, <<", "4) <<, >>", "5) None of these"],
+        answer: 3
+        },
+        {
+        question: "16. Which of the following must be included in any program that uses the cin object?",
+        options: ["1) compiler", "2) the header file <iostream>", "3) linker", "4) brackets", "5) None of these"],
+        answer: 2
+        },
+        {
+        question: "17. Which of the following will allow the user to input the values 15 and 20 and have them stored in variables named base and height, respectively?",
+        options: ["1) cin << base << height;", "2) cin base, height;", "3) cin >> base >> height;", "4) cin base >> cin height;", "5) None of these"],
+        answer: 3
+        },
+        {
+        question: "18. What will be displayed after the following statements execute?<br><br>int num1 = 5;<br>int num2 = 3;<br>cout << &quot;The result is &quot; << (num1 * num2 + 10) << endl;",
+        options: ["1) The result is 5 * 3 + 10", "2) The result is (num1 * num2 + 10)", "3) The result is 25", "4) The result is 65", "5) None of these"],
+        answer: 3
+        },
+        {
+        question: "19. What is the value of x after the following code executes?<br><br>int x;<br>x = 3 / static_cast<int>(4.5 + 6.4);",
+        options: ["1) 0.3", "2) 0", "3) 0.275229", "4) 3.3", "5) None of these"],
+        answer: 2
+        },
+        {
+        question: "20. This manipulator is used to establish a field width for the value that follows it:",
+        options: ["1) field_width", "2) set_field", "3) setw", "4) iomanip", "5) None of these"],
+        answer: 3
+        },
+        {
+        question: "21. You can control the number of significant digits in your output with the __________ manipulator.",
+        options: ["1) setprecision", "2) set_precision", "3) to_fixed", "4) setfixed()", "5) None of these"],
+        answer: 1
+        },
+        {
+        question: "22. Which of the following functions tells the cin object to skip one or more characters in the keyboard buffer?",
+        options: ["1) cin.ignore", "2) cin.jump", "3) cin.hop", "4) cin.skip", "5) None of these"],
+        answer: 1
+        },
+        {
+        question: "23. __________ reads a line of input, including leading and embedded spaces, and stores it in a string object.",
+        options: ["1) cin.get", "2) getline", "3) cin.nextline", "4) get", "5) None of these"],
+        answer: 2
+        },
+        {
+        question: "24. Which of the following statements will read an entire line of input into the string object, address?",
+        options: ["1) cin << address;", "2) cin address;", "3) cin.get(address);", "4) getline(cin, address);", "5) cin.get(length >> width >> height);"],
+        answer: 4
+        },
+        {
+        question: "25. After the following code executes, what is the value of my_value if the user enters 0?<br><br>cin >> my_value;<br><br>if (my_value > 5)<br>    my_value = my_value + 5;<br>else if (my_value > 2)<br>    my_value = my_value + 10;<br>else<br>    my_value = my_value + 15;",
+        options: ["1) 15", "2) 10", "3) 25", "4) 0", "5) 5"],
+        answer: 1
+        },
+        {
+        question: "26. What is the output of the following code segment if the user enters 90 for the score?<br><br>cout << &quot;Enter your test score: &quot;;<br>cin >> test_score;<br><br>if (test_score < 60)<br>    cout << &quot;You failed the test.&quot; << endl;<br><br>if (test_score > 60)<br>    cout << &quot;You passed the test.&quot;;<br>else<br>    cout << &quot;You need to study harder next time.&quot; << endl;",
+        options: ["1) You failed the test.", "2) You passed the test.", "3) You need to study harder next time.", "4) You failed the test.\<br>You need to study harder next time.", "5) You passed the test.\<br>You need to study harder next time."],
+        answer: 2
+        },
+        {
+        question: "27. What is the output of the following segment of code if the value 4 is input by the user?<br><br>int num;<br>int total = 0;<br>cout << &quot;Enter a number from 1 to 10: &quot;;<br>cin >> num;<br><br>switch (num)<br>{<br>    case 1:<br>    case 2:   total = 5;<br>    case 3:   total = 10;<br>    case 4:   total = total + 3;<br>    case 8:   total = total + 6;<br>    default:  total = total + 4;<br>}<br><br>cout << total << endl;",
+        options: ["1) 0", "2) 3", "3) 13", "4) 23", "5) None of these"],
+        answer: 3
+        },
+        {
+        question: "28. These types of arguments are passed to parameters automatically if no argument is provided in the function call.",
+        options: ["1) local", "2) default", "3) global", "4) reference", "5) None of these"],
+        answer: 2
+        },
+        {
+        question: "29. When used as parameters, these types of variables allow a function to access the parameter's original argument:",
+        options: ["1) reference", "2) floating-point", "3) counter", "4) undeclared", "5) None of these"],
+        answer: 1
+        },
+        {
+        question: "30. What will the following code display?<br><br>#include <iostream><br>using namespace std;<br><br>void doSomething(int&);<br><br>int main()<br>{<br>   int x = 2;<br>   cout << x << endl;<br>   doSomething(x);<br>   cout << x << endl;<br>   return 0;<br>}<br><br>void doSomething(int& num)<br>{<br>   num = 0;<br>   cout << num << endl;<br>}",
+        options: ["1) 2\<br>0\<br>2", "2) 2\<br>2\<br>2", "3) 0\<br>0\<br>0", "4) 2\<br>0\<br>0"],
+        answer: 4
+        },
+        {
+        question: "31. The __________ is automatically appended to a character array when it is initialized with a string constant.",
+        options: ["1) array name", "2) number of elements", "3) value of the first element", "4) null terminator", "5) None of these"],
+        answer: 4
+        },
+        {
+        question: "32. An array of string objects that will hold five names would be declared with which of the following statements?",
+        options: ["1) string names[5];", "2) string names(5);", "3) string names 5;", "4) String[5] = names;"],
+        answer: 1
+        },
+        {
+        question: "33. In the following statement, what does int mean?<br><br>int *ptr = nullptr;",
+        options: ["1) The variable named *ptr will store an integer value.", "2) The variable named *ptr will store an asterisk and an integer value", "3) ptr is a pointer variable and will store the address of an integer variable.", "4) The variable named *ptr will store the value in nullptr.", "5) None of these"],
+        answer: 3
+        },
+        {
+        question: "34. Which of the following statements deletes memory that has been dynamically allocated for an array?",
+        options: ["1) int array = delete memory;", "2) int delete[ ];", "3) delete [] array;", "4) new array = delete;", "5) None of these"],
+        answer: 3
+        },
+        {
+        question: "35. The following statement __________<br><br>int *ptr = new int;",
+        options: ["1) results in a compiler error", "2) assigns an integer less than 32767 to the variable ptr", "3) assigns an address to the variable ptr", "4) creates a new pointer named int", "5) None of these"],
+        answer: 3
+        },
+        {
+        question: "36. Which of the following defines a unique_ptr named uniq that points to a dynamically allocated int?",
+        options: ["1) unique_ptr<uniq> int( new int );", "2) unique_ptr<int> int( new uniq );", "3) unique_ptr<uniq> uniq( new int );", "4) unique_ptr<int> uniq( new int );", "5) None of these"],
+        answer: 4
+        }
+    ];
+
+    // Shuffle questions before showing
+    shuffleQuestions(questions);
+
+    function shuffleQuestions(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    // --- New: Reference for next button ---
+    let nextButton;
+
+    function showQuestion() {
+      document.getElementById('progress').textContent =
+        `Question ${currentQuestion + 1} of ${questions.length}`;
+      const questionElement = document.getElementById('question');
+      const optionsElement = document.getElementById('options');
+      const resultElement = document.getElementById('result');
+
+      questionElement.innerHTML = questions[currentQuestion].question;
+      optionsElement.innerHTML = '';
+      resultElement.textContent = '';
+
+      questions[currentQuestion].options.forEach((option, i) => {
+        const btn = document.createElement('button');
+        btn.textContent = option;
+        btn.onclick = () => checkAnswer(btn, i);
+        optionsElement.appendChild(btn);
+      });
+
+      // Remove 'Next' button if it exists
+      if (nextButton && nextButton.parentNode) {
+        nextButton.parentNode.removeChild(nextButton);
+        nextButton = null;
+      }
+    }
+
+    function checkAnswer(button, selectedIndex) {
+      const resultElement = document.getElementById('result');
+      const correctIndex = questions[currentQuestion].answer;
+      if (selectedIndex === correctIndex) {
+        score++;
+        button.style.background = "#b0edac";
+        button.style.color = "#24642f";
+        resultElement.textContent = "🎉 Correct!";
+      } else {
+        button.style.background = "#f8b7b7";
+        button.style.color = "#ae2530";
+        resultElement.textContent = `❌ Wrong. Answer: "${questions[currentQuestion].options[correctIndex]}"`;
+      }
+      Array.from(document.querySelectorAll('.options button')).forEach(btn => btn.disabled = true);
+
+      // --- New: Create and show 'Next Question' button ---
+      if (!nextButton) {
+        nextButton = document.createElement('button');
+        nextButton.textContent = currentQuestion < questions.length - 1 ? "Next Question" : "Show Result";
+        nextButton.className = "restart-btn";
+        nextButton.onclick = () => {
+          currentQuestion++;
+          if (currentQuestion < questions.length) {
+            showQuestion();
+          } else {
+            showResult();
+          }
+        };
+        document.querySelector('.quiz-container').appendChild(nextButton);
+      }
+      // Adjust button text dynamically
+      nextButton.textContent = currentQuestion < questions.length - 1 ? "Next Question" : "Show Result";
+      nextButton.style.display = 'block';
+    }
+
+    function showResult() {
+      document.querySelector('.quiz-container').innerHTML =
+        `<div class="score">Your score: ${score} of ${questions.length}</div>
+        <button class="restart-btn" onclick="location.reload()">Restart Quiz</button>`;
+    }
+
+    showQuestion();
+  </script>
+</body>
+</html>
