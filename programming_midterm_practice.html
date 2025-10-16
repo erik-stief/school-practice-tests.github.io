@@ -352,6 +352,31 @@
         question: "Which of the following is not true of static local variables?", 
         options: ["They’re accessible outside of the function in which they are defined", "They retain their values when the function is exited", "They’re initialized to zero if no explicitly initialized by the programmer", "They can be pointers"], 
         answer: 0
+      },
+      {
+        question: "The following ______<br>int *ptr = new int;", 
+        options: ["results in a compiler error", "Assigns an integer less than 32767 to the variable ptr", "Assigns an address to the variable ptr", "creates a new pointer named int", "none of these"],
+        answer: 2
+      },
+      {
+        question: "The __________ selection statement performs one of many different actions, depending on the value of an expression.",
+        options: ["if", "when", "if…else", "switch"],
+        answer: 3
+      },
+      {
+        question: "Which is not a C iteration statement?",
+        options: ["while", "do…while", "for", "do…for"],
+        answer: 3
+      },
+      {
+        question: "When the __________ of a variable is passed to a function, the indirection operator (*) may be used in the function to modify the __________ at that location in the caller’s memory.",
+        options: ["address, address", "value, address", "value, value", "address, value"],
+        answer: 3
+      },
+      {
+        question: "The program segment<br>int counter = 1;<br>do {<br>  printf(&quot;%i &quot;, counter);<br>} while (++counter <= 10);<br>will ________.",
+        options: ["print the numbers 1 through 11", "print the numbers 1 through 10", "print the numbers 1 through 9", "cause a syntax error"],
+        answer: 1
       }
     ];
 

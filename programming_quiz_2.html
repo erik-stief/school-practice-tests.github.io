@@ -553,7 +553,7 @@
     function checkAnswer(button, selectedIndex) {
       const resultElement = document.getElementById('result');
       const correctIndex = questions[currentQuestion].answer;
-      if (selectedIndex === correctIndex) {
+      if (selectedIndex === correctIndex-1) {
         score++;
         button.style.background = "#b0edac";
         button.style.color = "#24642f";
