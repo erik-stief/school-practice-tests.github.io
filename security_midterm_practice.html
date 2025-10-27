@@ -124,51 +124,451 @@
   <script>
     const questions = [
       { 
-        question: "What does CIA stand for in the CIA triangle?", 
-        options: ["confidentiality, integrity, and availability", 
-        "confidentiality, infiltration, and accurate", 
-        "careful, integrity, and available", 
-        "cybercrime, integrity, and activism"], 
-        answer: 0 
+            question: "What does CIA stand for in the CIA triangle?", 
+            options: ["confidentiality, integrity, and availability", 
+            "confidentiality, infiltration, and accurate", 
+            "careful, integrity, and available", 
+            "cybercrime, integrity, and activism"], 
+            answer: 0 
       },
       { 
-        question: "What does confidentiality mean In the CIA triangle?", 
-        options: ["no one can access confidential information",
-        "only higher ups can view classified information ", 
-        " Only approved individuals may access information",
-        "only company employees can view classified information"], 
-        answer: 2
+            question: "What does confidentiality mean In the CIA triangle?", 
+            options: ["no one can access confidential information",
+            "only higher ups can view classified information ", 
+            " Only approved individuals may access information",
+            "only company employees can view classified information"], 
+            answer: 2
       },
       { 
-        question: "Which is an example of a passive attack?", 
-        options: ["affecting a company's operations", "making a false data stream", "eavesdropping on transmitted information"], 
-        answer: 2
+            question: "Which is an example of a passive attack?", 
+            options: ["affecting a company's operations", "making a false data stream", "eavesdropping on transmitted information"], 
+            answer: 2
       },
       { 
-        question: "Which of the following is NOT a risk response technique?", 
-        options: ["Acceptence", "Tranference", "Avoidance", 
-        "Mitigation", "Packetization"], 
-        answer: 4
+            question: "Which of the following is NOT a risk response technique?", 
+            options: ["Acceptence", "Tranference", "Avoidance", 
+            "Mitigation", "Packetization"], 
+            answer: 4
       },
       { 
-        question: "What does APT mean?", 
-        options: ["Automatic protection technology", "Advanced persistent threat", "Applied predictive technology", 
-        "Attacker protection topology"], 
-        answer: 1 
+            question: "What does APT mean?", 
+            options: ["Automatic protection technology", "Advanced persistent threat", "Applied predictive technology", 
+            "Attacker protection topology"], 
+            answer: 1 
       },
       { 
-        question: "What is the 80 20 rule?", 
-        options: ["fixing 20% of most important bugs also fixes 80% of Issues", 
-        "80% of attackers are script kiddies ", 
-        "20% of employees makes 80% of the mistakes", 
-        "fixing 80% of important bugs also fixes 20% of issues"], 
-        answer: 0 
+            question: "What is the 80 20 rule?", 
+            options: ["fixing 20% of most important bugs also fixes 80% of Issues", 
+            "80% of attackers are script kiddies ", 
+            "20% of employees makes 80% of the mistakes", 
+            "fixing 80% of important bugs also fixes 20% of issues"], 
+            answer: 0 
       },
       { 
-        question: "Which is NOT a fundamental security principle for defence?", 
-        options: ["Layering", "Diversity", "Complexity", 
-        "obscurity", "Limiting"], 
-        answer: 2
+            question: "Which is NOT a fundamental security principle for defence?", 
+            options: ["Layering", "Diversity", "Complexity", 
+            "obscurity", "Limiting"], 
+            answer: 2
+      },
+      {
+            question: "What are the three components of the CIA triangle in information security?",
+            options: ["Control, Integrity, Authorization", "Confidentiality, Integrity, Availability", "Complexity, Integrity, Access", "Consistency, Information, Accuracy"],
+            answer: 1
+      },
+      {
+            question: "Which of the following is listed as a necessary tool for security, alongside policy and training?",
+            options: ["Budgeting", "Auditing", "Technology", "Compliance"],
+            answer: 2
+      },
+      {
+            question: "According to the sources, attacks are successful because of widespread vulnerabilities and which other listed factor?",
+            options: ["Lack of criminal prosecution", "Poorly designed software", "Excessive encryption protocols", "Low salaries for security staff"],
+            answer: 1
+      },
+      {
+            question: "The process that achieves freedom from danger is defined as:",
+            options: ["Risk mitigation", "Information security", "Threat modelling", "Security"],
+            answer: 3
+      },
+      {
+            question: "Which type of attack is used to learn or make use of information without affecting system resources?",
+            options: ["Active attack", "Denial of service", "Modification of messages", "Passive attack"],
+            answer: 3
+      },
+      {
+            question: "Which of the following is an example of an Active Attack?",
+            options: ["Traffic analysis", "Release of message contents", "Denial of service", "Eavesdropping"],
+            answer: 2
+      },
+      {
+            question: "The sources mention securing data in which three states?",
+            options: ["Data in use, Data at rest, Data in transit", "Data stored, Data copied, Data deleted", "Data accessed, Data owned, Data shared", "Data encrypted, Data decrypted, Data backed up"],
+            answer: 0
+      },
+      {
+            question: "Which item is listed as an asset that information security protects?",
+            options: ["Threat vectors", "Communication facilities and networks", "Script kiddies", "Risk avoidance"],
+            answer: 1
+      },
+      {
+            question: "Which is NOT listed as a risk response technique?",
+            options: ["Transfer", "Avoid", "Eliminate", "Accept", "Mitigate"],
+            answer: 2
+      },
+      {
+            question: "A flaw or weakness that allows a threat agent to bypass security is defined as a:",
+            options: ["Threat vector", "Risk", "Vulnerability", "Threat actor"],
+            answer: 2
+      },
+      {
+            question: "What is defined as 'the means by which an attack can occur'?",
+            options: ["Asset", "Threat vector", "Risk", "Threat actor"],
+            answer: 1
+      },
+      {
+            question: "Vulnerabilities created by a person (insider or outsider) fall under which attack surface category?",
+            options: ["Network attack surface", "Software attack surface", "Human attack surface", "Enterprise attack surface"],
+            answer: 2
+      },
+      {
+            question: "What type of attack is defined as 'premeditated, politically motivated'?",
+            options: ["Hacktivism", "Script kiddie attack", "Cyberterrorism", "Insider threat"],
+            answer: 2
+      },
+      {
+            question: "People who want to attack but lack the knowledge, often downloading scripts from websites, are known as:",
+            options: ["Hacktivists", "Nation-state actors", "Data users", "Script kiddies"],
+            answer: 3
+      },
+      {
+            question: "Threat actors whose attacks will be for ideological reasons, and are not as well defined as cyberterrorists, are called:",
+            options: ["Hacktivists", "Insiders", "Data owners", "Government agents"],
+            answer: 0
+      },
+      {
+            question: "Which of the following is NOT one of the five principles of defending against attacks?",
+            options: ["Layering", "Diversity", "Complexity", "Obscurity", "Limiting"],
+            answer: 2
+      },
+      {
+            question: "The security principle that requires security to be implemented in multiple stages is called:",
+            options: ["Limiting", "Obscurity", "Diversity", "Layering"],
+            answer: 3
+      },
+      {
+            question: "The 'Good' definition of 'Hack' provided in the sources is to:",
+            options: ["Illegally gain access", "Use computers for enjoyment", "Conduct traffic analysis", "Limit access to information"],
+            answer: 1
+      },
+      {
+            question: "The information characteristic referring to the quality or state of being genuine or original is:",
+            options: ["Accuracy", "Utility", "Authenticity", "Possession"],
+            answer: 2
+      },
+      {
+            question: "The role responsible for the storage, organization, maintenance, and protection of information is the:",
+            options: ["Data owner", "Data custodian", "Data user", "System administrator"],
+            answer: 1
+      },
+      {
+            question: "What is the overall process of identifying and controlling risks known as?",
+            options: ["Risk identification", "Risk assessment", "Risk management", "Risk avoidance"],
+            answer: 2
+      },
+      {
+            question: "Which phase involves applying controls to reduce risks?",
+            options: ["Risk identification", "Risk control", "Asset classification", "Vulnerability assessment"],
+            answer: 1
+      },
+      {
+            question: "Which approach to the risk identification process involves learning curve and employee knowledge by talking to co-workers?",
+            options: ["Top down approach", "Automated scanning", "Bottom up approach", "Annual review approach"],
+            answer: 2
+      },
+      {
+            question: "Which of the following asset types is described as a 'prime target for attackers'?",
+            options: ["Hardware", "Personnel", "Information", "Legal assets"],
+            answer: 2
+      },
+      {
+            question: "The characterization of an asset referring to the damage resulting from a breach of confidentiality or integrity is known as:",
+            options: ["Criticality", "Classification", "Sensitivity", "Authenticity"],
+            answer: 2
+      },
+      {
+            question: "The characterization of an asset referring to its importance to the immediate survival of the organization is known as:",
+            options: ["Sensitivity", "Criticality", "Classification", "Valuation"],
+            answer: 1
+      },
+      {
+            question: "In the context of asset sensitivity, what classification is assigned if disclosure or alteration would be considered 'bad'?",
+            options: ["Unrestricted", "Essential", "Deferable", "Restricted"],
+            answer: 3
+      },
+      {
+            question: "If an asset is categorized as 'Required,' what is the organization able to do upon its loss?",
+            options: ["Suffer severe immediate repercussions", "Continue for a time", "Tolerate the loss easily", "Immediately cease operations"],
+            answer: 1
+      },
+      {
+            question: "Which level of asset criticality indicates that the loss is tolerable?",
+            options: ["Essential asset", "Required asset", "Deferable asset", "Critical asset"],
+            answer: 2
+      },
+      {
+            question: "Which step follows 'Deployment' in the listed Asset Lifecycle stages?",
+            options: ["Acquisition", "Utilization", "Maintenance", "Retirement"],
+            answer: 1
+      },
+      {
+            question: "Which attribute is listed specifically for 'Data' assets?",
+            options: ["IP address", "Position name/number/ID", "Intended purpose", "Owner/creator/manager"],
+            answer: 3
+      },
+      {
+            question: "Which of the following is an information gathering technique for assessing values for assets?",
+            options: ["Top secret classification", "Dumpster diving", "Automated scanning tools", "Need-to-know principle"],
+            answer: 2
+      },
+      {
+            question: "When assessing values for assets, how are judgments typically made?",
+            options: ["Based purely on purchase price", "Based on US military classification", "Comparatively, prioritizing the most valuable assets", "Based only on IP address"],
+            answer: 2
+      },
+      {
+            question: "In the general Data Classification model, which category is highest in sensitivity?",
+            options: ["Public", "For official use only", "Sensitive", "Classified"],
+            answer: 3
+      },
+      {
+            question: "The U.S. military classification 'Confidential' is one level above which other classification?",
+            options: ["Secret", "Top secret", "Sensitive but unclassified", "Unclassified"],
+            answer: 2
+      },
+      {
+            question: "What is the Canadian Military classification equivalent to 'Protected A' data?",
+            options: ["Official business use only", "Unclassified", "Confidential data", "Top secret data"],
+            answer: 2
+      },
+      {
+            question: "What security principle dictates that an individual cannot view data even if it falls within their clearance level, unless they require it for their job?",
+            options: ["Need-to-know principle", "Clean desk policy", "Layering principle", "Bottom up approach"],
+            answer: 0
+      },
+      {
+            question: "Gaining access to information by going through trash is known as:",
+            options: ["Social engineering", "Clean desk violation", "Dumpster diving", "Traffic analysis"],
+            answer: 2
+      },
+      {
+            question: "What variable does 'U' represent in the Risk calculation formula: LO * V - RM + U?",
+            options: ["Utility of the asset", "Uncertainty of current knowledge", "User access level", "Unit cost"],
+            answer: 1
+      },
+      {
+            question: "Which of the following is listed as a primary category of controls?",
+            options: ["Policies", "Budgeting", "Vulnerability assessment", "Training"],
+            answer: 0
+      },
+      {
+            question: "Risk, when using the CIA triangle, primarily focuses on the security of which element?",
+            options: ["Data owners", "External threats", "Systems", "Network perimeter"],
+            answer: 2
+      },
+      {
+            question: "Which term is defined as the evaluated likelihood of a particular outcome actually happening?",
+            options: ["Impact", "Benefit", "Probability", "Expected loss"],
+            answer: 2
+      },
+      {
+            question: "Which of the following is listed as an element to consider when evaluating the Impact of a risk outcome?",
+            options: ["Resources", "Complexity", "Obscurity", "Authorization"],
+            answer: 0
+      },
+      {
+            question: "What is the graphical representation of information normally found in existing risk logs called?",
+            options: ["Annual Loss Expectancy", "Control spreadsheet", "Risk profile", "Exposure factor"],
+            answer: 2
+      },
+      {
+            question: "ITIL (Information Technology Infrastructure Library) is a set of detailed practices focused on aligning IT services with the needs of what?",
+            options: ["Government regulation", "Cybersecurity auditing", "Law enforcement agencies", "The business"],
+            answer: 3
+      },
+      {
+            question: "If an organization fails to optimize risk management, spending too little may lead to which outcome?",
+            options: ["Wasteful security measures", "High losses", "Trivial security costs", "Material benefit"],
+            answer: 1
+      },
+      {
+            question: "A security measure is considered 'cost-beneficial' if its cost is trivial and its benefit is what?",
+            options: ["Intolerable", "Theoretical", "Material", "Uncertain"],
+            answer: 2
+      },
+      {
+            question: "Which two elements make up optimization in risk management?",
+            options: ["Asset value and ARO", "Cost of risk management and amount of risk losses", "Probability and impact", "Layering and diversity"],
+            answer: 1
+      },
+      {
+            question: "What is defined as the number of occurrences we expect each year?",
+            options: ["Annual Loss Expectancy (ALE)", "Threat occurrence rate", "Exposure Factor (EF)", "Single-occurrence loss (SOL)"],
+            answer: 1
+      },
+      {
+            question: "Which of the following is one of the listed methods for estimating risk parameters?",
+            options: ["Formal calculus", "Hardware logging", "Best efforts analysis", "Risk ranking"],
+            answer: 2
+      },
+      {
+            question: "According to Jacobson's thirty-year law, if something has not happened in 30 years, how should an organization act?",
+            options: ["As if it will happen next year", "As if it will never happen", "As if it needs a high occurrence rate measure", "As if the impact is high"],
+            answer: 1
+      },
+      {
+            question: "When focusing on loss potential, which group is listed as a source of information?",
+            options: ["Building engineer", "Operation staff", "Human resources", "Police crime"],
+            answer: 2
+      },
+      {
+            question: "The 80-20 rule suggests focusing on the 20% of parameters that generate what percentage of the expected loss?",
+            options: ["50%", "80%", "20%", "100%"],
+            answer: 1
+      },
+      {
+            question: "Which of the following is an example of an existing system that a risk-ranked control audit might be conducted on?",
+            options: ["Disaster and recovery", "Annual Loss Expectancy", "The 80-20 rule", "Jaconson’s law"],
+            answer: 0
+      },
+      {
+            question: "The first step in the six-step risk-ranked control method is the creation of what?",
+            options: ["Risk assessment report", "Control spreadsheet", "Detailed threat log", "Disaster recovery plan"],
+            answer: 1
+      },
+      {
+            question: "What is defined as one of the specific parts of the system and is identified as a physical entity?",
+            options: ["Threat vector", "Component", "Exposure factor", "Control"],
+            answer: 1
+      },
+      {
+            question: "Which item is listed as an example of a system component?",
+            options: ["Fraud or theft", "Programs", "Breach of privacy", "Errors and omissions"],
+            answer: 1
+      },
+      {
+            question: "Which type of control is listed in the risk assessment process alongside Preventive and Corrective controls?",
+            options: ["Administrative controls", "Physical controls", "Detective controls", "Compensating controls"],
+            answer: 2
+      },
+      {
+            question: "What is the formula for Return on Investment (ROI) in risk mitigation?",
+            options: ["ROI = PV of Cost / PV of Loss Reduction", "ROI = ALE * ARO", "ROI = PV of Loss Reduction / PV of Cost", "ROI = Asset Value / Exposure Factor"],
+            answer: 2
+      },
+      {
+            question: "In the calculation ALE = SLE * ARO, what does ARO stand for?",
+            options: ["Asset Replacement Outcome", "Annualized Risk Optimization", "Annualized Rate of Occurrence", "Asset Retention Objective"],
+            answer: 2
+      },
+      {
+            question: "Which type of risk assessment uses a subjective evaluation of probability and impact, often ranked from 0 to 1?",
+            options: ["Quantitative", "Project-level", "Benchmarking", "Qualitative"],
+            answer: 3
+      },
+      {
+            question: "Which approach to risk assessment is described as time-consuming and may require specialized tools?",
+            options: ["Qualitative", "FRAP", "NIST", "Quantitative"],
+            answer: 3
+      },
+      {
+            question: "In Quantitative risk assessment, only which type of risk is considered?",
+            options: ["All identified risks", "Project-specific high-impact risks", "All intangible assets", "Risks ranked 0 to 1"],
+            answer: 1
+      },
+      {
+            question: "Which step is listed immediately following 'Threat identification' in the NIST approach?",
+            options: ["System characterization", "Vulnerability identification", "Impact analysis", "Risk determination"],
+            answer: 1
+      },
+      {
+            question: "The COBRA approach views risk assessment primarily as which type of issue?",
+            options: ["A technical issue", "An IT security issue", "A business issue", "An automation issue"],
+            answer: 2
+      },
+      {
+            question: "COBRA utilizes tools to perform self-assessment of risk, drawing from which primary knowledge base, alongside IT security?",
+            options: ["E-securityy", "System characterization", "Tangible assets", "Project-level probability"],
+            answer: 0
+      },
+      {
+            question: "Which risk management approach is described as workshop-based rather than tool-based?",
+            options: ["FRAP", "COBRA", "OCTAVE", "NIST"],
+            answer: 2
+      },
+      {
+            question: "OCTAVE's first phase focuses on gathering knowledge about assets, threats, and strategies from whom?",
+            options: ["Auditors and consultants", "Staff only", "Managers", "Data owners"],
+            answer: 2
+      },
+      {
+            question: "In the OCTAVE approach, the process 'Conduct risk analysis' occurs during which phase?",
+            options: ["Phase 1: Gather knowledge about assets, threats, and strategies from managers", "Phase 2: Gather knowledge from operational area managers", "Phase 3: Gather knowledge from staff", "Phase 4: Develop protection strategy"],
+            answer: 2
+      },
+      {
+            question: "Flexibility, Modularity, Simplicity, and Consistency are listed as characteristics of which approach?",
+            options: ["The NIST approach", "The Harmonized threat and risk assessment approach (TRA)", "FRAP", "OCTAVE"],
+            answer: 1
+      },
+      {
+            question: "Which of the following is listed as a Principle of the Harmonized TRA approach, alongside Compatibility and Transparency?",
+            options: ["Automation", "Evolutionary change", "Generality", "Completeness"],
+            answer: 1
+      },
+      {
+            question: "The process of Asset identification and valuation involves Asset identification, Asset valuation, and which intermediary assessment step?",
+            options: ["Control analysis", "Injury/impact assessment", "Likelihood determination", "Risk determination"],
+            answer: 1
+      },
+      {
+            question: "What is a characteristic of Tangible assets?",
+            options: ["Non-physical existence", "Cost is harder to determine", "Can be easily liquidated", "Not sold in the market"],
+            answer: 2
+      },
+      {
+            question: "A characteristic of Intangible assets is that their cost is what?",
+            options: ["Easily determined", "Easily liquidated", "Harder to determine", "Based on physical existence"],
+            answer: 2
+      },
+      {
+            question: "Which benefit of a hierarchical structure ensures that important assets are less likely to be overlooked?",
+            options: ["Consistency", "Flexibility and scalability", "Completeness", "Automation"],
+            answer: 2
+      },
+      {
+            question: "FRAP (Facilitated Risk Assessment Process) is described as a facilitator-led approach where the stakeholders play what role?",
+            options: ["They are passive recipients of the assessment results", "They have a big role in the assessment", "They are only involved in documentation", "They only provide technical input"],
+            answer: 1
+      },
+      {
+            question: "FRAP is considered cost-effective because exact estimates of loss are not needed to determine what?",
+            options: ["The identity of the facilitator", "The risk appetite of the organization", "If controls should be implemented", "The consistency of the process"],
+            answer: 2
+      },
+      {
+            question: "Which challenge is listed as a problem associated with using benchmarking to compare security practices?",
+            options: ["The consistency of the measures", "The lack of available metrics based data", "Organizations always talk to each other", "No two organizations are identical"],
+            answer: 3
+      },
+      {
+            question: "What is defined as the risk remaining after vulnerabilities have been controlled?",
+            options: ["Risk appetite", "Residual risk", "Operational risk", "Harmonized risk"],
+            answer: 1
+      },
+      {
+            question: "Analysis of measures against established standards is known as:",
+            options: ["Benchmarking", "Baselining", "Risk appetite", "Results documentation"],
+            answer: 1
       }
     ];
 
