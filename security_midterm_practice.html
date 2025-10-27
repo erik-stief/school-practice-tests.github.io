@@ -7,109 +7,132 @@
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
     body {
       font-family: 'Montserrat', Arial, sans-serif;
-      background: linear-gradient(125deg, #ffd6d6 0%, #fff0f0 100%);
+      background: linear-gradient(135deg, #151a2b 0%, #212844 100%);
       margin: 0;
       padding: 0;
       min-height: 100vh;
+      /* Simulate static interference */
+     background:
+      linear-gradient(135deg, #151a2b 0%, #212844 100%),
+      repeating-linear-gradient(
+        45deg,
+        rgba(24, 31, 53, .5) 0,
+        rgba(24, 31, 53, .5) 1px,
+        transparent 1px,
+        transparent 6px
+      );
     }
     .quiz-container {
-      background: #fff1f1;
-      padding: 40px 36px 32px 36px;
+      background: rgba(29, 37, 59, 0.92);
+      padding: 42px 36px 34px 36px;
       max-width: 420px;
-      margin: 54px auto;
+      margin: 62px auto;
       border-radius: 18px;
-      box-shadow: 0 8px 32px rgba(234, 33, 41, 0.13), 0 1.5px 3px #fba3a3;
+      box-shadow: 0 0 40px 0 #28ffbf88, 0 1.5px 3px #2464a388;
+      border: 2.5px solid #2cffcfcc;
+      position: relative;
+      overflow: hidden;
+    }
+    .quiz-container:before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: .09;
+      background-color: #00a669;
+      background-image: url(http://www.transparenttextures.com/patterns/diagmonds.png);
+      pointer-events: none;
     }
     .question {
       font-weight: 700;
-      font-size: 1.15rem;
+      font-size: 1.18rem;
       margin-bottom: 22px;
-      color: #e12929;
-      letter-spacing: 0.5px;
+      color: #24ffc8;
+      letter-spacing: 1.2px;
+      text-shadow: 0 1.5px 5px #28ffd3bb;
     }
     #progress {
-      font-size: 0.98rem;
-      color: #a83232;
-      margin-bottom: 16px;
+      font-size: 0.99rem;
+      color: #7afffd;
+      margin-bottom: 14px;
       text-align: right;
+      text-shadow: 0 1px 5px #1bfcff44;
     }
     .options {
       margin-bottom: 20px;
     }
     .options button {
       display: block;
-      margin: 10px 0;
+      margin: 11px 0;
       width: 100%;
-      padding: 13px 0;
+      padding: 14px 0;
       font-size: 1.07rem;
-      font-weight: 500;
-      background: #ffe6e6;
-      color: #e12929;
-      border: 2px solid #f8baba;
-      border-radius: 9px;
+      font-weight: 600;
+      background: #232b44;
+      color: #27ffbb;
+      border: 2.5px solid #27ffbb;
+      border-radius: 11px;
       cursor: pointer;
-      transition: all 0.22s cubic-bezier(.47,1.64,.41,.8);
       outline: none;
-      box-shadow: 0 1.5px 6px #ffcaca;
+      box-shadow: 0 2px 24px #07ffeb44, 0 1.5px 6px #1bfcff22;
+      transition: all 0.19s cubic-bezier(.47,1.64,.41,.8);
+      position: relative;
     }
-    .options button:hover, .options button:focus {
-      background: #e12929;
-      color: #fff;
-      border-color: #b31e1e;
-      transform: scale(1.03);
-      box-shadow: 0 2.5px 18px #ff9999;
+    .options button:hover,
+    .options button:focus {
+      background: #0cf;
+      color: #191e31;
+      border-color: #1474ff;
+      box-shadow: 0 3px 36px #63fffddd;
+      transform: scale(1.04);
+    }
+    .options button:active {
+      box-shadow: 0 2px 16px #560fcf77;
     }
     #result {
-      margin-top: 10px;
+      margin-top: 11px;
       font-weight: 700;
       font-size: 1.08rem;
       text-align: center;
-      color: #a32121;
-      opacity: 0.95;
+      color: #00ffd0;
+      opacity: 0.99;
+      text-shadow: 0 1.5px 8px #0ffdaa;
     }
     .score {
-      font-size: 1.3rem;
+      font-size: 1.34rem;
       font-weight: 700;
       text-align: center;
-      color: #e12929;
-      margin-top: 38px;
-      margin-bottom: 10px;
+      color: #03fff0;
+      margin-top: 37px;
+      margin-bottom: 13px;
+      text-shadow: 0 2px 12px #0fffbc88;
     }
-    .restart-btn {
-      margin: 16px auto 0;
+    .restart-btn, .back-btn {
+      margin: 18px auto 0;
       padding: 13px 44px;
-      background: #e12929;
-      color: #fff;
+      background: #1bfcff;
+      color: #12151b;
       border: none;
       border-radius: 8px;
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
       display: block;
-      transition: background 0.20s;
-      box-shadow: 0 2px 10px #f8baba;
+      transition: background 0.18s;
+      box-shadow: 0 2px 14px #07ffeb99;
+      text-shadow: 0 1px 8px #09fff199;
     }
-    .restart-btn:hover {
-      background: #b31e1e;
-      color: #ffe6e6;
+    .restart-btn:hover, .back-btn:hover {
+      background: #27ffbb;
+      color: #171d31;
     }
-    .back-btn {
-      margin: 24px auto 0;
-      padding: 12px 38px;
-      background: #e12929;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: block;
-      transition: background 0.20s;
-      box-shadow: 0 2px 10px #f8baba;
-    }
-    .back-btn:hover {
-      background: #b31e1e;
-      color: #ffe6e6;
+
+    @media (max-width: 500px) {
+      .quiz-container {
+        padding: 16px 6px;
+        max-width: 97vw;
+        font-size: 0.98rem;
+      }
     }
   </style>
 </head>
@@ -361,11 +384,6 @@
             answer: 2
       },
       {
-            question: "What variable does 'U' represent in the Risk calculation formula: LO * V - RM + U?",
-            options: ["Utility of the asset", "Uncertainty of current knowledge", "User access level", "Unit cost"],
-            answer: 1
-      },
-      {
             question: "Which of the following is listed as a primary category of controls?",
             options: ["Policies", "Budgeting", "Vulnerability assessment", "Training"],
             answer: 0
@@ -437,7 +455,7 @@
       },
       {
             question: "Which of the following is an example of an existing system that a risk-ranked control audit might be conducted on?",
-            options: ["Disaster and recovery", "Annual Loss Expectancy", "The 80-20 rule", "Jaconson’s law"],
+            options: ["Disaster and recovery", "Annual Loss Expectancy", "The 80-20 rule", "Jacobson’s law"],
             answer: 0
       },
       {
@@ -512,7 +530,7 @@
       },
       {
             question: "In the OCTAVE approach, the process 'Conduct risk analysis' occurs during which phase?",
-            options: ["Phase 1: Gather knowledge about assets, threats, and strategies from managers", "Phase 2: Gather knowledge from operational area managers", "Phase 3: Gather knowledge from staff", "Phase 4: Develop protection strategy"],
+            options: ["Phase 1: Gather knowledge about assets, threats, and strategies from managers", "Phase 2: Gather knowledge from operational area managers", "Phase 3: Gather knowledge from staff"],
             answer: 2
       },
       {
