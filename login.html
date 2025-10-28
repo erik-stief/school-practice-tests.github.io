@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🔒 Access Point</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background: radial-gradient(ellipse at top left, #060c21 0%, #212b36 100%);
+      color: #e0fcff;
+      font-family: 'Share Tech Mono', monospace;
+      display: flex;
+      min-height: 100vh;
+      margin: 0;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .terminal-card {
+      background: #181f2aeb;
+      padding: 2.5em 3.2em;
+      border-radius: 13px;
+      box-shadow: 0 0 32px #00ffbb42;
+      border: 1px solid #18e0b850;
+      text-align: left;
+      max-width: 380px;
+      width: 100%;
+    }
+    .neon-title {
+      color: #19ffc4;
+      letter-spacing: 2.6px;
+      font-size: 2.0em;
+      text-shadow: 0 0 13px #00d8b9, 0 0 8px #6817e8;
+      font-family: inherit;
+    }
+    .quiz-link {
+        transition: background 0.18s;
+        }
+        @keyframes fadein {
+        from { opacity: 0; transform: translateY(20px);}
+        to { opacity: 1; transform: none;}
+    }
+    label, input, button {
+      margin-top: 1em;
+      font-family: inherit;
+      font-size: 1.13em;
+    }
+    input[type=password], input[type=text] {
+      width: 100%;
+      padding: .65em .7em;
+      background: #201a2d;
+      color: #befcec;
+      border: 1.3px solid #2cf7cb78;
+      border-radius: 9px;
+      outline: none;
+      font-size: 1.07em;
+      box-shadow: 0 1.5px 8px #19ffc32e;
+    }
+    button {
+      width: 100%;
+      margin-top: 1.2em;
+      padding: 0.7em;
+      border-radius: 8px;
+      border: 0;
+      color: #0f2822;
+      background: #19ffc4;
+      font-weight: bold;
+      font-size: 1.16em;
+      box-shadow: 0 2px 8px #19ffc35a;
+      cursor: pointer;
+      transition: background 0.16s;
+    }
+    button:hover { background: #11bba4; }
+    .output {
+      min-height: 2em;
+      margin-top: 1.8em;
+      color: #ff8baf;
+      font-size: 1.13em;
+      letter-spacing:1.2px;
+    }
+    /* Add futuristic font */
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+  </style>
+</head>
+<body>
+  <div class="terminal-card">
+    <div class="neon-title">Access Point</div>
+    <form id="secureForm" autocomplete="off">
+      <label for="pwX">Password:</label>
+      <input type="password" id="pwX" />
+      <button type="submit"> log in </button>
+      <div class="output" id="outY"></div>
+    </form>
+    <div class="output" style="font-size:14px;color:#51f2a790;">
+      <!-- analysis is often required to decode the world -->
+    </div>
+  </div>
+  <script>
+    (function() {
+      var bait = 'nothingHere';
+      var _random_ = ['U2lsbHkt','Q3liZXIt','U3R1ZGVudA=='];
+      function c(x,y,z){return atob(x)+atob(y)+atob(z);}
+      let flag = c(_random_[0], _random_[1], _random_[2]);
+      document.getElementById('secureForm').onsubmit = function(e){
+        e.preventDefault();
+        let maybe = document.getElementById('pwX').value;
+        if(maybe === flag){
+            const outY = document.getElementById('outY');
+            outY.innerHTML = "";
+            var card = document.createElement('div');
+            card.style.display = "flex";
+            card.style.flexDirection = "column";
+            card.style.alignItems = "center";
+            card.style.justifyContent = "center";
+            card.style.background = "#13282cfa";
+            card.style.border = "2px solid #19ffc4";
+            card.style.borderRadius = "15px";
+            card.style.padding = "1.7em 2.6em";
+            card.style.margin = "1em 0";
+            card.style.boxShadow = "0 0 24px #19ffc480, 0 0 6px #6817e8";
+            card.style.animation = "fadein .8s ease";
+            var icon = document.createElement('span');
+            icon.textContent = "🟢";
+            icon.style.fontSize = "2.6em";
+            icon.style.marginBottom = "0.45em";
+            card.appendChild(icon);
+            var msg = document.createElement('div');
+            msg.textContent = "Authenticated! Welcome agent.";
+            msg.style.color = "#19ffc4";
+            msg.style.fontSize = "1.35em";
+            msg.style.fontFamily = "'Share Tech Mono', monospace";
+            msg.style.textAlign = "center";
+            card.appendChild(msg);
+            var btn = document.createElement('a');
+            btn.href = "Lobby/main.html";
+            btn.className = "quiz-link";
+            btn.textContent = "Enter Test Bank";
+            btn.style.display = "inline-block";
+            btn.style.marginTop = "1.3em";
+            btn.style.padding = "0.9em 2.2em";
+            btn.style.background = "#19ffc4";
+            btn.style.color = "#0f2822";
+            btn.style.borderRadius = "8px";
+            btn.style.fontSize = "1.1em";
+            btn.style.fontWeight = "bold";
+            btn.style.textDecoration = "none";
+            btn.style.boxShadow = "0 2px 12px #19ffc380";
+            btn.onmouseover = function() { btn.style.background = "#11bba4"; };
+            btn.onmouseout = function() { btn.style.background = "#19ffc4"; };
+            card.appendChild(btn);
+            outY.appendChild(card);
+        }else{
+          document.getElementById('outY').textContent = '🔴 Access Denied!';
+          document.getElementById('outY').style.color = "#ff8baf";
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
