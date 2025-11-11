@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multiple Choice Test</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(125deg, #d5f6e7 0%, #eafbee 100%);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    .quiz-container {
+      background: #f2fff8;
+      padding: 40px 36px 32px 36px;
+      max-width: 420px;
+      margin: 54px auto;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(41, 234, 143, .13), 0 1.5px 3px #b4edca;
+    }
+    .question {
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-bottom: 22px;
+      color: #289d4a;
+      letter-spacing: 0.5px;
+    }
+    #progress {
+      font-size: 0.98rem;
+      color: #349c59;
+      margin-bottom: 16px;
+      text-align: right;
+    }
+    .options {
+      margin-bottom: 20px;
+    }
+    .options button {
+      display: block;
+      margin: 10px 0;
+      width: 100%;
+      padding: 13px 0;
+      font-size: 1.07rem;
+      font-weight: 500;
+      background: #e4faed;
+      color: #289d4a;
+      border: 2px solid #b7eec6;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(.47,1.64,.41,.8);
+      outline: none;
+      box-shadow: 0 1.5px 6px #e0ffe4;
+    }
+    .options button:hover, .options button:focus {
+      background: #34c471;
+      color: #fff;
+      border-color: #289d4a;
+      transform: scale(1.03);
+      box-shadow: 0 2.5px 18px #c2f7cf;
+    }
+    #result {
+      margin-top: 10px;
+      font-weight: 700;
+      font-size: 1.08rem;
+      text-align: center;
+      color: #24642f;
+      opacity: 0.95;
+    }
+    .score {
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-align: center;
+      color: #289d4a;
+      margin-top: 38px;
+      margin-bottom: 10px;
+    }
+    .restart-btn {
+      margin: 16px auto 0;
+      padding: 13px 44px;
+      background: #289d4a;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: block;
+      transition: background 0.20s;
+      box-shadow: 0 2px 10px #b7eec6;
+    }
+    .restart-btn:hover {
+      background: #24642f;
+      color: #e4faed;
+    }
+    .back-btn {
+      margin: 24px auto 0;
+      padding: 12px 38px;
+      background: #289d4a;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: block;
+      transition: background 0.20s;
+      box-shadow: 0 2px 10px #b7eec6;
+    }
+    .back-btn:hover {
+      background: #24642f;
+      color: #e4faed;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <div id="progress"></div>
+    <div id="question" class="question"></div>
+    <div id="options" class="options"></div>
+    <div id="result"></div>
+  </div>
+  <button class="back-btn" onclick="window.location.href='main.html'">⬅ Back to Main Page</button>
+  <script>
+    const questions = [
+        {
+            question: "Objects are created from abstract data types that encapsulate __________ and __________ together.",
+            options: ["numbers, characters", "data, functions", "addresses, pointers", "integers, floating-point numbers", "None of these"],
+            answer: 1
+        },
+        {
+            question: "In OOP terminology, an object's member variables are often called its __________ and its member functions can be referred to as its behaviors or its __________.",
+            options: ["values, morals", "data, activities", "attributes, activities", "attributes, methods", "None of these"],
+            answer: 3
+        },
+        {
+            question: "A C++ class is similar to a(n)",
+            options: ["inline function", "header file", "library function", "structure", "None of these"],
+            answer: 3
+        },
+        {
+            question: "Where are class declarations usually stored?",
+            options: ["on separate disk volumes", "in their own header files", "in .cpp files, along with function definitions", "under pseudonyms", "None of these"],
+            answer: 1
+        },
+        {
+            question: "In a procedural program you typically have __________ stored in a collection of variables and a set of __________ that perform operations on the data.",
+            options: ["numbers, arguments", "parameters, arguments", "strings, operators", "data, functions", "None of these"],
+            answer: 3
+        },
+        {
+            question: "A class is a(n) __________ that is defined by the programmer.",
+            options: ["data type", "function", "method", "attribute", "None of these"],
+            answer: 0
+        },
+        {
+            question: "Examples of access specifiers are the key words",
+            options: ["near and far", "opened and closed", "private and public", "table and row", "None of these"],
+            answer: 2
+        },
+        {
+            question: "Which of the following is used to protect important data?",
+            options: ["the public access specifier", "the private access specifier", "the protect member function", "the class protection operator, @", "None of these"],
+            answer: 1
+        },
+        {
+            question: "When the body of a member function is defined inside a class declaration, it is said to be",
+            options: ["static", "global", "inline", "conditional", "None of these"],
+            answer: 2
+        },
+        {
+            question: "A __________ is a member function that is automatically called when a class object is __________.",
+            options: ["constructor, created", "destructor, created", "static function, deallocated", "utility function, declared", "None of these"],
+            answer: 0
+        },
+        {
+            question: "The constructor function's return type is",
+            options: ["int", "float", "char", "structure pointer", "None of these"],
+            answer: 4
+        },
+        {
+            question: "The destructor function's return type is",
+            options: ["int", "float", "char", "Nothing; destructors have no return type", "None of these"],
+            answer: 3
+        },
+        {
+            question: "When a constructor function accepts no arguments, or does not have to accept arguments because of default arguments, it is called a(n)",
+            options: ["empty constructor", "default constructor", "stand-alone function", "arbitrator function", "None of these"],
+            answer: 1
+        },
+        {
+            question: "When a constructor has a member initialization list, the initializations take place",
+            options: ["after any statements in the body of the constructor execute", "before any statements in the body of the constructor execute", "when a member is used in the execution of the program", "None of these"],
+            answer: 1
+        },
+        {
+            question: "In C++11 you can use __________ to initialize a member variable in its declaration statement.",
+            options: ["general member initialization", "default initialization", "in-place initialization", "initialization overload", "None of these"],
+            answer: 2
+        },
+        {
+            question: "The type of member function that may be called from a statement outside the class is",
+            options: ["public", "private", "undeclared", "global", "None of these"],
+            answer: 0
+        },
+        {
+            question: "If you do not declare an access specification, the default for members of a class is",
+            options: ["inline", "private", "public", "global", "None of these"],
+            answer: 1
+        },
+        {
+            question: "Members of the class object are accessed with the",
+            options: ["dot operator", "cin object", "extraction operator", "stream insertion operator", "None of these"],
+            answer: 0
+        },
+        {
+            question: "Assuming that Rectangle is a class name, what can you say is true, given the following statement? Rectangle *BoxPtr;",
+            options: ["The statement declares an object of the class Rectangle.", "The statement assigns the value of *BoxPtr to the object Rectangle.", "The statement defines a Rectangle pointer variable named *BoxPtr.", "The statement is illegal in C++.", "None of these"],
+            answer: 2
+        },
+        {
+            question: "When you dereference an object pointer, use the",
+            options: ["-> operator", "<> operator", "dot operator", "& operator", "None of these"],
+            answer: 0
+        },
+        {
+            question: "Which type of member function may only be called from a function that is a member of the same class?",
+            options: ["public", "private", "global", "local", "None of these"],
+            answer: 1
+        },
+        {
+            question: "The constructor function always has the same name as",
+            options: ["the first private data member", "the first public data member", "the class", "the first object of the class", "None of these"],
+            answer: 2
+        },
+        {
+            question: "Which of the following is automatically called when an object is destroyed?",
+            options: ["the constructor function", "the specification deallocator", "the destructor function", "the destruction function", "None of these"],
+            answer: 2
+        },
+        {
+            question: "How many default constructors can a class have?",
+            options: ["only one", "two or more", "only two", "any number", "None of these"],
+            answer: 0
+        },
+        {
+            question: "Objects in an array are accessed with __________.",
+            options: ["subscripts", "parentheses", "#include statements", "output format manipulators", "None of these"],
+            answer: 0
+        },
+        {
+            question: "The process of object-oriented analysis can be viewed as the following steps:",
+            options: ["identify objects, then define each object's attributes, behaviors, and relationships", "define data members and member functions, then assign the class name", "declare public and private variables, prototype functions, and then write code", "write the main() function, then determine which classes are needed", "None of these"],
+            answer: 0
+        },
+        {
+            question: "When a member function is defined outside of the class declaration, the function name must be qualified with the",
+            options: ["class name, followed by a semicolon", "name of the first object", "class name, followed by the scope resolution operator", "private access specifier", "None of these"],
+            answer: 2
+        },
+        {
+            question: "If a local variable and a global variable have the same name within the same program, the __________ resolution operator must be used.",
+            options: ["variable", "ambiguity", "scope", "global", "None of these"],
+            answer: 2
+        },
+        {
+            question: "For the following code, which statement is not true? (class Point...)",
+            options: ["x is available to code that is written outside the class.", "The name of the class is Point.", "x, y, and z are called members of the class.", "z is not available to code that is written outside the class.", "All of these are true."],
+            answer: 3
+        },
+        {
+            question: "The following code shows an example of __________ (class Point...)",
+            options: ["constructor delegation", "in-place initialization", "a default constructor creation", "an illegal initialization"],
+            answer: 1
+        },
+        {
+            question: "In C++11 you can have one constructor call another constructor in the same class by using",
+            options: ["constructor delegation", "in-place initialization", "a member initialization list", "None of these"],
+            answer: 0
+        },
+        {
+            question: "Assume that myCar is an instance of the Car class and that the Car class has a member function named accelerate. Which of the following is a valid call to the accelerate member function?",
+            options: ["Car -> accelerate();", "myCar::accelerate();", "myCar.accelerate();", "myCar:accelerate();", "None of these"],
+            answer: 2
+        },
+        {
+            question: "What is the output of the following program? (TestClass test;)",
+            options: ["the program runs but there is no output.", "0", "Hello!", "the program will not compile"],
+            answer: 2
+        },
+        {
+            question: "What is the output of the following program? (TestClass test(77);)",
+            options: ["the program runs but there is no output.", "77", "Hello!", "the program will not compile"],
+            answer: 1
+        },
+        {
+            question: "What is the output of the following program? (test.showVal();)",
+            options: ["the program runs but there is no output.", "77", "0", "the program will not compile"],
+            answer: 3
+        },
+        {
+            question: "Each object of a class has its own copy of the class's",
+            options: ["member functions", "member variables", "constructor and destructor functions", "All of these", "None of these"],
+            answer: 1
+        },
+        {
+            question: "The __________ member variable may be accessed before any objects of the class have been created.",
+            options: ["private", "public", "inline", "static", "None of these"],
+            answer: 3
+        },
+        {
+            question: "C++ requires that a copy constructor's parameter be a(n)",
+            options: ["integer data type", "floating-point data type", "pointer variable", "reference object", "None of these"],
+            answer: 3
+        },
+        {
+            question: "C++ allows you to redefine the way __________ work when used with class objects.",
+            options: ["compiler errors", "preprocessor directives", "standard operators", "undefined variables", "None of these"],
+            answer: 2
+        },
+        {
+            question: "When objects contain pointers, it is a good idea to create an explicit __________ function.",
+            options: ["destructor", "copy constructor", "static constructor", "inline constructor", "None of these"],
+            answer: 1
+        },
+        {
+            question: "A good reason to overload an operator is to enable it to",
+            options: ["outperform its C language counterparts", "work in its usual way, but with programmer-defined data types", "operate on more operands than in its standard definition", "operate on no operands", "None of these"],
+            answer: 1
+        },
+        {
+            question: "Which of the following operators may be used to assign one object to another?",
+            options: ["=", "==", "<>", "@", "None of these"],
+            answer: 0
+        },
+        {
+            question: "When a class contains an instance of another class, it is known as",
+            options: ["object overloading", "operator overloading", "object composition", "dynamic composition", "None of these"],
+            answer: 2
+        },
+        {
+            question: "If you do not furnish a(n) __________, an automatic memberwise copy will be performed when one object is assigned to another object.",
+            options: ["overloaded constructor function", "overloaded assignment operator", "default constructor function", "overloaded copy operator", "None of these"],
+            answer: 1
+        },
+        {
+            question: "It is a good idea to make a copy constructor's parameters __________ by specifying the __________ key word in the parameter list.",
+            options: ["inline, inline", "static, static", "constant, const", "global, global", "None of these"],
+            answer: 2
+        },
+        {
+            question: "If a member is declared __________, all objects of that class have access to that variable.",
+            options: ["static", "dynamic", "inline", "default", "None of these"],
+            answer: 0
+        },
+        {
+            question: "A member function that is declared __________ may not access any non-static data members in the class.",
+            options: ["private", "public", "static", "inline", "None of these"],
+            answer: 2
+        },
+        {
+            question: "Which type of function is not a member of a class but has access to the private members of the class?",
+            options: ["static", "constructor", "destructor", "friend", "None of these"],
+            answer: 3
+        },
+        {
+            question: "A(n) __________ is a special function that is called whenever a new object is created and initialized with another object's data.",
+            options: ["static function", "destructor", "copy constructor", "assignment function", "None of these"],
+            answer: 2
+        },
+        {
+            question: "If you do not furnish a __________, a default one will be provided by the compiler.",
+            options: ["constructor", "destructor", "copy constructor", "All of these", "None of these"],
+            answer: 3
+        },
+        {
+            question: "When you redefine the way a standard operator works when it is used with class objects, you have __________ the operator.",
+            options: ["reassigned", "reformatted", "overloaded", "referenced", "None of these"],
+            answer: 2
+        },
+        {
+            question: "In C++11 values that persist beyond the statement that created them and have names that make them accessible to other statements in the program are called",
+            options: ["rvalues", "lvalues", "temporary values", "semantics", "None of these"],
+            answer: 1
+        },
+        {
+            question: "In C++11 reference variables that can refer only to temporary objects that would otherwise have no name are called __________ and are declared with a __________.",
+            options: ["rvalues, ampersand (&)", "lvalues, ampersand (&)", "lvalues, double ampersand (&&)", "rvalues, double ampersand (&&)", "None of these"],
+            answer: 3
+        }
+    ];
+
+    // Shuffle questions before showing
+    shuffleQuestions(questions);
+
+    function shuffleQuestions(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    // --- New: Reference for next button ---
+    let nextButton;
+
+    function showQuestion() {
+      document.getElementById('progress').textContent =
+        `Question ${currentQuestion + 1} of ${questions.length}`;
+      const questionElement = document.getElementById('question');
+      const optionsElement = document.getElementById('options');
+      const resultElement = document.getElementById('result');
+
+      questionElement.innerHTML = questions[currentQuestion].question;
+      optionsElement.innerHTML = '';
+      resultElement.textContent = '';
+
+      questions[currentQuestion].options.forEach((option, i) => {
+        const btn = document.createElement('button');
+        btn.textContent = option;
+        btn.onclick = () => checkAnswer(btn, i);
+        optionsElement.appendChild(btn);
+      });
+
+      // Remove 'Next' button if it exists
+      if (nextButton && nextButton.parentNode) {
+        nextButton.parentNode.removeChild(nextButton);
+        nextButton = null;
+      }
+    }
+
+    function checkAnswer(button, selectedIndex) {
+      const resultElement = document.getElementById('result');
+      const correctIndex = questions[currentQuestion].answer;
+      if (selectedIndex === correctIndex-1) {
+        score++;
+        button.style.background = "#b0edac";
+        button.style.color = "#24642f";
+        resultElement.textContent = "🎉 Correct!";
+      } else {
+        button.style.background = "#f8b7b7";
+        button.style.color = "#ae2530";
+        resultElement.textContent = `❌ Wrong. Answer: "${questions[currentQuestion].options[correctIndex-1]}"`;
+      }
+      Array.from(document.querySelectorAll('.options button')).forEach(btn => btn.disabled = true);
+
+      // --- New: Create and show 'Next Question' button ---
+      if (!nextButton) {
+        nextButton = document.createElement('button');
+        nextButton.textContent = currentQuestion < questions.length - 1 ? "Next Question" : "Show Result";
+        nextButton.className = "restart-btn";
+        nextButton.onclick = () => {
+          currentQuestion++;
+          if (currentQuestion < questions.length) {
+            showQuestion();
+          } else {
+            showResult();
+          }
+        };
+        document.querySelector('.quiz-container').appendChild(nextButton);
+      }
+      // Adjust button text dynamically
+      nextButton.textContent = currentQuestion < questions.length - 1 ? "Next Question" : "Show Result";
+      nextButton.style.display = 'block';
+    }
+
+    function showResult() {
+      document.querySelector('.quiz-container').innerHTML =
+        `<div class="score">Your score: ${score} of ${questions.length}</div>
+        <button class="restart-btn" onclick="location.reload()">Restart Quiz</button>`;
+    }
+
+    showQuestion();
+  </script>
+</body>
+</html>
