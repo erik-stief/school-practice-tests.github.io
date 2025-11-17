@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Security Practice Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&family=Montserrat:wght@500;700&display=swap');
+    body {
+      font-family: 'Fira Mono', 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(115deg, #141c22 54%, #202530 100%);
+      margin: 0; min-height: 100vh;
+      color: #d2ffe9;
+      letter-spacing: 0.03em;
+      position: relative;
+      overflow-x: hidden;
+    }
+    .hub-container {
+      background: rgba(24,31,40,0.97);
+      border-radius: 19px;
+      box-shadow: 0 8px 24px 0 #10311a99, 0 2px 6px #1a253144;
+      padding: 45px 38px 32px 38px;
+      max-width: 485px;
+      margin: 64px auto;
+      border-top: 4px solid #09e889;
+      border-bottom: 4px solid #2dbe7f;
+      position: relative;
+    }
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.48rem;
+      color: #5dffa5;
+      text-align: center;
+      letter-spacing: 0.05em;
+      margin-bottom: 33px;
+      text-shadow: 0 4px 14px #15462088;
+      position: relative;
+    }
+    h1::after {
+      content: "_";
+      color: #09e889;
+      animation: blink 1.12s steps(1) infinite;
+      margin-left: 0.12em;
+      font-family: 'Fira Mono', monospace;
+      font-size: 1.15em;
+    }
+    @keyframes blink { 0%,100% { opacity:1 } 50% { opacity:0 } }
+    .quiz-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .quiz-list li {
+      margin-bottom: 22px;
+      position: relative;
+    }
+    .quiz-link {
+      display: block;
+      padding: 15px;
+      font-size: 1.17rem;
+      letter-spacing: 0.01em;
+      background: linear-gradient(95deg, #1a2631 62%, #1c352b 100%);
+      color: #b1fff3;
+      border: 2px solid #24332c;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px #10513f53;
+      font-family: 'Fira Mono', 'Montserrat', monospace;
+      font-weight: 500;
+      transition: all 0.16s cubic-bezier(0.55,1.6,0.32,0.92);
+      text-align: center;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .quiz-link:before {
+      content: "🔒";
+      color: #0fe586;
+      font-family: 'Fira Mono', monospace;
+      font-weight: 700;
+      position: absolute;
+      left: 14px; top: 13px;
+      font-size: 1.18em;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+    .quiz-link:hover, .quiz-link:focus {
+      background: linear-gradient(94deg,#203f2e 36%,#097f5b 99%);
+      color: #47d76a;
+      border-color: #1aecad;
+      box-shadow: 0 4px 22px #09e88945, 0 0.5px 4px #11382b;
+      transform: translateY(-2px) scale(1.04);
+    }
+    .quiz-link:active {
+      box-shadow: none;
+      transform: scale(1);
+    }
+    .credit {
+      text-align: center;
+      font-size: 0.93rem;
+      color: #0fe586;
+      margin-top: 31px;
+      font-family: 'Fira Mono', 'Montserrat', monospace;
+      opacity: 0.91;
+      letter-spacing: 0.06em;
+    }
+    /* Subtle animated code rain background - greenish tint */
+    .code-rain {
+      pointer-events: none;
+      position: fixed;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      opacity: 0.17;
+      mix-blend-mode: lighten;
+    }
+  </style>
+</head>
+<body>
+  <canvas class="code-rain"></canvas>
+  <div class="hub-container">
+    <h1>Security Concepts Hub</h1>
+    <ul class="quiz-list">
+      <li><a href="Security/security_midterm_practice.html" class="quiz-link">Midterm Practice</a></li>
+      <li><a href="Security/security_quiz_2.html" class="quiz-link">Quiz 2 Practice</a></li>
+    </ul>
+    <div class="credit">Infosec ✦ Hosted with GitHub Pages</div>
+  </div>
+  <script>
+    // Minimal "code rain" animation - green themed
+    const canvas = document.querySelector('.code-rain');
+    const ctx = canvas.getContext('2d');
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+    let fontSize = 21, columns, drops;
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      columns = Math.floor(canvas.width / fontSize);
+      drops = Array.from({length: columns}, () => Math.random()*canvas.height/fontSize|0);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+    function draw() {
+      ctx.fillStyle = 'rgba(10,25,16, 0.29)';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.font = fontSize+"px 'Fira Mono','Consolas',monospace";
+      for(let i=0; i<drops.length; i++) {
+        const text = letters[Math.floor(Math.random()*letters.length)];
+        ctx.fillStyle = "#13ff92";
+        ctx.globalAlpha = 0.17 + 0.4*Math.random();
+        ctx.fillText(text, i*fontSize, drops[i]*fontSize);
+        ctx.globalAlpha = 1;
+        drops[i]++;
+        if(drops[i]*fontSize > canvas.height && Math.random() > 0.977)
+          drops[i]=0;
+      }
+    }
+    setInterval(draw, 58);
+  </script>
+</body>
+</html>
