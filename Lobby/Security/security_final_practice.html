@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multiple Choice Test</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(135deg, #151a2b 0%, #212844 100%);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      /* Simulate static interference */
+     background:
+      linear-gradient(135deg, #151a2b 0%, #212844 100%),
+      repeating-linear-gradient(
+        45deg,
+        rgba(24, 31, 53, .5) 0,
+        rgba(24, 31, 53, .5) 1px,
+        transparent 1px,
+        transparent 6px
+      );
+    }
+    .quiz-container {
+      background: rgba(29, 37, 59, 0.92);
+      padding: 42px 36px 34px 36px;
+      max-width: 420px;
+      margin: 62px auto;
+      border-radius: 18px;
+      box-shadow: 0 0 40px 0 #28ffbf88, 0 1.5px 3px #2464a388;
+      border: 2.5px solid #2cffcfcc;
+      position: relative;
+      overflow: hidden;
+    }
+    .quiz-container:before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: .09;
+      background-color: #00a669;
+      background-image: url(http://www.transparenttextures.com/patterns/diagmonds.png);
+      pointer-events: none;
+    }
+    .question {
+      font-weight: 700;
+      font-size: 1.18rem;
+      margin-bottom: 22px;
+      color: #24ffc8;
+      letter-spacing: 1.2px;
+      text-shadow: 0 1.5px 5px #28ffd3bb;
+    }
+    #progress {
+      font-size: 0.99rem;
+      color: #7afffd;
+      margin-bottom: 14px;
+      text-align: right;
+      text-shadow: 0 1px 5px #1bfcff44;
+    }
+    .options {
+      margin-bottom: 20px;
+    }
+    .options button {
+      display: block;
+      margin: 11px 0;
+      width: 100%;
+      padding: 14px 0;
+      font-size: 1.07rem;
+      font-weight: 600;
+      background: #232b44;
+      color: #27ffbb;
+      border: 2.5px solid #27ffbb;
+      border-radius: 11px;
+      cursor: pointer;
+      outline: none;
+      box-shadow: 0 2px 24px #07ffeb44, 0 1.5px 6px #1bfcff22;
+      transition: all 0.19s cubic-bezier(.47,1.64,.41,.8);
+      position: relative;
+    }
+    .options button:hover,
+    .options button:focus {
+      background: #0cf;
+      color: #191e31;
+      border-color: #1474ff;
+      box-shadow: 0 3px 36px #63fffddd;
+      transform: scale(1.04);
+    }
+    .options button:active {
+      box-shadow: 0 2px 16px #560fcf77;
+    }
+    #result {
+      margin-top: 11px;
+      font-weight: 700;
+      font-size: 1.08rem;
+      text-align: center;
+      color: #00ffd0;
+      opacity: 0.99;
+      text-shadow: 0 1.5px 8px #0ffdaa;
+    }
+    .score {
+      font-size: 1.34rem;
+      font-weight: 700;
+      text-align: center;
+      color: #03fff0;
+      margin-top: 37px;
+      margin-bottom: 13px;
+      text-shadow: 0 2px 12px #0fffbc88;
+    }
+    .restart-btn, .back-btn {
+      margin: 18px auto 0;
+      padding: 13px 44px;
+      background: #1bfcff;
+      color: #12151b;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: block;
+      transition: background 0.18s;
+      box-shadow: 0 2px 14px #07ffeb99;
+      text-shadow: 0 1px 8px #09fff199;
+    }
+    .restart-btn:hover, .back-btn:hover {
+      background: #27ffbb;
+      color: #171d31;
+    }
+
+    @media (max-width: 500px) {
+      .quiz-container {
+        padding: 16px 6px;
+        max-width: 97vw;
+        font-size: 0.98rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <div id="progress"></div>
+    <div id="question" class="question"></div>
+    <div id="options" class="options"></div>
+    <div id="result"></div>
+  </div>
+  <button class="back-btn" onclick="window.location.href='main.html'">⬅ Back to Main Page</button>
+  <script>
+    const questions = [
+        {
+                question: "The Business Impact Analysis (BIA) is identified as which phase of developing the Contingency Plan (CP)?",
+                options: ["Phase two.", "Phase zero.", "Phase three.", "Phase one.", "The final phase."],
+                answer: 3
+        },
+        {
+                question: "Which of the following is an accurate comparison between Risk Assessment (RA) and Business Impact Analysis (BIA)?",
+                options: ["BIA is proactive, and RA is reactive.", "They are independent processes with no interaction.", "RA is proactive, and BIA is reactive.", "Both are classified as proactive methodologies.", "BIA replaces RA when establishing criticality."],
+                answer: 2
+        },
+        {
+                question: "The BIA process begins with which fundamental step or document?",
+                options: ["A list of prioritized threats.", "A definitions table.", "The completion of the potential damage assessment.", "Subordinate plan classification.", "A group session interview."],
+                answer: 1
+        },
+        {
+                question: "During which BIA step is the estimated cost of the best, worst, and most likely cases determined?",
+                options: ["Threat attack identification and prioritization.", "Business unit analysis.", "Subordinate plan classification.", "Attack success scenario development.", "Potential damage assessment."],
+                answer: 4
+        },
+        {
+                question: "What is the result of the 'Attack success scenario development' step in the BIA process?",
+                options: ["The updated threat list.", "The Recovery Time Objectives (RTO).", "The BIA summary sheet.", "The attack scenario end case.", "The definitions table."],
+                answer: 3
+        },
+        {
+                question: "What does RTO stand for in the context of disaster recovery planning?",
+                options: ["Response Time Objectives.", "Recovery Training Outcomes.", "Restoration Team Operations.", "Recovery Time Objectives.", "Risk Tolerance Oversight."],
+                answer: 3
+        },
+        {
+                question: "Which category in the BIA scoring key signifies 'Mission critical; restore first'?",
+                options: ["Blue.", "Yellow.", "Green.", "Orange.", "Red."],
+                answer: 4
+        },
+        {
+                question: "According to the BIA scoring key, which classification represents systems that are 'Moderately critical' and should be restored 'in the third wave'?",
+                options: ["Red.", "Yellow.", "Orange.", "Green.", "Blue."],
+                answer: 1
+        },
+        {
+                question: "If a system is classified as 'Blue' in the BIA scoring key, what does this indicate?",
+                options: ["It is highly critical and requires immediate attention.", "It is a support system that is nice to have and should be restored when possible.", "It is moderately critical and must be restored in the third wave.", "It requires a specialized questionnaire to assess its impact.", "It represents an intangible loss."],
+                answer: 1
+        },
+        {
+                question: "The BIA goal is to determine how critical an application/system/process is relative to what?",
+                options: ["The total gross revenue.", "The definitions table.", "The Recovery Time Objectives (RTO).", "Other assets.", "The attack scenario end case."],
+                answer: 3
+        },
+        {
+                question: "Which of the following is considered an Intangible Loss, according to the sources?",
+                options: ["Cost of money.", "Hardware replacement costs.", "Environmental Release.", "Financial impact of disruption.", "Lost customers."],
+                answer: 2
+        },
+        {
+                question: "How is the 'Value of one day’s outage' calculated based on the information provided?",
+                options: ["Total gross revenue multiplied by 264.", "Total gross revenue minus 264 (working days in a year).", "Total gross revenue divided by 264 (working days in a year).", "Total profit divided by the worst-case scenario cost.", "Total gross revenue plus 264."],
+                answer: 2
+        },
+        {
+                question: "One of the listed advantages (Pros) of using the One-on-one interview approach for BIA is that it allows for the establishment of what?",
+                options: ["Shorter recovery time windows.", "Economic or financial impact assessments.", "Efficient use of time for all participants.", "A personal rapport.", "The standardized threat list."],
+                answer: 3
+        },
+        {
+                question: "What is listed as a disadvantage (Con) of using the Group session approach for BIA?",
+                options: ["It prevents the observation of individuals.", "It is time-consuming for the overall BIA timeline.", "It requires lots of time per participant.", "It fails to establish a personal rapport.", "It focuses too much on emotional understanding."],
+                answer: 2
+        },
+        {
+                question: "Quantitative questions in BIA questionnaires are designed to consider and describe the impact of disruption in what way?",
+                options: ["Emotional understanding.", "Identification, reaction, and recovery.", "Economic or financial.", "Reputation and customer loss.", "Health and safety."],
+                answer: 2
+        },
+        {
+                question: "Qualitative questions in BIA questionnaires ask about emotional understanding, which can potentially lead to what outcome?",
+                options: ["Longer recovery time windows.", "The use of specialized questions.", "Higher financial impact estimates.", "Shorter recovery time windows.", "A decrease in the number of working days per year."],
+                answer: 3
+        },
+        {
+                question: "Specialized questions in BIA questionnaires are customized to the organization to help understand impacts such as lost customers, cost of money, and what else?",
+                options: ["RTO.", "Restoration.", "Health/Safety.", "Reputation.", "Response."],
+                answer: 3
+        },
+        {
+                question: "The step 'Subordinate plan classification' takes into account which three factors regarding an attack?",
+                options: ["Cost of money, lost customers, and reputation.", "Response, recovery, and restoration.", "Economic, financial, and emotional impact.", "Identification, reaction, and recovery.", "Best case, worst case, and most likely case."],
+                answer: 3
+        },
+        {
+                question: "The costs included in the 'Attack success scenario development' step must account for the actions of which group?",
+                options: ["The executives.", "The auditors.", "The insurance team.", "The response team.", "The competitors."],
+                answer: 3
+        },
+        {
+                question: "What are the three distinct phases of disaster recovery planning?",
+                options: ["Identification, reaction, and recovery.", "Response, recovery, and restoration.", "Proactive, reactive, and comparative.", "Red, Orange, and Yellow.", "Planning, Implementation, and Maintenance."],
+                answer: 1
+        },
+        {
+                question: "An organization is considered to have experienced an incident when it is unable to control the impact, the damage level is severe, and the organization cannot recover quickly. What is the organization unable to control during this event?",
+                options: ["The cost of recovery.", "The damage to personnel.", "The pace of external response.", "The impact of the incident."],
+                answer: 3
+        },
+        {
+                question: "Disasters are classified based on several factors, including whether they are natural or man-made. Which other classification criterion is explicitly mentioned?",
+                options: ["Location.", "Speed.", "Cost.", "Magnitude."],
+                answer: 1
+        },
+        {
+                question: "Which type of secondary site is characterized by being a fully configured facility and is typically the most expensive option?",
+                options: ["Cold site.", "Warm site.", "Mobile site.", "Hot site."],
+                answer: 3
+        },
+        {
+                question: "A Warm site is a secondary facility that is less expensive than a Hot site. What key component is often excluded from a Warm site setup?",
+                options: ["Heating and cooling systems.", "Basic utilities.", "Software.", "Hardware infrastructure."],
+                answer: 2
+        },
+        {
+                question: "What type of secondary site is characterized by only having AC, Heat, and electricity, making it the cheapest option?",
+                options: ["Warm site.", "Cold site.", "Timeshare site.", "Mobile site."],
+                answer: 1
+        },
+        {
+                question: "A shared-use secondary site that involves a contract between organizations to provide facilities is known by what term?",
+                options: ["Timeshare.", "Service bureau.", "Mutual agreement.", "Electronic vaulting."],
+                answer: 2
+        },
+        {
+                question: "What term describes the off-site data storage method where duplicate data is stored?",
+                options: ["Electronic vaulting.", "Remote journaling.", "Database shadowing.", "Bulk batch transfer."],
+                answer: 2
+        },
+        {
+                question: "Which method of off-site data storage involves the transfer of live transactions?",
+                options: ["Remote journaling.", "Electronic vaulting.", "Database shadowing.", "Mutual agreement."],
+                answer: 0
+        },
+        {
+                question: "The Continuous Planning (CP) timeline begins with the Incident Response Plan (IRP). If incident detection reveals a disaster, where does the plan transition next?",
+                options: ["Business Continuity Planning (BCP).", "Disaster Recovery Plan (DRP).", "Alternate site operations.", "Incident recovery."],
+                answer: 1
+        },
+        {
+                question: "When a disaster requires off-site operations, the Disaster Recovery Plan (DRP) reaction phase transitions the organization into which subsequent plan?",
+                options: ["Incident Recovery Plan.", "Business Continuity Plan (BCP).", "Disaster Maintenance Phase.", "Primary Site Restoration."],
+                answer: 1
+        },
+        {
+                question: "The CP team includes a Champion, a Project Manager, and Team members. Which type of manager is listed among the roles for the Team members?",
+                options: ["Administrative.", "Logistics.", "Business.", "Security operations."],
+                answer: 2
+        },
+        {
+                question: "When developing the disaster recovery planning team, the team requires a high-level manager who can exert influence, ideally the CEO or a designee. What is this role called?",
+                options: ["Project Manager.", "Information Security Manager.", "Business Manager.", "Champion.", "Team Member."],
+                answer: 3
+        },
+        {
+                question: "The planning strategy used to document the Attack Success Scenario Development includes Methodology and Broad consequences. What is the third included element?",
+                options: ["Scope.", "Indicators.", "Timeline.", "Personnel."],
+                answer: 1
+        },
+        {
+                question: "Many businesses choose to combine the DRP and BCP into a single document. This combined plan must support reestablishment of operations immediately at what location?",
+                options: ["The primary site.", "The vendor site.", "The alternate site.", "The recovery center."],
+                answer: 2
+        },
+        {
+                question: "Which of the following is *not* listed as one of the six strategies for testing contingency plans?",
+                options: ["Desk checks.", "Structured walkthrough.", "System integration.", "Parallel testing."],
+                answer: 2
+        },
+        {
+                question: "The practice of Continuous Improvement, where iteration results in improvement, is also known by what acronym?",
+                options: ["SETA.", "IRP.", "CPI.", "DRP."],
+                answer: 2
+        },
+        {
+                question: "What does the acronym SETA stand for, referring to user training?",
+                options: ["Security Education Training and Awareness.", "System Entry Tool Access.", "Scenario Evaluation and Test Assessment.", "System Education and Technical Administration."],
+                answer: 0
+        },
+        {
+                question: "One of the key instructional points for users in the training phase is how to report an incident. Which other key instruction is provided regarding an attack?",
+                options: ["How to ignore the attack.", "How to recognize an attack.", "How to analyze the attack.", "How to track the attacker."],
+                answer: 1
+        },
+        {
+                question: "Which training method is categorized as 'CBT'?",
+                options: ["One-on-one.", "Formal class.", "Computer-based training.", "On-the-job training."],
+                answer: 2
+        },
+        {
+                question: "According to the DRP 8 Steps, which activity is designated as the final phase (Step 8)?",
+                options: ["Documenting the policies and procedures.", "Implementing the disaster recovery plan.", "Testing and rehearsing the plan.", "Maintenance phase."],
+                answer: 3
+        },
+        {
+                question: "Which Contingency Planning (CP) component focuses on immediate response to an event?",
+                options: ["Disaster Recovery Planning (DRP).", "Business Continuity Planning (BCP).", "Incident Response Planning (IRP).", "After Action Review (AAR)."],
+                answer: 2
+        },
+        {
+                question: "What is the primary focus of Disaster Recovery Planning (DRP)?",
+                options: ["Establishing operations at an alternate site.", "Restoring operations at the primary site after disasters occur.", "Reviewing law enforcement involvement.", "Documenting who/what/where/when/why/how."],
+                answer: 1
+        },
+        {
+                question: "The establishment of operations at an alternate site is facilitated by which planning component?",
+                options: ["Incident Response Planning (IRP).", "Disaster Recovery Planning (DRP).", "Business Continuity Planning (BCP).", "Incident Recovery (IR) team."],
+                answer: 2
+        },
+        {
+                question: "Which of the following teams is explicitly listed as a component of CP Operations?",
+                options: ["The Crisis Management team.", "The Risk Assessment team.", "The Disaster Recovery (DR) team.", "The Physical Security team."],
+                answer: 2
+        },
+        {
+                question: "Incident Response Plan (IRP) procedures are designed to anticipate, detect, and what else regarding the impact of an incident?",
+                options: ["Exacerbate.", "Maximize.", "Mitigate.", "Transfer."],
+                answer: 2
+        },
+        {
+                question: "Incident detection indicators are classified into which three categories?",
+                options: ["Minor, major, and critical.", "Possible, probable, and definite.", "High, medium, and low.", "Internal, external, and blended."],
+                answer: 1
+        },
+        {
+                question: "When an incident is declared, what mechanism is used to notify key personnel?",
+                options: ["Alert Roster.", "Risk Matrix.", "Impact Analysis.", "Standard Operating Procedure."],
+                answer: 0
+        },
+        {
+                question: "Which term describes a detailed examination of events, including a review of one’s own actions and the Incident Response (IR) plan?",
+                options: ["Contingency Planning.", "Business Continuity Planning.", "Disaster Recovery Planning.", "After action review (AAR)."],
+                answer: 3
+        },
+        {
+                question: "According to the sources, when should documentation of an incident (Who/what/where/when/why/how) begin?",
+                options: ["After the incident is completely resolved.", "Only if law enforcement gets involved.", "When the incident is declared ('start now').", "During the After action review (AAR)."],
+                answer: 2
+        },
+        {
+                question: "Law enforcement becomes involved in an incident when which condition is met?",
+                options: ["When the financial loss exceeds a certain threshold.", "When the incident violates the law.", "When physical damage occurs.", "When the Business Continuity Plan is activated."],
+                answer: 1
+        },
+        {
+                question: "The CP Operations include the Business Continuity Plan (BC) team, the CP team, the Incident Recovery (IR) team, and which other team focusing on site restoration?",
+                options: ["The Incident Response team.", "The Disaster Recovery (DR) team.", "The Public Relations team.", "The Information Security team."],
+                answer: 1
+        },
+        {
+                question: "Which component of Contingency Planning (CP) ensures operations can be established away from the primary site?",
+                options: ["IRP.", "AAR.", "DRP.", "BCP."],
+                answer: 3
+        },
+        {
+                question: "The Incident Response Plan (IRP) is defined by procedures that anticipate, detect, and mitigate what aspect of an event?",
+                options: ["The cost.", "The impact.", "The recovery time.", "The legal ramifications."],
+                answer: 1
+        },
+        {
+                question: "In addition to the Alert Roster, what specific message type is used to notify personnel when an incident is declared?",
+                options: ["Alert Status Report.", "Alert Notification.", "Alert Message.", "Alert Declaration."],
+                answer: 2
+        },
+        {
+                question: "The documentation process requires recording who, what, where, when, why, and what else?",
+                options: ["How.", "Cost.", "Duration.", "Severity."],
+                answer: 0
+        },
+        {
+                question: "The After action review (AAR) involves a detailed examination of events and a review of which specific plan?",
+                options: ["The BCP.", "The DRP.", "The IR plan.", "The financial budget."],
+                answer: 2
+        },
+        {
+                question: "Contingency Planning (CP) is composed of which three main planning components?",
+                options: ["IRP, DRP, and BCP.", "AAR, IR team, and DR team.", "CP team, IR team, and BC team.", "Alert Roster, Alert Message, and Documentation."],
+                answer: 0
+        },
+        {
+                question: "If an incident detection indicator is classified as 'probable,' what is another classification mentioned in the sources?",
+                options: ["Contingent.", "Absolute.", "Definite.", "Suspected."],
+                answer: 2
+        },
+        {
+                question: "Which team listed under CP Operations is generally associated with procedures focused on the immediate response?",
+                options: ["Business Continuity Plan (BC) team.", "Disaster Recovery (DR) team.", "Contingency Planning (CP) team.", "Incident Recovery (IR) team."],
+                answer: 3
+        },
+        {
+                question: "The Disaster Recovery Planning (DRP) focuses on restoring operations at which location?",
+                options: ["The alternate site.", "The primary site.", "The hot site.", "The cold site."],
+                answer: 1
+        },
+        {
+                question: "According to the source material, which entity is responsible for assembling the Disaster Recovery (DR) Team?",
+                options: ["DR Manager.", "CPMT.", "Information Security Department.", "Logistics Team."],
+                answer: 1
+        },
+        {
+                question: "Which specialised team within the Disaster Recovery structure is responsible for determining the extent of damage to the network?",
+                options: ["Communications team.", "Computer recovery (hardware) team.", "Network recovery team.", "Damage assessment/salvage team."],
+                answer: 2
+        },
+        {
+                question: "Which of the following teams acts as the voice of management, providing feedback and desired information during a disaster recovery effort?",
+                options: ["Business interface.", "Vendor contact team.", "Logistics team.", "Communications team."],
+                answer: 3
+        },
+        {
+                question: "The team responsible for reestablishing systems during recovery is known as the:",
+                options: ["Applications recovery team.", "Storage recovery team.", "Computer recovery (hardware) team.", "Damage assessment/salvage team."],
+                answer: 2
+        },
+        {
+                question: "What is the primary responsibility of the Storage recovery team?",
+                options: ["To recover information and reestablish operations.", "To replace destroyed assets.", "To reintegrate users.", "To provide supplies and space."],
+                answer: 0
+        },
+        {
+                question: "The Applications recovery team is responsible for recovering applications and performing what other key function?",
+                options: ["Conducting forensic analysis.", "Reintegrating users.", "Determining network damage.", "Providing high-level management influence."],
+                answer: 1
+        },
+        {
+                question: "Which DR team works specifically with external parties to replace destroyed assets?",
+                options: ["Business interface.", "Logistics team.", "Vendor contact team.", "Damage assessment/salvage team."],
+                answer: 2
+        },
+        {
+                question: "The Damage assessment/salvage team provides what specific information during a recovery effort?",
+                options: ["Forecasts of recovery time.", "Assessments of damage to assets.", "Feedback from senior management.", "The official after-action report."],
+                answer: 1
+        },
+        {
+                question: "Which team is responsible for assisting the rest of the organisation with non-technical functions during recovery?",
+                options: ["Logistics team.", "Business interface.", "Corporate support.", "InfoSec managers."],
+                answer: 1
+        },
+        {
+                question: "Providing supplies, space, materials, and food are the responsibilities of which dedicated DR team?",
+                options: ["Damage assessment/salvage team.", "Vendor contact team.", "Logistics team.", "Facilities team."],
+                answer: 2
+        },
+        {
+                question: "Which of the following groups must have representatives on the DR team, according to the sources?",
+                options: ["HR specialists.", "Law enforcement.", "Senior management.", "Marketing personnel."],
+                answer: 2
+        },
+        {
+                question: "As part of the necessary documentation and equipment required for the DR team, what special roster is listed in the sources?",
+                options: ["Asset catalogue.", "Risk analysis.", "Alert roster.", "Vendor contract list."],
+                answer: 2
+        },
+        {
+                question: "What is the first step in the 7-Step NIST Disaster Recovery Plan?",
+                options: ["Review the business impact analysis (BIA).", "Identify preventive controls.", "Develop the DR planning policy statement.", "Create DR contingency strategies."],
+                answer: 2
+        },
+        {
+                question: "After reviewing the business impact analysis (BIA), what is the next step in the NIST Disaster Recovery Plan process?",
+                options: ["Identify preventive controls.", "Develop the DR plan.", "Ensure DR plan testing, training, and exercises.", "Ensure DR plan maintenance."],
+                answer: 0
+        },
+        {
+                question: "Which of the following elements must be contained within the DR policy?",
+                options: ["Ransomware remediation strategy.", "Purpose.", "Detailed budget breakdown.", "CEO personal contact details."],
+                answer: 1
+        },
+        {
+                question: "When developing the DR Plan Document, what specific factor must be decided upon that makes management act?",
+                options: ["A budget ceiling.", "A trigger.", "A restoration timeline.", "A primary site selection."],
+                answer: 1
+        },
+        {
+                question: "What activity is conducted by the DR team after the disaster, following the restoration of lost or damaged assets?",
+                options: ["Creation of the BIA.", "Forensic analysis.", "Standing down.", "Developing a new policy statement."],
+                answer: 1
+        },
+        {
+                question: "When the Disaster Recovery (DR) plan and the Business Continuity (BC) plan are combined, they are referred to as a:",
+                options: ["Business resumption plan.", "Interim operations report.", "Contingency management statement.", "Integrated systems manual."],
+                answer: 0
+        },
+        {
+                question: "The restoration phase of disaster recovery begins once what critical prerequisite is accomplished?",
+                options: ["The alternate site is operational.", "All vendors have been contacted.", "The CEO has approved the budget.", "All damage assessments are accomplished."],
+                answer: 3
+        },
+        {
+                question: "What phase is noted as being absent from DR planning, although the probability of its necessity can be minimized by planning?",
+                options: ["Restoration phase.", "Testing phase.", "Prevention phase.", "Communication phase."],
+                answer: 2
+        },
+        {
+                question: "What is highlighted as the most important part of Disaster Recovery Planning (DRP)?",
+                options: ["Defining the business continuity plan.", "Data and application resumption.", "Testing the plan and procedures.", "Creating a comprehensive archive.", "Assigning roles and responsibilities."],
+                answer: 2
+        },
+        {
+                question: "Which type of DRP test involves teams verbally going through steps and is described as the least time-consuming?",
+                options: ["Real-time testing.", "Component testing.", "Tabletop walkthroughs.", "Disaster simulations.", "Full failover testing."],
+                answer: 2
+        },
+        {
+                question: "Which type of testing executes the total disaster recovery plan and requires the most time and resources?",
+                options: ["Component testing.", "Environment segment testing.", "Real-time testing.", "Tabletop walkthroughs.", "Full failover testing."],
+                answer: 4
+        },
+        {
+                question: "Which testing type involves testing parts of the environment and is executed at different times throughout the year?",
+                options: ["Component testing.", "Environment segment testing.", "Real-time testing.", "Full failover testing.", "Disaster simulations."],
+                answer: 0
+        },
+        {
+                question: "Which type of testing involves testing segments of the environment together, such as groups like routers and firewalls?",
+                options: ["Component testing.", "Real-time testing.", "Full failover testing.", "Environment segment testing.", "Tabletop walkthroughs."],
+                answer: 3
+        },
+        {
+                question: "The Business Resumption (BR) plan contains which two other essential plans?",
+                options: ["RPO and RTO.", "BC and RTO.", "DR and BC.", "RPO and DR.", "CDP and SAN."],
+                answer: 2
+        },
+        {
+                question: "What is defined as a snapshot of data from a point in time, which can be online, disk, or tape?",
+                options: ["Continuous Data Protection (CDP).", "Archive.", "Data backups.", "Disk mirroring.", "Operational backups."],
+                answer: 2
+        },
+        {
+                question: "Long-term document or data file storage, usually for legal/regulatory purposes, is known as what?",
+                options: ["Snapshot.", "Data backup.", "Operational backup.", "Archive.", "Disk imaging."],
+                answer: 3
+        },
+        {
+                question: "According to the databackup policy outlined in the sources, how often should data files and critical systems be backed up?",
+                options: ["WEEKLY.", "MONTHLY.", "ANNUALLY.", "DAILY.", "BI-WEEKLY."],
+                answer: 3
+        },
+        {
+                question: "Which backup technique involves data being automatically saved every time a change is made?",
+                options: ["Disk mirroring.", "Continuous data protection (CDP).", "Full backup.", "Incremental backup.", "Differential backup."],
+                answer: 1
+        },
+        {
+                question: "Which backup technique is defined as a bit-by-bit copy of all data on the disk?",
+                options: ["Incremental backup.", "Continuous data protection (CDP).", "Differential backup.", "Disk mirroring.", "Archive."],
+                answer: 3
+        },
+        {
+                question: "How often should organizations test their backups and recovery solutions, according to the backup/recovery checklist?",
+                options: ["At least annually.", "As often as every month.", "Every quarter.", "Every six months.", "Only during full failover testing."],
+                answer: 1
+        },
+        {
+                question: "Which tool listed in the sources is a disk imaging solution?",
+                options: ["Veritas NetBackup.", "Norton online backup.", "Handy Backup Server.", "Syncplicity.", "Norton ghost."],
+                answer: 4
+        },
+        {
+                question: "Which storage solution is hard disk-based, uses an Ethernet Connection, and is described as low-cost and high-density?",
+                options: ["CD-ROM.", "SAN (Storage Area Network).", "Tape drive.", "NAS (Network Attached Storage).", "External hard drive."],
+                answer: 3
+        },
+        {
+                question: "Which storage solution is a high-speed subnetwork used for large amounts of data, supporting both storage and data recovery?",
+                options: ["NAS (Network Attached Storage).", "Tape drive.", "USB drive.", "SAN (Storage Area Network).", "CD-ROM."],
+                answer: 3
+        },
+        {
+                question: "Which type of backup stores a copy of all data to a tape backup or any other magnetic data?",
+                options: ["DIFFERENTIAL.", "INCREMENTAL.", "FULL.", "CDP.", "Snapshot."],
+                answer: 2
+        },
+        {
+                question: "Which type of backup backs up every file on the drive that has been added or changed since the last full backup?",
+                options: ["INCREMENTAL.", "DIFFERENTIAL.", "FULL.", "CDP.", "Disk imaging."],
+                answer: 1
+        },
+        {
+                question: "Which type of backup backs up files that have been modified since the last backup operation?",
+                options: ["FULL.", "DIFFERENTIAL.", "INCREMENTAL.", "Snapshot.", "CDP."],
+                answer: 2
+        },
+        {
+                question: "How long should operational backups typically be stored?",
+                options: ["1-7 years.", "Less than 7 days.", "30-90 days.", "One year.", "Only until the next backup runs."],
+                answer: 2
+        },
+        {
+                question: "Which objective measures the amount of data that an organization can afford to lose if a disaster or outage occurs?",
+                options: ["RTO (Recovery Time Objective).", "CDP (Continuous Data Protection).", "DRP (Disaster Recovery Plan).", "RPO (Recovery Point Objective).", "BC (Business Continuity)."],
+                answer: 3
+        }
+    ];
+
+    // Shuffle questions before showing
+    shuffleQuestions(questions);
+
+    function shuffleQuestions(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    // --- New: Reference for next button ---
+    let nextButton;
+
+    function showQuestion() {
+      document.getElementById('progress').textContent =
+        `Question ${currentQuestion + 1} of ${questions.length}`;
+      const questionElement = document.getElementById('question');
+      const optionsElement = document.getElementById('options');
+      const resultElement = document.getElementById('result');
+
+      questionElement.innerHTML = questions[currentQuestion].question;
+      optionsElement.innerHTML = '';
+      resultElement.textContent = '';
+
+      questions[currentQuestion].options.forEach((option, i) => {
+        const btn = document.createElement('button');
+        btn.textContent = option;
+        btn.onclick = () => checkAnswer(btn, i);
+        optionsElement.appendChild(btn);
+      });
+
+      // Remove 'Next' button if it exists
+      if (nextButton && nextButton.parentNode) {
+        nextButton.parentNode.removeChild(nextButton);
+        nextButton = null;
+      }
+    }
+
+    function checkAnswer(button, selectedIndex) {
+      const resultElement = document.getElementById('result');
+      const correctIndex = questions[currentQuestion].answer;
+      if (selectedIndex === correctIndex) {
+        score++;
+        button.style.background = "#b0edac";
+        button.style.color = "#24642f";
+        resultElement.textContent = "🎉 Correct!";
+      } else {
+        button.style.background = "#f8b7b7";
+        button.style.color = "#ae2530";
+        resultElement.textContent = `❌ Wrong. Answer: "${questions[currentQuestion].options[correctIndex]}"`;
+      }
+      Array.from(document.querySelectorAll('.options button')).forEach(btn => btn.disabled = true);
+
+      // --- New: Create and show 'Next Question' button ---
+      if (!nextButton) {
+        nextButton = document.createElement('button');
+        nextButton.textContent = currentQuestion < questions.length - 1 ? "Next Question" : "Show Result";
+        nextButton.className = "restart-btn";
+        nextButton.onclick = () => {
+          currentQuestion++;
+          if (currentQuestion < questions.length) {
+            showQuestion();
+          } else {
+            showResult();
+          }
+        };
+        document.querySelector('.quiz-container').appendChild(nextButton);
+      }
+      // Adjust button text dynamically
+      nextButton.textContent = currentQuestion < questions.length - 1 ? "Next Question" : "Show Result";
+      nextButton.style.display = 'block';
+    }
+
+    function showResult() {
+      document.querySelector('.quiz-container').innerHTML =
+        `<div class="score">Your score: ${score} of ${questions.length}</div>
+        <button class="restart-btn" onclick="location.reload()">Restart Quiz</button>`;
+    }
+
+    showQuestion();
+  </script>
+</body>
+</html>
