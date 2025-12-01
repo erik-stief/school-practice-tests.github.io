@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multiple Choice Test</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(135deg, #151a2b 0%, #212844 100%);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      /* Simulate static interference */
+     background:
+      linear-gradient(135deg, #151a2b 0%, #212844 100%),
+      repeating-linear-gradient(
+        45deg,
+        rgba(24, 31, 53, .5) 0,
+        rgba(24, 31, 53, .5) 1px,
+        transparent 1px,
+        transparent 6px
+      );
+    }
+    .quiz-container {
+      background: rgba(29, 37, 59, 0.92);
+      padding: 42px 36px 34px 36px;
+      max-width: 420px;
+      margin: 62px auto;
+      border-radius: 18px;
+      box-shadow: 0 0 40px 0 #28ffbf88, 0 1.5px 3px #2464a388;
+      border: 2.5px solid #2cffcfcc;
+      position: relative;
+      overflow: hidden;
+    }
+    .quiz-container:before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: .09;
+      background-color: #00a669;
+      background-image: url(http://www.transparenttextures.com/patterns/diagmonds.png);
+      pointer-events: none;
+    }
+    .question {
+      font-weight: 700;
+      font-size: 1.18rem;
+      margin-bottom: 22px;
+      color: #24ffc8;
+      letter-spacing: 1.2px;
+      text-shadow: 0 1.5px 5px #28ffd3bb;
+    }
+    #progress {
+      font-size: 0.99rem;
+      color: #7afffd;
+      margin-bottom: 14px;
+      text-align: right;
+      text-shadow: 0 1px 5px #1bfcff44;
+    }
+    .options {
+      margin-bottom: 20px;
+    }
+    .options button {
+      display: block;
+      margin: 11px 0;
+      width: 100%;
+      padding: 14px 0;
+      font-size: 1.07rem;
+      font-weight: 600;
+      background: #232b44;
+      color: #27ffbb;
+      border: 2.5px solid #27ffbb;
+      border-radius: 11px;
+      cursor: pointer;
+      outline: none;
+      box-shadow: 0 2px 24px #07ffeb44, 0 1.5px 6px #1bfcff22;
+      transition: all 0.19s cubic-bezier(.47,1.64,.41,.8);
+      position: relative;
+    }
+    .options button:hover,
+    .options button:focus {
+      background: #0cf;
+      color: #191e31;
+      border-color: #1474ff;
+      box-shadow: 0 3px 36px #63fffddd;
+      transform: scale(1.04);
+    }
+    .options button:active {
+      box-shadow: 0 2px 16px #560fcf77;
+    }
+    #result {
+      margin-top: 11px;
+      font-weight: 700;
+      font-size: 1.08rem;
+      text-align: center;
+      color: #00ffd0;
+      opacity: 0.99;
+      text-shadow: 0 1.5px 8px #0ffdaa;
+    }
+    .score {
+      font-size: 1.34rem;
+      font-weight: 700;
+      text-align: center;
+      color: #03fff0;
+      margin-top: 37px;
+      margin-bottom: 13px;
+      text-shadow: 0 2px 12px #0fffbc88;
+    }
+    .restart-btn, .back-btn {
+      margin: 18px auto 0;
+      padding: 13px 44px;
+      background: #1bfcff;
+      color: #12151b;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: block;
+      transition: background 0.18s;
+      box-shadow: 0 2px 14px #07ffeb99;
+      text-shadow: 0 1px 8px #09fff199;
+    }
+    .restart-btn:hover, .back-btn:hover {
+      background: #27ffbb;
+      color: #171d31;
+    }
+
+    @media (max-width: 500px) {
+      .quiz-container {
+        padding: 16px 6px;
+        max-width: 97vw;
+        font-size: 0.98rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <div id="progress"></div>
+    <div id="question" class="question"></div>
+    <div id="options" class="options"></div>
+    <div id="result"></div>
+  </div>
+  <button class="back-btn" onclick="window.location.href='main.html'">⬅ Back to Main Page</button>
+  <script>
+    const questions = [
+        {
+                question: "When developing the disaster recovery planning team, the team requires a high-level manager who can exert influence, ideally the CEO or a designee. What is this role called?",
+                options: ["Project Manager.", "Information Security Manager.", "Business Manager.", "Champion.", "Team Member."],
+                answer: 3
+        },
+        {
+                question: "What is the first phase of the Continuous Process (CP) development, according to the sources?",
+                options: ["Risk Assessment (RA).", "Subordinate plan classification.", "Business Impact Analysis (BIA).", "Attack success scenario development."],
+                answer: 2
+        },
+        {
+                question: "Which term is described as proactive, complementing the reactive nature of the Business Impact Analysis (BIA)?",
+                options: ["Business Resumption Plan (BRP).", "Risk Assessment (RA).", "Recovery Time Objective (RTO).", "Continuous Process Improvement (CPI)."],
+                answer: 1
+        },
+        {
+                question: "When conducting a BIA, what is the result of the stage 'Attack success scenario development'?",
+                options: ["Intangible Loss Calculation.", "Potential Damage Assessment.", "Subordinate Plan Classification.", "Attack Scenario End Case."],
+                answer: 3
+        },
+        {
+                question: "In the context of BIA interviews, which method is considered time-consuming but allows for gathering lots of personal information and building rapport?",
+                options: ["Distance learning.", "Group session.", "One-on-one interview.", "Desk checks."],
+                answer: 2
+        },
+        {
+                question: "BIA questionnaires that focus on the emotional impact of disruption are known as what type of questions?",
+                options: ["Specialized questions.", "Quantitative questions.", "Economic questions.", "Qualitative questions."],
+                answer: 3
+        },
+        {
+                question: "A disaster recovery incident caused by events like floods or hurricanes is categorized as which type?",
+                options: ["Man-made.", "Slow onset.", "Rapid onset.", "Natural."],
+                answer: 3
+        },
+        {
+                question: "Which type of BCP site is described as allowing businesses to function in a disaster at a secondary site that is fully equipped and ready for immediate use?",
+                options: ["Cold site.", "Warm site.", "Exclusive-use site.", "Mutual Agreement site."],
+                answer: 2
+        },
+        {
+                question: "What term describes BCP sites that involve third-party agreements for the use of facilities, such as through Timeshare or Service Bureaus?",
+                options: ["Mobile.", "Externally stored resource.", "Shared-use.", "Cold."],
+                answer: 2
+        },
+        {
+                question: "Which method of off-site data storage involves the bulk batch transfer of data?",
+                options: ["Database shadowing.", "Transfer of live transactions.", "Electronic vaulting.", "Remote journaling."],
+                answer: 2
+        },
+        {
+                question: "Which method of off-site data storage involves the storage of duplicate data?",
+                options: ["Electronic vaulting.", "Transfer of live transactions.", "Database shadowing.", "Remote journaling."],
+                answer: 2
+        },
+        {
+                question: "The combined aim of Disaster Recovery Planning (DRP) and Business Continuity Planning (BCP) is to reestablish operations under what merged plan name?",
+                options: ["Alert Roster.", "Business Resumption Plan (BRP).", "Continuous Process Improvement (CPI).", "After Action Review (AAR)."],
+                answer: 1
+        },
+        {
+                question: "Which testing strategy involves reviewing the plan informally with various departmental managers and responders?",
+                options: ["Parallel testing.", "Desk checks.", "Full interruption.", "Simulation."],
+                answer: 1
+        },
+        {
+                question: "What concept describes the idea of conducting continuous tests for the purpose of improving disaster recovery and business continuity plans?",
+                options: ["Business Resumption Plan (BRP).", "Continuous Data Protection (CDP).", "Continuous Process Improvement (CPI).", "Recovery Point Objective (RPO)."],
+                answer: 2
+        },
+        {
+                question: "According to the DRP 8 Steps, what is the first step in the process?",
+                options: ["Assessing the risk that the enterprise faces.", "Establishing roles of each department.", "Organizing the disaster recovery planning team.", "Developing actual policies and procedures."],
+                answer: 2
+        },
+        {
+                question: "Which step in the DRP 8 Steps immediately precedes the maintenance phase?",
+                options: ["Implement the disaster recovery plan.", "Document the policies and procedures.", "Establish the roles of each department.", "Test and rehearse parts of the plan."],
+                answer: 3
+        },
+        {
+                question: "Training conducted via self-paced modules and web content is typically described as what type of training?",
+                options: ["One-on-one.", "Formal class.", "On-the-job training.", "Computer-based training."],
+                answer: 3
+        },
+        {
+                question: "Which body completes VIA components and transfers this information to subordinate committees?",
+                options: ["IR team.", "BC team.", "CPMT.", "DR team."],
+                answer: 2
+        },
+        {
+                question: "What type of indicator suggests that an incident might be occurring, but is not yet confirmed?",
+                options: ["Definite indicator.", "Probable indicator.", "Possible indicator.", "Zero-day indicator."],
+                answer: 2
+        },
+        {
+                question: "What document is used to immediately notify key personnel upon declaring an incident?",
+                options: ["After Action Review (AAR).", "Alert Roster.", "DR Policy Statement.", "Alert Message."],
+                answer: 3
+        },
+        {
+                question: "When an incident is declared, documentation should begin immediately, recording the who, what, where, when, why, and:",
+                options: ["cost.", "risk.", "how.", "impact."],
+                answer: 2
+        },
+        {
+                question: "A detailed examination of an event conducted after the incident, reviewing actions and the IR plan, is known as a(n):",
+                options: ["Real-time test.", "Full interruption.", "After Action Review (AAR).", "Desk check."],
+                answer: 2
+        },
+        {
+                question: "In what circumstance does law enforcement become involved in an incident?",
+                options: ["When the RPO is exceeded.", "When intangible loss occurs.", "When the incident violates criminal or civil law.", "When the incident is determined to be man-made."],
+                answer: 2
+        },
+        {
+                question: "According to the NIST 7-step disaster recovery plan, what must be developed first?",
+                options: ["Review the business impact analysis (BIA).", "Develop the DR planning policy statement.", "Identify preventative controls.", "Create DR contingency strategies."],
+                answer: 1
+        },
+        {
+                question: "Which NIST step involves ensuring the DR plan is practiced and its effectiveness evaluated?",
+                options: ["Develop the DR plan.", "Ensure DR plan maintenance.", "Review the business impact analysis (BIA).", "Ensure DR plan testing, training, and exercises."],
+                answer: 3
+        },
+        {
+                question: "The resource requirements and the plan maintenance schedule are mandatory elements contained within the:",
+                options: ["Business Impact Analysis.", "After Action Review.", "DR policy.", "Alert Message."],
+                answer: 2
+        },
+        {
+                question: "The DR plan must describe the disaster, the actions to prepare, and the best, worst, and most likely case:",
+                options: ["controls.", "triggers.", "outcomes.", "losses."],
+                answer: 2
+        },
+        {
+                question: "An Alert Message includes a scripted disaster description, an auxiliary phone alert and reporting system, and what automated feature?",
+                options: ["Incident detection indicator.", "Automated “I’m ok” response line.", "RTO measure.", "Archive protocol."],
+                answer: 1
+        },
+        {
+                question: "Which component is tested periodically throughout the year as part of disaster simulation?",
+                options: ["Full failover.", "Real-time testing.", "Component testing.", "Environment segment testing."],
+                answer: 2
+        },
+        {
+                question: "What type of testing simulates the disaster and ensures all aspects within the scope of the DRP are tested?",
+                options: ["Component testing.", "Structured walkthrough.", "Real-time testing.", "Parallel testing."],
+                answer: 2
+        },
+        {
+                question: "According to the sources, how often must data files and critical systems be backed up?",
+                options: ["Weekly.", "Annually.", "Monthly.", "Daily."],
+                answer: 3
+        },
+        {
+                question: "How often must nonessential files be backed up?",
+                options: ["Daily.", "Weekly.", "Monthly.", "Annually."],
+                answer: 1
+        },
+        {
+                question: "What function is served by long-term storage of data for legal or regulatory purposes?",
+                options: ["Recovery from on-site threat.", "Continuous Data Protection (CDP).", "Archive.", "Disk Mirroring."],
+                answer: 2
+        },
+        {
+                question: "Which data storage method is defined as updated when a change is made?",
+                options: ["Disk Mirroring.", "Continuous Data Protection (CDP).", "NAS.", "SAN."],
+                answer: 1
+        },
+        {
+                question: "Which storage solution is characterized by being high speed and capable of handling large amounts of data?",
+                options: ["NAS (Network Attached Storage).", "SAN (Storage Area Network).", "Electronic vaulting.", "CDP (Continuous Data Protection)."],
+                answer: 1
+        },
+        {
+                question: "What type of backup stores a copy of all data?",
+                options: ["Incremental backups.", "Differential backups.", "Full backups.", "Remote journaling."],
+                answer: 2
+        },
+        {
+                question: "Which type of backup backs up every time there is an addition or change since the *last full backup*?",
+                options: ["Incremental backups.", "Differential backups.", "Full backups.", "Archive backups."],
+                answer: 1
+        },
+        {
+                question: "What objective measures the amount of time it takes to restore access to systems, applications, and data?",
+                options: ["RPO (Recovery Point Objective).", "TGR (Total Gross Revenue).", "AAR (After Action Review).", "RTO (Recovery Time Objective)."],
+                answer: 3
+        },
+        {
+                question: "RPO (Recovery Point Objective) measures what critical factor?",
+                options: ["The time required for a full failover.", "The amount of data an organization can afford to lose in a disaster.", "The speed of the onset of the disaster.", "The time required to review the plan."],
+                answer: 1
+        },
+        {
+                question: "Highly available architectures are designed to reduce the time systems take to:",
+                options: ["be reviewed and revised.", "be brought online.", "calculate the TGR.", "complete the BIA."],
+                answer: 1
+        },
+        {
+                question: "How long are operational backups typically stored?",
+                options: ["1-7 years.", "90-180 days.", "30-90 days.", "Annually."],
+                answer: 2
+        },
+        {
+                question: "How often should the backup plan be tested, according to the stated frequency?",
+                options: ["As often as every year.", "As often as every week.", "As often as every month.", "As often as every day."],
+                answer: 2
+        },
+        {
+                question: "How often should the backup plan be reviewed and revised?",
+                options: ["At least quarterly.", "At least annually.", "At least monthly.", "At least semi-annually."],
+                answer: 1
+        },
+        {
+                question: "Which team is listed as primarily responsible for creating backups?",
+                options: ["The Project Manager.", "The CP team.", "The IR team.", "IT/Data management team."],
+                answer: 3
+        },
+        {
+                question: "Which phase of the BIA stages occurs immediately after Threat attack identification and prioritization?",
+                options: ["Potential damage assessment.", "Subordinate plan classification.", "Business unit analysis.", "Attack success scenario development."],
+                answer: 2
+        },
+        {
+                question: "What calculation determines the 'Value of one day’s outage'?",
+                options: ["RTO / 264.", "TGR / 264.", "RPO / 365.", "CPI / 12."],
+                answer: 1
+        },
+        {
+                question: "Which DRP 8 Step immediately follows 'Developing actual disaster recovery policies and procedures'?",
+                options: ["Implement the disaster recovery plan.", "Document the policies and procedures developed in the previous step.", "Test and rehearse parts of the plan.", "Assessing the risk that the enterprise faces."],
+                answer: 1
+        },
+        {
+                question: "The stage of standing down after an incident includes the After Action Review (AAR), creating/archiving the official report, and the standing down of which teams?",
+                options: ["Law enforcement.", "All subordinate committees.", "DR teams.", "Business unit managers."],
+                answer: 2
+        },
+        {
+                question: "What duration range is associated with long term storage for backups?",
+                options: ["30-90 days.", "1-7 years.", "90-180 days.", "More than 7 years."],
+                answer: 1
+        },
+        {
+                question: "The role of the Project Manager, the Champion, and Team Members are all necessary components of which team?",
+                options: ["The CP operations team.", "The BC team.", "The CP team.", "The IR team."],
+                answer: 2
+        }
+    ];
+
+    // Shuffle questions before showing
+    shuffleQuestions(questions);
+
+    function shuffleQuestions(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    // --- New: Reference for next button ---
+    let nextButton;
+
+    function showQuestion() {
+      document.getElementById('progress').textContent =
+        `Question ${currentQuestion + 1} of ${questions.length}`;
+      const questionElement = document.getElementById('question');
+      const optionsElement = document.getElementById('options');
+      const resultElement = document.getElementById('result');
+
+      questionElement.innerHTML = questions[currentQuestion].question;
+      optionsElement.innerHTML = '';
+      resultElement.textContent = '';
+
+      questions[currentQuestion].options.forEach((option, i) => {
+        const btn = document.createElement('button');
+        btn.textContent = option;
+        btn.onclick = () => checkAnswer(btn, i);
+        optionsElement.appendChild(btn);
+      });
+
+      // Remove 'Next' button if it exists
+      if (nextButton && nextButton.parentNode) {
+        nextButton.parentNode.removeChild(nextButton);
+        nextButton = null;
+      }
+    }
+
+    function checkAnswer(button, selectedIndex) {
+      const resultElement = document.getElementById('result');
+      const correctIndex = questions[currentQuestion].answer;
+      if (selectedIndex === correctIndex) {
+        score++;
+        button.style.background = "#b0edac";
+        button.style.color = "#24642f";
+        resultElement.textContent = "🎉 Correct!";
+      } else {
+        button.style.background = "#f8b7b7";
+        button.style.color = "#ae2530";
+        resultElement.textContent = `❌ Wrong. Answer: "${questions[currentQuestion].options[correctIndex]}"`;
+      }
+      Array.from(document.querySelectorAll('.options button')).forEach(btn => btn.disabled = true);
+
+      // --- New: Create and show 'Next Question' button ---
+      if (!nextButton) {
+        nextButton = document.createElement('button');
+        nextButton.textContent = currentQuestion < questions.length - 1 ? "Next Question" : "Show Result";
+        nextButton.className = "restart-btn";
+        nextButton.onclick = () => {
+          currentQuestion++;
+          if (currentQuestion < questions.length) {
+            showQuestion();
+          } else {
+            showResult();
+          }
+        };
+        document.querySelector('.quiz-container').appendChild(nextButton);
+      }
+      // Adjust button text dynamically
+      nextButton.textContent = currentQuestion < questions.length - 1 ? "Next Question" : "Show Result";
+      nextButton.style.display = 'block';
+    }
+
+    function showResult() {
+      document.querySelector('.quiz-container').innerHTML =
+        `<div class="score">Your score: ${score} of ${questions.length}</div>
+        <button class="restart-btn" onclick="location.reload()">Restart Quiz</button>`;
+    }
+
+    showQuestion();
+  </script>
+</body>
+</html>
