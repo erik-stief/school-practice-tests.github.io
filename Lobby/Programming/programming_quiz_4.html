@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multiple Choice Test</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(125deg, #d5f6e7 0%, #eafbee 100%);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    .quiz-container {
+      background: #f2fff8;
+      padding: 40px 36px 32px 36px;
+      max-width: 420px;
+      margin: 54px auto;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(41, 234, 143, .13), 0 1.5px 3px #b4edca;
+    }
+    .question {
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-bottom: 22px;
+      color: #289d4a;
+      letter-spacing: 0.5px;
+    }
+    #progress {
+      font-size: 0.98rem;
+      color: #349c59;
+      margin-bottom: 16px;
+      text-align: right;
+    }
+    .options {
+      margin-bottom: 20px;
+    }
+    .options button {
+      display: block;
+      margin: 10px 0;
+      width: 100%;
+      padding: 13px 0;
+      font-size: 1.07rem;
+      font-weight: 500;
+      background: #e4faed;
+      color: #289d4a;
+      border: 2px solid #b7eec6;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(.47,1.64,.41,.8);
+      outline: none;
+      box-shadow: 0 1.5px 6px #e0ffe4;
+    }
+    .options button:hover, .options button:focus {
+      background: #34c471;
+      color: #fff;
+      border-color: #289d4a;
+      transform: scale(1.03);
+      box-shadow: 0 2.5px 18px #c2f7cf;
+    }
+    #result {
+      margin-top: 10px;
+      font-weight: 700;
+      font-size: 1.08rem;
+      text-align: center;
+      color: #24642f;
+      opacity: 0.95;
+    }
+    .score {
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-align: center;
+      color: #289d4a;
+      margin-top: 38px;
+      margin-bottom: 10px;
+    }
+    .restart-btn {
+      margin: 16px auto 0;
+      padding: 13px 44px;
+      background: #289d4a;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: block;
+      transition: background 0.20s;
+      box-shadow: 0 2px 10px #b7eec6;
+    }
+    .restart-btn:hover {
+      background: #24642f;
+      color: #e4faed;
+    }
+    .back-btn {
+      margin: 24px auto 0;
+      padding: 12px 38px;
+      background: #289d4a;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: block;
+      transition: background 0.20s;
+      box-shadow: 0 2px 10px #b7eec6;
+    }
+    .back-btn:hover {
+      background: #24642f;
+      color: #e4faed;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <div id="progress"></div>
+    <div id="question" class="question"></div>
+    <div id="options" class="options"></div>
+    <div id="result"></div>
+  </div>
+  <button class="back-btn" onclick="window.location.href='main.html'">⬅ Back to Main Page</button>
+  <script>
+    const questions = [
+      {
+          question: "A(n) __________ is like a pointer. It is used to access the individual data elements in a container.",
+          options: ["element access operator", "subscript indicator", "global data finder", "iterator", "None of these"],
+          answer: 3
+      },
+      {
+          question: "The most important data structures in the STL are __________",
+          options: ["arrays and structures", "lists and groups", "containers and iterators", "templates and prototypes", "None of these"],
+          answer: 2
+      },
+      {
+          question: "A(n) __________ is a class that stores data and organizes it in some fashion.",
+          options: ["iterator", "container", "template", "box", "None of these"],
+          answer: 1
+      },
+      {
+          question: "A sequence container that is dynamic in size is a(n)",
+          options: ["array", "map", "vector", "multimap", "None of these"],
+          answer: 2
+      },
+      {
+          question: "Which of the following types of iterators is(are) not supported by the vector class?",
+          options: ["const_iterator", "reverse_iterator", "const_reverse_iterator", "All of these are supported by the vector class", "None of these are supported by the vector class"],
+          answer: 3
+      },
+      {
+          question: "A technique introduced by C++11 to improve runtime performance is known as",
+          options: ["insertion", "emplacement", "push", "multimove", "None of these"],
+          answer: 1
+      },
+      {
+          question: "Because a vector container uses a dynamically allocated array to hold its elements, it is common for the vector class to allocate",
+          options: ["less memory than it needs", "more memory than it needs", "a separate memory location for copies of new elements", "None of these"],
+          answer: 1
+      },
+      {
+          question: "To use the map class, you must include",
+          options: ["#include<key>", "#include<key_value>", "#include<map>", "#include<multimap>", "None of these"],
+          answer: 2
+      },
+      {
+          question: "When an element is stored in a map, it is stored as an object of the __________ type.",
+          options: ["map", "key", "pair", "key_value", "None of these"],
+          answer: 2
+      },
+      {
+          question: "To retrieve a value from a map, you call the __________ member function and pass the __________ that is associated with the desired value.",
+          options: ["at(), key", "at(), value", "key(), key", "pair(), key", "None of these"],
+          answer: 0
+      },
+      {
+          question: "Which of the following is used to signal errors or unexpected results that happen as a program runs?",
+          options: ["virtual functions", "destructors", "exceptions", "templates", "None of these"],
+          answer: 2
+      },
+      {
+          question: "The __________ starts with the key word try and is followed by a block of code that executes any statement that might cause an exception to be thrown..",
+          options: ["try block", "try/catch class", "try function", "catch function", "None of these"],
+          answer: 0
+      },
+      {
+          question: "When an error occurs, an exception is",
+          options: ["created", "thrown", "passed", "ignored", "None of these"],
+          answer: 1
+      },
+      {
+          question: "An exception thrown from outside a try block will",
+          options: ["be caught outside the catch block", "be caught inside the catch block", "remain inside the throw block", "cause the program to abort execution", "None of these"],
+          answer: 3
+      },
+      {
+          question: "In the following code, which statement is the throw point? double divide(int numer, int denom) { if (denom == 0) throw \"ERROR: Cannot divide by zero.\\n\"; else return static_cast<double>(numer)/denom; }",
+          options: ["if (denom == 0)", "throw \"ERROR: Cannot divide by zero.\\n\";", "return static_cast<double>(numer)/denom;", "There is no throw point because there is no try block.", "None of these"],
+          answer: 1
+      },
+      {
+          question: "Given the following code, what will happen if the value of denom is 0? double divide(int numer, int denom) { if (denom == 0) throw \"ERROR: Cannot divide by zero.\\n\"; else return static_cast<double>(numer)/denom; }",
+          options: ["Nothing will happen because there is no catch block.", "The program will display ERROR: Cannot divide by zero.and then move to the statement following the if/else block.", "The program will display ERROR: Cannot divide by zero.and then halt.", "There is no throw point because there is no try block.", "None of these"],
+          answer: 2
+      },
+      {
+          question: "If an exception is thrown by a member function of a class object, the class __________ is called.",
+          options: ["constructor", "destructor", "catcher", "handler", "None of these"],
+          answer: 1
+      },
+      {
+          question: "In a function template, the programmer writes a general version of a function using __________ (like T), which are then replaced by specific __________ (like int, double, etc.) when the function is instantiated.",
+          options: ["data types, template parameters", "template parameters, arguments", "arguments, template parameters", "template parameters, data types", "None of these"],
+          answer: 3
+      },
+      {
+          question: "A(n) __________ is used in a function template to specify a generic data type.",
+          options: ["dummy variable", "exception", "catch block", "type parameter", "None of these"],
+          answer: 3
+      },
+      {
+          question: "The beginning of a function template is marked by a",
+          options: ["return type", "parameter list", "template prefix", "semicolon", "None of these"],
+          answer: 2
+      },
+      {
+          question: "What does the T represent in the following statement? template < class T >",
+          options: ["the name of the function template", "T stands for Template", "a generic data type that is used in a function template", "the int data type", "None of these"],
+          answer: 2
+      },
+      {
+          question: "What does the word class indicate in the following statement? template < class T >  //class is the same as typename here",
+          options: ["class is a key word that is used to precede the type parameter.", "It indicates that a class is being derived from an existing class named T.", "It indicates that a class named T is being derived from a class named template.", "A class named T will automatically be created by the compiler.", "None of these"],
+          answer: 0
+      },
+      {
+          question: "Class templates allow you to create one general version of a class without having to",
+          options: ["write any code", "use member functions", "use private members", "duplicate code to handle multiple data types", "None of these"],
+          answer: 3
+      },
+      {
+          question: "A(n) __________ is a value or an object that signals an error.",
+          options: ["destructor", "template", "throw", "exception", "None of these"],
+          answer: 3
+      },
+      {
+          question: "To handle an exception that has been thrown, a program must have a(n)",
+          options: ["throw function", "try/catch construct", "fatal error", "unrecoverable error", "None of these"],
+          answer: 1
+      },
+      {
+          question: "The try block is immediately followed by one or more",
+          options: ["errors", "error messages", "catch blocks", "throw blocks", "None of these"],
+          answer: 2
+      },
+      {
+          question: "Catch blocks serve as",
+          options: ["exception handlers", "receivers", "temporary variables", "permanent storage for trapped errors", "None of these"],
+          answer: 0
+      },
+      {
+          question: "A generic function that can work with any data type is a",
+          options: ["function argument", "function parameter", "function template", "member function", "None of these"],
+          answer: 2
+      },
+      {
+          question: "How much memory is reserved for a function template?",
+          options: ["four bytes", "It depends on the size of the template.", "two bytes", "no memory", "None of these"],
+          answer: 3
+      },
+      {
+          question: "A function template's prefix contains __________ enclosed in angle brackets.",
+          options: ["one or more generic data types", "the function definition", "constant values", "the function's return type", "None of these"],
+          answer: 0
+      },
+      {
+          question: "A function template prefix is placed before the function header while a class template prefix is placed",
+          options: ["following the public: access specification", "following the private: access specification", "before the class declaration", "before the class constructor function header", "None of these"],
+          answer: 2
+      },
+      {
+          question: "In OOP programming, __________ allows you to create new classes based on existing classes.",
+          options: ["polymorphism", "inheritance", "function overloading", "the copy constructor", "None of these"],
+          answer: 1
+      },
+      {
+          question: "When you derive a class from an existing class, you __________ add new data and functions.",
+          options: ["never", "must", "may", "None of these"],
+          answer: 2
+      },
+      {
+          question: "The __________ members of a base class are never accessible to a derived class.",
+          options: ["private", "public", "protected", "All of these", "None of these"],
+          answer: 0
+      },
+      {
+          question: "The __________ constructor is called before the __________ constructor.",
+          options: ["base, derived", "derived, base", "public, private", "private, public", "None of these"],
+          answer: 0
+      },
+      {
+          question: "A __________ of a base class expects to be overridden in a derived class.",
+          options: ["constructor function", "destructor function", "static function", "virtual function", "None of these"],
+          answer: 3
+      },
+      {
+          question: "The term __________ means the ability to take many forms.",
+          options: ["inheritance", "polymorphism", "member function", "encapsulation", "None of these"],
+          answer: 1
+      },
+      {
+          question: "When the compiler binds a member function call with the version of the function that resides in the same class as the call itself, it is considered",
+          options: ["local binding", "safe binding", "static binding", "dynamic binding", "None of these"],
+          answer: 2
+      },
+      {
+          question: "The compiler performs __________ on virtual functions.",
+          options: ["local binding", "additional error checking", "static binding", "dynamic binding", "None of these"],
+          answer: 3
+      },
+      {
+          question: "Which is the base class in the following statement? class Car : public Vehicle",
+          options: ["Car", "Vehicle", "public", "class", "None of these"],
+          answer: 1
+      },
+      {
+          question: "The following statement allows the __________ members of the Car class to access __________ members of the Vehicle class. class Car : public Vehicle",
+          options: ["private, private", "public, private", "protected, private", "all, protected", "None of these"],
+          answer: 3
+      },
+      {
+          question: "Which is the derived class in the following statement? class Car : protected Vehicle",
+          options: ["Car", "Vehicle", "protected", "There is no way to tell.", "None of these"],
+          answer: 0
+      },
+      {
+          question: "What is being protected in the following statement? class Car : protected Vehicle",
+          options: ["derived class functions", "base class members", "derived class data", "future inherited classes", "None of these"],
+          answer: 1
+      },
+      {
+          question: "Arguments are passed to the base class by the __________ class __________ function.",
+          options: ["derived, constructor", "derived, destructor", "base, constructor", "base, destructor", "None of these"],
+          answer: 0
+      },
+      {
+          question: "Arguments are passed to the base class destructor by the __________ class __________ function.",
+          options: ["derived, constructor", "derived, destructor", "base, constructor", "base, destructor", "None of these"],
+          answer: 4
+      },
+      {
+          question: "Protected members of a base class are like __________, but they may be accessed by derived classes.",
+          options: ["constructor functions", "static members", "private members", "public members", "None of these"],
+          answer: 2
+      },
+      {
+          question: "The __________ destructor is called before the __________ destructor.",
+          options: ["base, derived", "derived, base", "public, private", "private, public", "None of these"],
+          answer: 1
+      },
+      {
+          question: "Which of the following is commonly used to extend a class or to give it additional capabilities?",
+          options: ["inheritance", "privacy", "the constructor", "the destructor", "None of these"],
+          answer: 0
+      },
+      {
+          question: "When member functions behave differently depending on which object performed the call,  this is an example of",
+          options: ["chaos theory", "virtual insubordination", "polymorphism", "encapsulation", "None of these"],
+          answer: 2
+      },
+      {
+          question: "A virtual function is a function that expects to be __________ in a derived class.",
+          options: ["ignored", "called frequently", "overridden", "private", "None of these"],
+          answer: 2
+      },
+      {
+          question: "Multiple inheritance is when a __________ class has __________ base classes.",
+          options: ["base, no", "derived, two or more", "derived, no", "compound, more than two", "None of these"],
+          answer: 1
+      },
+      {
+          question: "A virtual function is declared by placing the __________ key word in front of the return type in the base class's function declaration.",
+          options: ["virtual", "private", "public", "protected", "None of these"],
+          answer: 0
+      },
+      {
+          question: "Polymorphism is when __________ in a class hierarchy perform differently, depending on which object performs the call.",
+          options: ["base class constructors", "derived class constructors", "member functions", "derived class destructors", "None of these"],
+          answer: 2
+      },
+      {
+          question: "Functions that are dynamically bound by the compiler are __________ functions.",
+          options: ["constructor", "destructor", "static", "virtual", "None of these"],
+          answer: 3
+      },
+      {
+          question: "C++11 introduced the __________ key word to help prevent subtle errors when overriding virtual functions.",
+          options: ["const", "final", "override", "virtual", "None of these"],
+          answer: 2
+      }
+    ];
+
+    // Shuffle questions before showing
+    shuffleQuestions(questions);
+
+    function shuffleQuestions(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    // --- New: Reference for next button ---
+    let nextButton;
+
+    function showQuestion() {
+      document.getElementById('progress').textContent =
+        `Question ${currentQuestion + 1} of ${questions.length}`;
+      const questionElement = document.getElementById('question');
+      const optionsElement = document.getElementById('options');
+      const resultElement = document.getElementById('result');
+
+      questionElement.innerHTML = questions[currentQuestion].question;
+      optionsElement.innerHTML = '';
+      resultElement.textContent = '';
+
+      questions[currentQuestion].options.forEach((option, i) => {
+        const btn = document.createElement('button');
+        btn.textContent = option;
+        btn.onclick = () => checkAnswer(btn, i);
+        optionsElement.appendChild(btn);
+      });
+
+      // Remove 'Next' button if it exists
+      if (nextButton && nextButton.parentNode) {
+        nextButton.parentNode.removeChild(nextButton);
+        nextButton = null;
+      }
+    }
+
+    function checkAnswer(button, selectedIndex) {
+      const resultElement = document.getElementById('result');
+      const correctIndex = questions[currentQuestion].answer;
+      if (selectedIndex === correctIndex) {
+        score++;
+        button.style.background = "#b0edac";
+        button.style.color = "#24642f";
+        resultElement.textContent = "🎉 Correct!";
+      } else {
+        button.style.background = "#f8b7b7";
+        button.style.color = "#ae2530";
+        resultElement.textContent = `❌ Wrong. Answer: "${questions[currentQuestion].options[correctIndex]}"`;
+      }
+      Array.from(document.querySelectorAll('.options button')).forEach(btn => btn.disabled = true);
+
+      // --- New: Create and show 'Next Question' button ---
+      if (!nextButton) {
+        nextButton = document.createElement('button');
+        nextButton.textContent = currentQuestion < questions.length - 1 ? "Next Question" : "Show Result";
+        nextButton.className = "restart-btn";
+        nextButton.onclick = () => {
+          currentQuestion++;
+          if (currentQuestion < questions.length) {
+            showQuestion();
+          } else {
+            showResult();
+          }
+        };
+        document.querySelector('.quiz-container').appendChild(nextButton);
+      }
+      // Adjust button text dynamically
+      nextButton.textContent = currentQuestion < questions.length - 1 ? "Next Question" : "Show Result";
+      nextButton.style.display = 'block';
+    }
+
+    function showResult() {
+      document.querySelector('.quiz-container').innerHTML =
+        `<div class="score">Your score: ${score} of ${questions.length}</div>
+        <button class="restart-btn" onclick="location.reload()">Restart Quiz</button>`;
+    }
+
+    showQuestion();
+  </script>
+</body>
+</html>
